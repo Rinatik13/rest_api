@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Добавление компании</title>
+</head>
+<body>
+
+    <header>
+		<div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
+		<div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
+		<div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
+	</header>
+
+    <h1 class="title">Новая компания</h1>
+
+        <form class="registration_blok" id="add_company" onsubmit>
+            <input class="input" type="number" placeholder="Инн" name="inn" id="company_inn">
+            <input class="input" type="number" placeholder="Кпп" name="kpp" id="company_kpp">
+            <input class="input" type="text" placeholder="Полная название формы" name="form" id="company_name_form">
+            <input class="input" type="text" placeholder="Полное название компании" name="" id="company_full_name">
+            <input class="input" type="text" placeholder="Сокращенное название компании" name="" id="company_smile_name">
+            <input class="input" type="text" placeholder="Юридический адрес" name="" id="company_address">
+            <input class="input" type="text" placeholder="Почтовый адрес" name="" id="company_post_address">
+            <input class="input" type="email" placeholder="Электронная почта" name="" id="company_email">
+            <input class="input" type="text" placeholder="Сайт" name="" id="company_web_site">
+            <input class="input" type="phone" placeholder="Номер телефона" name="" id="company_phone">
+            Дата регистрации <input class="input" type="date" placeholder="Дата регистрации" name="" id="company_date_reg">
+            <input class="input" type="text" placeholder="Основной ОКВЭД" name="" id="company_okved">
+            <input class="input" type="number" placeholder="ОКПО" name="" id="company_okpo">
+            <input class="input" type="number" placeholder="ОКАТО" name="" id="company_okato">
+            <input class="input" type="number" placeholder="ОГРН" name="" id="company_ogrn">
+            <input class="input" type="text" placeholder="Номер гос органа" name="" id="company_gov_number">
+            <input class="input" type="text" placeholder="Должность руководителя" name="" id="company_direct">
+            <input class="input" type="text" placeholder="ФИО Руководителя" name="" id="company_FIO_direct">
+            <input class="input" type="text" placeholder="ФИО Главного бухгалтера" name="" id="company_economic_empl">
+            <input class="input" type="text" placeholder="Форма названия банка" name="" id="company_form_name_bank">
+            <input class="input" type="text" placeholder="Название банка" name="" id="company_name_bank"> 
+            <input class="input" type="text" placeholder="Адрес банка" name="" id="company_bank_address">
+            <input class="input" type="number" placeholder="БИК" name="" id="company_bik">
+            <input class="input" type="number" placeholder="Расчётный счёт" name="" id="company_bank_schet">
+            <input class="input" type="number" placeholder="Корреспонденский счёт" name="" id="company_kor_schet">
+            <br>
+            <span id="error_add_company" style="color:red">test</span>
+            <input class="button" type="submit" value="Добавить">
+        </form>
+<script src="/js/addcompany.js"></script>
+</body>
+</html>

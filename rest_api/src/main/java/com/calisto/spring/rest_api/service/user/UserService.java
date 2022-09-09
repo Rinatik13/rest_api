@@ -9,4 +9,6 @@ public interface UserService {
     public User add(User user);
     public User getUser(int id);
     public void delete(int id);
+
+    User getLoginEndPass(User user);
 }

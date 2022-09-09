@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     @Autowired
     UserDaO userDaO;
 
@@ -36,5 +37,23 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public void delete(int id) {
         userDaO.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public User getLoginEndPass(User user) {
+        String login = user.getLogin();
+        String password = user.getPassword();
+        User result = null;
+        List<User> userList = userDaO.getAll();
+
+        for (User myUser : userList) {
+            if (myUser.getLogin().equals(login)){
+                if (myUser.getPassword().equals(password)){
+                    result=myUser;
+                }
+            }
+        }
+        return result;
     }
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<title>Регистрация</title>
+</head>
+<body>
+	<header>
+		<div class = "button_style"><a href="/info.html" class="text_decorator">О компании</a></div>
+		<div class = "button_style"><a href="/tarif.html" class="text_decorator">Тарифы</a></div>
+		<div class = "button_style"><a href="/registration.html" class="text_decorator">Регистрация</a></div>
+		<div class = "button_style"><a href="/login.html" class="text_decorator">Вход</a></div>
+	</header>
+	<div class="title">
+		<h1>Регистрация</h1>
+	</div>
+		<form class="registration_blok" id="registration_form" onsubmit>
+		<input class="input" type="text" placeholder="Имя" name="name" id="name">
+        <input class="input" type="text" placeholder="Логин" name="login" id="login">
+        <input class="input" type="text" placeholder="Иин" name="inn" id="inn">
+        <input class="input" type="email" placeholder="Электронная почта" name="email" id="email">
+        <input class="input" type="phone" placeholder="Номер телефона" name="phone" id="phone">
+        <input class="input" type="password" placeholder="Пароль" name="password" id="password">
+        <input class="input" type="password" placeholder="Проверка пароля" name="passwordTest" id="passwordTest">
+		<br>
+		<div id="error" style="color: red"></div>
+        <input class="button" type="submit" value="Регистрация" name="submit">	
+		</form>
+	<script src="/js/registration.js"></script>
+</body>
+</html>

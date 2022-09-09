@@ -17,9 +17,9 @@ public class User {
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_company",
+    @JoinTable(name = "company",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "company_id"))
+            inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Company> companyList;
 
     public User() {

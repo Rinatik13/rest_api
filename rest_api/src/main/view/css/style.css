@@ -1,0 +1,65 @@
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.button_style{
+    padding: 0.3%;
+    margin: 0.3%;
+    background-color:rgb(236, 236, 236);
+    border-radius: 5px;
+}
+.button_style:hover {
+    background-color:rgb(255, 255, 255);
+}
+
+.title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.text{
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+}
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.registration_blok{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.input{
+    margin: 0.3%;
+}
+
+.list_company{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.button{
+    background-color:rgb(236, 236, 236);
+    border-radius: 5px;
+    border:0ch;
+}
+.button:hover{
+    background-color:rgb(255, 255, 255);
+}
+
+.center_flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.text_decorator{
+    text-decoration: none;
+    color:black;
+}

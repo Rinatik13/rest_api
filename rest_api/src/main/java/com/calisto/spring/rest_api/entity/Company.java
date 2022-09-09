@@ -117,6 +117,9 @@ public class Company {
     // смп статус
     private int smpstatus;
 
+    // ид пользователя
+    private int user_id;
+
     // список сотрудников
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "company_employee",
@@ -186,6 +189,8 @@ public class Company {
             joinColumns = @JoinColumn(name = "company_id"),
             inverseJoinColumns = @JoinColumn(name = "docs_id"))
     private List<DocumentPdf> stampList;
+
+
 
     public Company() {
     }
@@ -484,5 +489,13 @@ public class Company {
 
     public void setStampList(List<DocumentPdf> stampList) {
         this.stampList = stampList;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 }

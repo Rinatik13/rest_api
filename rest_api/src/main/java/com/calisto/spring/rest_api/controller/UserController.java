@@ -33,4 +33,9 @@ public class UserController {
         userService.delete(id);
         return "Удалено!";
     }
+
+    @PostMapping("/get")
+    public User getLoginEndPass(@RequestBody User user){
+        return userService.getLoginEndPass(user);
+    }
 }

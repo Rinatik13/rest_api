@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Вход</title>
+</head>
+<body>
+    <header>
+        <div class = "button_style"><a href="/info.html" class="text_decorator">О компании</a></div>
+		<div class = "button_style"><a href="/tarif.html" class="text_decorator">Тарифы</a></div>
+		<div class = "button_style"><a href="/registration.html" class="text_decorator">Регистрация</a></div>
+		<div class = "button_style"><a href="/login.html" class="text_decorator">Вход</a></div>
+	</header>
+	<div class="title">
+		<h1>Вход</h1>
+	</div>
+	<form class="login" id="login_info" onsubmit="getUser(this)">
+        <input class="input" type="text" placeholder="Логин" name="login" id="login">
+        <input class="input" type="password" placeholder="Пароль" name="password" id="password">
+        <br>
+        <div id="error_login" style="color:red"></div>
+        <br>
+        <input class="button" type="submit" value="Вход" name="submit">	
+    </form>
+    <script src="/js/login.js"></script>
+</body>
+</html>
