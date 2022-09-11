@@ -49,91 +49,30 @@ public class GeneratorDocForm4 {
             SimpleDateFormat sf = new SimpleDateFormat("yyyy");
 
             Table table = new Table(8);
-            Cell cell = new Cell()
-                    .add("№\n" +
-                            "п/п")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("Наименование")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("Производитель, страна\n" +
-                            "производства, марка,\n" +
-                            "модель, основные\n" +
-                            "технические\n" +
-                            "характеристики")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("Год\n" +
-                            "выпуска")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("%\n" +
-                            "аморт\n" +
-                            "изаци\n" +
-                            "и")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("Принадлежность\n" +
-                            "(собственность,\n" +
-                            "арендованный)")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("Кол-во\n" +
-                            "единиц")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("Примеча\n" +
-                            "ния")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
+            addCell("№\n" +
+                    "п/п", table);
+            addCell("Наименование",table);
+            addCell("Производитель, страна\n" +
+                    "производства, марка,\n" +
+                    "модель, основные\n" +
+                    "технические\n" +
+                    "характеристики",table);
+            addCell("Год\n" +
+                    "выпуска",table);
+            addCell("%\n" +
+                    "аморт\n" +
+                    "изаци\n" +
+                    "и",table);
+            addCell("Принадлежность\n" +
+                    "(собственность,\n" +
+                    "арендованный)",table);
+            addCell("Кол-во\n" +
+                    "единиц",table);
+            addCell("Примеча\n" +
+                    "ния",table);
 
             for (int b = 1; b < 9; b++){
-                cell = new Cell()
-                        .add(b + "\n")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell(b + "\n",table);
             }
 
 
@@ -147,51 +86,23 @@ public class GeneratorDocForm4 {
                 Oborudovanie transportDoc = arrayListTransport.get(a);
 
                 // порядковый номер
-                cell = new Cell()
-                        .add("" + i + "\n")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell("" + i + "\n",table);
 
                 // Наименование
-                cell = new Cell()
-                        .add(transportDoc.getName())
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell(transportDoc.getName(),table);
 
                 // Производитель, страна производства, марка, модель, основные тех
                 // характеристики
-                cell = new Cell()
-                        .add(transportDoc.getModel())
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell(transportDoc.getModel(),table);
 
                 // Год выпуска
-                cell = new Cell()
-                        .add(sf.format(transportDoc.getDate()))
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell(
+//                        sf.format
+                        (transportDoc.getDate()),table);
 
                 // % амортизации
                 // нужна ли амортизация неизвестно
-                cell = new Cell()
-                        .add(" ")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell(" ", table);
 
                 // Принадлежность (собственность, арендованный)
                 String statusArend = "собственность";
@@ -199,32 +110,15 @@ public class GeneratorDocForm4 {
                     statusArend = "арендованный";
                 }
 
-                cell = new Cell()
-                        .add(statusArend)
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell(statusArend,table);
+
 
                 // Кол-во единиц
-                cell = new Cell()
-                        .add("1")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell("1",table);
 
                 // Примечание
                 // обычно взрывозащищённое или нет
-                cell = new Cell()
-                        .add(transportDoc.getPs())
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell(transportDoc.getPs(),table);
                 i++;
             }
 
@@ -356,5 +250,17 @@ public class GeneratorDocForm4 {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void addCell(String text, Table table) {
+        BaseFont baseFont = new BaseFont();
+        PdfFont font = baseFont.getFont();
+        Cell cell = new Cell()
+                .add(text)
+                .setFont(font)
+                .setFontSize(8)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setVerticalAlignment(VerticalAlignment.MIDDLE);
+        table.addCell(cell);
     }
 }

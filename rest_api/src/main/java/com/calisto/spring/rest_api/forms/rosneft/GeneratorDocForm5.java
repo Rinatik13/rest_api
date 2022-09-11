@@ -30,7 +30,7 @@ public class GeneratorDocForm5 {
             // краткое название компании с ковычками
             String fullSizeNameCompany =  company.getSmallNameCompany();
 
-            // добавляем информацию о участнике, инн и номер торгов
+            // добавляем информацию об участнике, инн и номер торгов
             String topInfoCompanyEndTender =
                     "Наименование Участника закупки: " + fullSizeNameCompany + "\n" +
                             "ИНН (или иной индификационный номер) Участника закупки: " +
@@ -42,7 +42,7 @@ public class GeneratorDocForm5 {
             // добавляем название документа
             String nameDocCompany = "СВЕДЕНИЯ О КАДРОВЫХ РЕСУРСАХ\n";
 
-            // добавляем таблицу с списком сотрудников, общее количество
+            // добавляем таблицу со списком сотрудников, общее количество
             // надо потом реализовать цыкл с выдачей всех работников компании
 
             // итоговое количество сотрудников
@@ -52,57 +52,18 @@ public class GeneratorDocForm5 {
             int countSummEmplWork = 0;
 
             Table table = new Table(5);
-            Cell cell = new Cell()
-                    .add("№\n" +
-                            "п/п")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
+            addCell("№\n" +
+                    "п/п",table);
+            addCell("Наименование показателей",table);
+            addCell("Кол-во человек, подразделения",table);
+            addCell("Место нахождения",table);
+            addCell("Количество человек, " +
+                    "которые Участник закупки собирается " +
+                    "использовать при выполнении Договора",table);
 
-            cell = new Cell()
-                    .add("Наименование показателей")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("Кол-во человек, подразделения")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("Место нахождения")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("Количество человек, " +
-                            "которые Участник закупки собирается " +
-                            "использовать при выполнении Договора")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            table.addCell(cell);
 
             for (int i = 1; i < 6; i++) {
-                cell = new Cell()
-                        .add("" + i + "\n")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell(i + "\n",table);
             }
 
             // необходимо реализовать цыкл и сборку данных по должностям. конкретно. можно попробывать всех работников
@@ -134,77 +95,19 @@ public class GeneratorDocForm5 {
 //
 
                 countSummEmpl = countSummEmpl+countEmpl;
-
-                cell = new Cell()
-                        .add(countEmpl + "")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell(countEmpl + "",table);
 
                 // добавляем место нахождение отдела
-                cell = new Cell()
-                        .add(company.getAddressCompany())
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell(company.getAddressCompany(),table);
 
                 // добавляем количество человек которое участник собирается использовать
                 countSummEmplWork = countSummEmplWork + countEmpl;
-                cell = new Cell()
-                        .add(countEmpl + "")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
-
-
-                cell = new Cell()
-                        .add("/")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
-
-                cell = new Cell()
-                        .add("ВСЕГО")
-                        .setFont(font)
-                        .setBold()
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
-
-                cell = new Cell()
-                        .add(countSummEmpl + "")
-                        .setFont(font)
-                        .setBold()
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
-
-                cell = new Cell()
-                        .add("\n")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
-
-                cell = new Cell()
-                        .add(countSummEmplWork + "")
-                        .setFont(font)
-                        .setBold()
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-                table.addCell(cell);
+                addCell(countEmpl + "",table);
+                addCell("/", table);
+                addCell("ВСЕГО", table);
+                addCell(countSummEmpl + "",table);
+                addCell("\n",table);
+                addCell(countSummEmplWork + "",table);
 
 
             // добавляем печать и подпись
@@ -248,4 +151,16 @@ public class GeneratorDocForm5 {
             throw new RuntimeException(e);
         }
     }
+
+    private void addCell(String text, Table table) {
+        BaseFont baseFont = new BaseFont();
+        PdfFont font = baseFont.getFont();
+        Cell cell = new Cell()
+                .add(text)
+                .setFont(font)
+                .setFontSize(8)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setVerticalAlignment(VerticalAlignment.MIDDLE);
+        table.addCell(cell);
     }
+}

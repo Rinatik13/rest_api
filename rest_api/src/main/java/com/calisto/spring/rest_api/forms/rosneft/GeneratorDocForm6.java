@@ -41,11 +41,13 @@ public class GeneratorDocForm6 {
                             company.getEmployeeList().get(0).getPassportSerial() + " " +
                             company.getEmployeeList().get(0).getPassportNumber() + " выдан " +
                             company.getEmployeeList().get(0).getPassportGovName() + " дата выдачи " +
-                            sf.format(company.getEmployeeList().get(0).getPassportGovDate()) + " года,\n" +
+//                            sf.format
+                                    (company.getEmployeeList().get(0).getPassportGovDate()) + " года,\n" +
                             "адрес регистрации: " +
                             company.getEmployeeList().get(0).getAddressReg() +",\n" +
                             "дата рождения: " +
-                            sf.format(company.getEmployeeList().get(0).getHeppyDate()) + " года,\n" +
+//                            sf.format
+                                    (company.getEmployeeList().get(0).getHeppyDate()) + " года,\n" +
                             "ИНН " +
                             company.getEmployeeList().get(0).getInn() + ".\n";
 

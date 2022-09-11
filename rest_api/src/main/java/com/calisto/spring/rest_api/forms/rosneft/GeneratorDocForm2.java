@@ -120,9 +120,11 @@ public class GeneratorDocForm2 {
                         company.getEmployeeList().get(0)
                                 .getPassportNumber() + ", выдан " +
                         company.getEmployeeList().get(0).getPassportGovName() + ", дата выдачи " +
-                        sf.format(company.getEmployeeList().get(0).getPassportGovDate())
+//                        sf.format
+                                (company.getEmployeeList().get(0).getPassportGovDate())
                         + ", дата рождения " +
-                        sf.format(company.getEmployeeList().get(0).getHeppyDate()) + ", гражданство " +
+//                        sf.format
+                                (company.getEmployeeList().get(0).getHeppyDate()) + ", гражданство " +
                         company.getEmployeeList().get(0).getGovermentStatus() + ".",table);
 
             }

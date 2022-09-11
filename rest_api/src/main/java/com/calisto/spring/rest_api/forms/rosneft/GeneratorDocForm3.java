@@ -53,84 +53,31 @@ public class GeneratorDocForm3 {
             // таблица со списком договором, по сути дела огромный документ.
             // самый большой
             Table bigTable = new Table(8);
-            Cell cell = new Cell();
-            cell.add("№")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            bigTable.addCell(cell);
+            addCell("№", bigTable);
+            addCell("Предмет Договора", bigTable);
+            addCell("Наименование Заказчика,\n" +
+                    "адрес и контактный телефон/факс Заказчика,\n" +
+                    "контактное лицо\n",bigTable);
+            addCell("Полная сумма\n" +
+                    "Договора, руб.",bigTable);
+            addCell("Дата заключения/\n" +
+                    "завершения (месяц, год,\n" +
+                    "процент выполнения)", bigTable);
+            addCell("Роль\n" +
+                    "(генподрядчик, субподрядчик\n" +
+                    "(соисполнитель), партнер)\n" +
+                    "и объем работ по Договору, %",bigTable);
+            addCell("Сведения о\n" +
+                    "претензиях\n" +
+                    "Заказчика к\n" +
+                    "выполнению\n" +
+                    "обязательств",bigTable);
+            addCell("Наличие\n" +
+                    "прилагаемых\n" +
+                    "отзывов от\n" +
+                    "Заказчиков\n" +
+                    "(есть/нет)",bigTable);
 
-            cell = new Cell();
-            cell.add("Предмет Договора")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            bigTable.addCell(cell);
-
-            cell = new Cell();
-            cell.add("Наименование Заказчика,\n" +
-                            "адрес и контактный телефон/факс Заказчика,\n" +
-                            "контактное лицо\n")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            bigTable.addCell(cell);
-
-            cell = new Cell();
-            cell.add("Полная сумма\n" +
-                            "Договора, руб.")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            bigTable.addCell(cell);
-
-            cell = new Cell();
-            cell.add("Дата заключения/\n" +
-                            "завершения (месяц, год,\n" +
-                            "процент выполнения)")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            bigTable.addCell(cell);
-
-            cell = new Cell();
-            cell.add("Роль\n" +
-                            "(генподрядчик, субподрядчик\n" +
-                            "(соисполнитель), партнер)\n" +
-                            "и объем работ по Договору, %")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            bigTable.addCell(cell);
-
-            cell = new Cell();
-            cell.add("Сведения о\n" +
-                            "претензиях\n" +
-                            "Заказчика к\n" +
-                            "выполнению\n" +
-                            "обязательств")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
-            bigTable.addCell(cell);
-
-            cell = new Cell();
-            cell.add("Наличие\n" +
-                            "прилагаемых\n" +
-                            "отзывов от\n" +
-                            "Заказчиков\n" +
-                            "(есть/нет)")
-                    .setFont(font)
-                    .setFontSize(8)
-                    .setTextAlignment(TextAlignment.CENTER);
-            bigTable.addCell(cell);
 
             // реализуем алгоритм вывода информации по договорам
             int countContact = company.getContractList().size();
@@ -147,20 +94,10 @@ public class GeneratorDocForm3 {
                 // добавляем данные в таблицу по контракту
 
                 pdfContract = listContactCom.get(a);
-                cell = new Cell()
-                        .add(i + "\n")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER);
-                bigTable.addCell(cell);
+                addCell(i + "\n",bigTable);
 
                 // предмет договора
-                cell = new Cell()
-                        .add(pdfContract.getName())
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER);
-                bigTable.addCell(cell);
+                addCell(pdfContract.getName(),bigTable);
 
                 // Наименование участника, адрес, контактный телефон Заказчика
                 // надо добавить реализацию получение названия компаний с инн запроса налоговой
@@ -175,21 +112,14 @@ public class GeneratorDocForm3 {
 //                bigTable.addCell(cell);
 
                 // Полная сумма договора
-                cell = new Cell()
-                        .add(pdfContract.getSumm()+" руб.")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER);
-                bigTable.addCell(cell);
+                addCell(pdfContract.getSumm()+" руб.",bigTable);
 
                 // Дата заключения/завершения договора
-                cell = new Cell()
-                        .add(sf.format(pdfContract.getDate()) + "/" +
-                                sf.format(pdfContract.getEndDate()))
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER);
-                bigTable.addCell(cell);
+                addCell(
+//                sf.format
+                        (pdfContract.getDate()) + "/" +
+//                        sf.format
+                                (pdfContract.getEndDate()),bigTable);
 
                 // Роль участника
                 // объём выполнения работ стоит по умолчанию 100%
@@ -203,21 +133,11 @@ public class GeneratorDocForm3 {
 
                 // Сведения о претензиях
                 // по умолчанию нету
-                cell = new Cell()
-                        .add("\n")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER);
-                bigTable.addCell(cell);
+                addCell("\n",bigTable);
 
                 // Наличие прилагаемых отзывов
                 // по умолчанию нету
-                cell = new Cell()
-                        .add("\n")
-                        .setFont(font)
-                        .setFontSize(8)
-                        .setTextAlignment(TextAlignment.CENTER);
-                bigTable.addCell(cell);
+                addCell("\n",bigTable);
             i++;
             }
             // добавляем печать и подпись
@@ -267,5 +187,17 @@ public class GeneratorDocForm3 {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void addCell(String text, Table table) {
+        BaseFont baseFont = new BaseFont();
+        PdfFont font = baseFont.getFont();
+        Cell cell = new Cell();
+        cell.add(text)
+                .setFont(font)
+                .setFontSize(8)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setVerticalAlignment(VerticalAlignment.MIDDLE);
+        table.addCell(cell);
     }
 }
