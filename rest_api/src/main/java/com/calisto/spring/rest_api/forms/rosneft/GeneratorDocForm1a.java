@@ -77,43 +77,16 @@ public class GeneratorDocForm1a {
             float[] tableWidths = {30f, 130f, 230f, 120f};
             Table table = new Table(tableWidths);
 
-            Cell cell = new Cell()
-                    .add(" ")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("Дата регистрации")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("Наименование")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("Примечание")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table.addCell(cell);
-
-            cell = new Cell()
-                    .add("1")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table.addCell(cell);
+            addCell(" ", table);
+            addCell("Дата регистрации",table);
+            addCell("Наименование",table);
+            addCell("Примечание",table);
+            addCell("1",table);
 
             int i;
             for(i = 2; i<5; i++)
             {
-                cell = new Cell()
-                        .add(" ")
-                        .setFont(font);
-                table.addCell(cell);
+                addCell(" ", table);
             }
 
             // продолжаем писать 2 блок тела документа после таблицы
@@ -164,108 +137,35 @@ public class GeneratorDocForm1a {
             // дальше идёт таблица с оборотами за последние 3 года.
             Table table1 = new Table(5);
 
-            Cell cell1 = new Cell()
-                    .add(" ")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
-
-            cell1 = new Cell()
-                    .add("2021г.,\n тыс.руб")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
-
-            cell1 = new Cell()
-                    .add("2020г.,\n тыс.руб.")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
-
-            cell1 = new Cell()
-                    .add("2019г.,\n тыс.руб")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
-
-            cell1 = new Cell()
-                    .add("Среднеговодой объём, \n тыс.руб.")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
-
-            cell1 = new Cell()
-                    .add("Годовые обороты\n всего, с учетом\n НДС тыс.руб.")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
+            addCell(" ", table1);
+            addCell("2021г.,\n тыс.руб",table1);
+            addCell("2020г.,\n тыс.руб.", table1);
+            addCell("2019г.,\n тыс.руб", table1);
+            addCell("Среднеговодой объём, \n тыс.руб.",table1);
+            addCell("Годовые обороты\n всего, с учетом\n НДС тыс.руб.", table1);
 
             // тут надо сделать в идеале цикл с добавлением информации из бухгалтерских данных
-            cell1 = new Cell()
-                    .add((String.format("%.2f",
-                            (company.getBuhdocumentList().get(0).getOborotiDate() * 1.2))) + "\n")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
 
-            cell1 = new Cell()
-                    .add((String.format("%.2f",
-                                    (company.getBuhdocumentList().get(1).getOborotiDate() * 1.2))) + "\n")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
-
-            cell1 = new Cell()
-                    .add((String.format("%.2f",
-                                    (company.getBuhdocumentList().get(2).getOborotiDate() * 1.2))) + "\n")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
-
-            cell1 = new Cell()
-                    .add(
-                            (String.format("%.2f",((company.getBuhdocumentList().get(0).getOborotiDate() * 1.2) +
-                                    (company.getBuhdocumentList().get(1).getOborotiDate() * 1.2)+
-                                    (company.getBuhdocumentList().get(2).getOborotiDate() * 1.2))/3)) + "\n"
-                    )
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
-
-            cell1 = new Cell()
-                    .add("Годовые обороты\nвсего, без учета\nНДС тыс. руб.")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
+            addCell((String.format("%.2f",
+                    (company.getBuhdocumentList().get(0).getOborotiDate() * 1.2))) + "\n",table1);
+            addCell((String.format("%.2f",
+                    (company.getBuhdocumentList().get(1).getOborotiDate() * 1.2))) + "\n", table1);
+            addCell((String.format("%.2f",
+                    (company.getBuhdocumentList().get(2).getOborotiDate() * 1.2))) + "\n", table1);
+            addCell((String.format("%.2f",((company.getBuhdocumentList().get(0).getOborotiDate() * 1.2) +
+                    (company.getBuhdocumentList().get(1).getOborotiDate() * 1.2)+
+                    (company.getBuhdocumentList().get(2).getOborotiDate() * 1.2))/3)) + "\n", table1);
+            addCell("Годовые обороты\nвсего, без учета\nНДС тыс. руб.",table1);
 
             // тут тоже делаем цикл полученные из бухгалтерии данных
-            cell1 = new Cell()
-                    .add((String.format("%.2f",(company.getBuhdocumentList().get(0).getOborotiDate()))) + "\n")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
+            addCell((String.format("%.2f",(company.getBuhdocumentList().get(0).getOborotiDate()))) + "\n", table1);
+            addCell((String.format("%.2f",(company.getBuhdocumentList().get(1).getOborotiDate()))) + "\n",table1);
+            addCell((String.format("%.2f",(company.getBuhdocumentList().get(2).getOborotiDate()))) + "\n", table1);
+            addCell((String.format("%.2f",(
+                    (company.getBuhdocumentList().get(0).getOborotiDate() +
+                            company.getBuhdocumentList().get(1).getOborotiDate() +
+                            company.getBuhdocumentList().get(2).getOborotiDate()))/3)) + "\n",table1);
 
-            cell1 = new Cell()
-                    .add((String.format("%.2f",(company.getBuhdocumentList().get(1).getOborotiDate()))) + "\n")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
-
-            cell1 = new Cell()
-                    .add((String.format("%.2f",(company.getBuhdocumentList().get(2).getOborotiDate()))) + "\n")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
-
-            cell1 = new Cell()
-                    .add((String.format("%.2f",(
-                            (company.getBuhdocumentList().get(0).getOborotiDate() +
-                                    company.getBuhdocumentList().get(1).getOborotiDate() +
-                                    company.getBuhdocumentList().get(2).getOborotiDate()))/3)) + "\n"
-                    )
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table1.addCell(cell1);
 
             // начинаем 3 блок текста тела документа до таблицы сведений
             // о привлекаемых субподрядчиках
@@ -433,80 +333,26 @@ public class GeneratorDocForm1a {
 
             Table table2 = new Table(5);
 
-            Cell cell2 = new Cell()
-                    .add("№\n п/п")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table2.addCell(cell2);
+            addCell("№\n п/п",table2);
+            addCell("Наименование привлекаемого субподрядчика (соисполнителя), ИНН",table2);
+            addCell("Наименование выполняемых работ (иное)",table2);
+            addCell("Объем выполнения работ\n" +
+                    "(в % от общего объема выполняемых работ)\n",table2);
+            addCell("Примечания\n" +
+                    "(в т.ч. является ли субподрядчик (соисполнитель) субъектом МСП)\n", table2);
 
-            cell2 = new Cell()
-                    .add("Наименование привлекаемого субподрядчика (соисполнителя), ИНН")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table2.addCell(cell2);
-
-            cell2 = new Cell()
-                    .add("Наименование выполняемых работ (иное)")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table2.addCell(cell2);
-
-            cell2 = new Cell()
-                    .add("Объем выполнения работ\n" +
-                            "(в % от общего объема выполняемых работ)\n")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table2.addCell(cell2);
-
-            cell2 = new Cell()
-                    .add("Примечания\n" +
-                            "(в т.ч. является ли субподрядчик (соисполнитель) субъектом МСП)\n")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table2.addCell(cell2);
 
             // доработать эту таблицу (эта фраза должна выводится в таблице на все столбцы в одной
             // строке
-            cell2 = new Cell(1,5)
-                    .add("Номер лота и наименование предмета Договора (лота): " +
-                            // если есть субподрядчик, то указать по какому лоту
-                            // по умолчанию пусто
-                            " ")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    ;
-            table2.addCell(cell2);
-
-            cell2 = new Cell()
-                    .add("1. ")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table2.addCell(cell2);
-
-            cell2 = new Cell()
-                    .add(" ")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table2.addCell(cell2);
-
-            cell2 = new Cell()
-                    .add(" ")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table2.addCell(cell2);
-
-            cell2 = new Cell()
-                    .add(" ")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table2.addCell(cell2);
-
-            cell2 = new Cell()
-                    .add(" ")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table2.addCell(cell2);
-
+            addCell("Номер лота и наименование предмета Договора (лота): " +
+                    // если есть субподрядчик, то указать по какому лоту
+                    // по умолчанию пусто
+                    " ",table2);
+            addCell("1. ", table2);
+            addCell(" ", table2);
+            addCell(" ", table2);
+            addCell(" ", table2);
+            addCell(" ", table2);
 
             // текст тела блока № 4 до таблицы наименование видов работ
 
@@ -534,44 +380,15 @@ public class GeneratorDocForm1a {
 
             // таблица (данные вносятся на основании данных о видах работ которые выполняем
             Table table3 = new Table(3);
+            addCell("Наименование видов работ по направлению деятельности",table3);
+            addCell("Код ОКПД2\n" +
+                    "(при наличии)\n", table3);
+            addCell("Категория Участника закупки",table3);
+            addCell(tender.getName(),table3);
+            addCell(" ", table3);
+            // при привлечении субподрядчика должно автоматом заполняться что с субподрядом
+            addCell("Исполнитель услуг (собственными силами)",table3);
 
-            Cell cell3 = new Cell()
-                    .add("Наименование видов работ по направлению деятельности")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table3.addCell(cell3);
-
-            cell3 = new Cell()
-                    .add("Код ОКПД2\n" +
-                            "(при наличии)\n")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table3.addCell(cell3);
-
-            cell3 = new Cell()
-                    .add("Категория Участника закупки")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table3.addCell(cell3);
-
-            cell3 = new Cell()
-                    .add(tender.getName())
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table3.addCell(cell3);
-
-            cell3 = new Cell()
-                    .add(" ")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table3.addCell(cell3);
-
-            cell3 = new Cell()
-                    // при привлечении субподрядчика должно автоматом заполняться что с субподрядом
-                    .add("Исполнитель услуг (собственными силами)")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER);
-            table3.addCell(cell3);
 
             // пошёл текст тела документа № 5
             // до раздела подписания
@@ -879,5 +696,15 @@ public class GeneratorDocForm1a {
                 break;
         }
         return result;
+    }
+
+    public void addCell (String text, Table table){
+        BaseFont baseFont = new BaseFont();
+        PdfFont font = baseFont.getFont();
+        Cell cell = new Cell()
+                .add(text)
+                .setFont(font)
+                .setTextAlignment(TextAlignment.CENTER);
+        table.addCell(cell);
     }
 }

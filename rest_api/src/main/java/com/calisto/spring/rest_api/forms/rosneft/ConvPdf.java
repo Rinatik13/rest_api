@@ -34,8 +34,7 @@ public class ConvPdf {
                        String bodyDocCompany, int numberDoc){
 
         // добавляем полное название компании в шапку файла
-        String topFullNameFileDocCompany = company.getFullNameFormCompany() + "\n" + "\"" +
-                company.getFullNameCompany() + "\"" ;
+        String topFullNameFileDocCompany = company.getFullNameCompany();
 
         // добавляем реквизиты компании в шапку файла
         String requisitesCompany = "Юридический адрес: " + company.getAddressCompany() + ";\n" +

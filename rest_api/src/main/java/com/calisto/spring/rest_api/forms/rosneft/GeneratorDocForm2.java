@@ -76,35 +76,20 @@ public class GeneratorDocForm2 {
             // нужны данные физ лица или компаний собственников
             // нужны данные с бухгалтерии с информацией по долям
             Table table = new Table(3);
-            Cell cell = new Cell()
-                    .add("Наименование организации\n" +
-                            "(наименование, место\n" +
-                            "нахождения, ИНН")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(8);
-            table.addCell(cell);
 
-            cell = new Cell()
-                    .add("Собственники (акционеры)\n" +
-                            "организации, с указанием доли в %\n" +
-                            "(наименование, место нахождения\n" +
-                            "(страна), ИНН")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(8);
-            table.addCell(cell);
+            addCell("Наименование организации\n" +
+                    "(наименование, место\n" +
+                    "нахождения, ИНН",table);
+            addCell("Собственники (акционеры)\n" +
+                    "организации, с указанием доли в %\n" +
+                    "(наименование, место нахождения\n" +
+                    "(страна), ИНН", table);
+            addCell("Подтверждающие\n" +
+                    "документы, наименование,\n" +
+                    "реквизиты, паспортные данные\n" +
+                    "(в т.ч. гражданство)", table);
 
-            cell = new Cell()
-                    .add("Подтверждающие\n" +
-                            "документы, наименование,\n" +
-                            "реквизиты, паспортные данные\n" +
-                            "(в т.ч. гражданство)")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(8);
-            table.addCell(cell);
-
+            Cell cell;
             cell = new Cell(1, 3)
                     .add("I. Организация-Участник закупки")
                     .setFont(font)
@@ -119,42 +104,27 @@ public class GeneratorDocForm2 {
             // пока не реализуем. надо подумать на логикой реализации
             int numberMenCompanySobstveniki = 1;
             for (int i = numberMenCompanySobstveniki; i < 2; i++) {
-                cell = new Cell()
-                        .add(fullSizeNameCompany +
-                                company.getAddressCompany() + ", " +
-                                company.getInnCompany())
-                        .setFont(font)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setFontSize(8);
-                table.addCell(cell);
+                addCell(fullSizeNameCompany +
+                        company.getAddressCompany() + ", " +
+                        company.getInnCompany(),table);
+                addCell(company.getEmployeeList().get(0).giveFullName() + ", " +
+                        company.getEmployeeList().get(0)
+                                .getAddressReg() + ", " +
+                        company.getEmployeeList().get(0).getInn(),table);
 
-                cell = new Cell()
-                        .add(company.getEmployeeList().get(0).giveFullName() + ", " +
-                                company.getEmployeeList().get(0)
-                                        .getAddressReg() + ", " +
-                                company.getEmployeeList().get(0).getInn())
-                        .setFont(font)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setFontSize(8);
-                table.addCell(cell);
 
                 // реализуем новую форму даты (сделать отдельно класс)
                 SimpleDateFormat sf = new SimpleDateFormat("dd MMMM yyyy");
+                addCell("паспорт " + company.getEmployeeList().get(0)
+                        .getPassportSerial() + " " +
+                        company.getEmployeeList().get(0)
+                                .getPassportNumber() + ", выдан " +
+                        company.getEmployeeList().get(0).getPassportGovName() + ", дата выдачи " +
+                        sf.format(company.getEmployeeList().get(0).getPassportGovDate())
+                        + ", дата рождения " +
+                        sf.format(company.getEmployeeList().get(0).getHeppyDate()) + ", гражданство " +
+                        company.getEmployeeList().get(0).getGovermentStatus() + ".",table);
 
-                cell = new Cell()
-                        .add("паспорт " + company.getEmployeeList().get(0)
-                                .getPassportSerial() + " " +
-                                company.getEmployeeList().get(0)
-                                        .getPassportNumber() + ", выдан " +
-                                company.getEmployeeList().get(0).getPassportGovName() + ", дата выдачи " +
-                                sf.format(company.getEmployeeList().get(0).getPassportGovDate())
-                                + ", дата рождения " +
-                                sf.format(company.getEmployeeList().get(0).getHeppyDate()) + ", гражданство " +
-                                company.getEmployeeList().get(0).getGovermentStatus() + ".")
-                        .setFont(font)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setFontSize(8);
-                table.addCell(cell);
             }
 
             cell = new Cell(1, 3)
@@ -223,77 +193,43 @@ public class GeneratorDocForm2 {
             // в группу лица отсутствуют
 
             Table table1 = new Table(7);
-            cell = new Cell()
-                    .add("№\n п/п")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(8);
-            table1.addCell(cell);
+            addCell("№\n п/п",table1);
+            addCell("Полное фирменное\n" +
+                    "наименование\n" +
+                    "(наименование для\n" +
+                    "некоммерческой\n" +
+                    "организации) или\n" +
+                    "фамилия, имя,\n" +
+                    "отчество\n" +
+                    "аффилированного\n" +
+                    "/входящего в группу\n" +
+                    "лица", table1);
+            addCell("Место нахождения\n" +
+                    "юридического\n" +
+                    "лица или место\n" +
+                    "жительства\n" +
+                    "физического лица\n" +
+                    "(указывается только\n" +
+                    "с согласия\n" +
+                    "физического лица)", table1);
+            addCell("Основание\n" +
+                    " (основания), в\n" +
+                    "силу которого\n" +
+                    "лицо признается\n" +
+                    "аффилированным\n" +
+                    "/входящим в \n" +
+                    "группу", table1);
+            addCell("Дата\n" +
+                    "наступления\n" +
+                    "основания\n" +
+                    "(оснований)", table1);
+            addCell("Способ и\n" +
+                    "доля участия\n" +
+                    "аффилированного\n" +
+                    "/входящего\n" +
+                    "в группу\n" +
+                    "лица", table1);
 
-            cell = new Cell()
-                    .add("Полное фирменное\n" +
-                            "наименование\n" +
-                            "(наименование для\n" +
-                            "некоммерческой\n" +
-                            "организации) или\n" +
-                            "фамилия, имя,\n" +
-                            "отчество\n" +
-                            "аффилированного\n" +
-                            "/входящего в группу\n" +
-                            "лица")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(8);
-            table1.addCell(cell);
-
-            cell = new Cell()
-                    .add("Место нахождения\n" +
-                            "юридического\n" +
-                            "лица или место\n" +
-                            "жительства\n" +
-                            "физического лица\n" +
-                            "(указывается только\n" +
-                            "с согласия\n" +
-                            "физического лица)")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(8);
-            table1.addCell(cell);
-
-            cell = new Cell()
-                    .add("Основание\n" +
-                            " (основания), в\n" +
-                            "силу которого\n" +
-                            "лицо признается\n" +
-                            "аффилированным\n" +
-                            "/входящим в \n" +
-                            "группу")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(8);
-            table1.addCell(cell);
-
-            cell = new Cell()
-                    .add("Дата\n" +
-                            "наступления\n" +
-                            "основания\n" +
-                            "(оснований)")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(8);
-            table1.addCell(cell);
-
-            cell = new Cell()
-                    .add("Способ и\n" +
-                            "доля участия\n" +
-                            "аффилированного\n" +
-                            "/входящего\n" +
-                            "в группу\n" +
-                            "лица")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(8);
-            table1.addCell(cell);
 
             // если есть аффилированность то заполняем эту часть таблицы
             // по умолчанию "Аффилированные и/или входящие в группу лица отсутствуют"
@@ -385,5 +321,16 @@ public class GeneratorDocForm2 {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void addCell(String text, Table table) {
+        BaseFont baseFont = new BaseFont();
+        PdfFont font = baseFont.getFont();
+        Cell cell = new Cell()
+                .add(text)
+                .setFont(font)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setFontSize(8);
+        table.addCell(cell);
     }
 }
