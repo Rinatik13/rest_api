@@ -56,7 +56,7 @@ header{
 .center_flex{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .text_decorator{
