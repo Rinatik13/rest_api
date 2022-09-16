@@ -63,3 +63,10 @@ header{
     text-decoration: none;
     color:black;
 }
+
+.center_text{
+    text-align: center;
+}
+.list_component{
+    text-align: center;
+}

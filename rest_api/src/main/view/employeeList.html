@@ -7,22 +7,28 @@
   <link rel="stylesheet" href="/css/style.css">
   <title>Список сотрудников</title>
 </head>
-<body>
+    <body>
 
-<header>
-  <div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
-  <div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
-  <div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
-</header>
+        <header>
+          <div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
+          <div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
+          <div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
+        </header>
 
-<h1 class="title">Список сотрудников</h1>
+        <h1 class="title">Список сотрудников</h1>
 
-<div class="center_flex">
-    <button class="button"><a href="/addCompany.html" class="text_decorator">Добавить сотрудника</a></button>
-<br>
+        <div class="center_text">Итого сотрудников <span id="list_count"></span></div>
+        <br>
 
-<div class="list_company" id="company_list">
-</div>
-<script src="/js/company.js"></script>
-</body>
+        <div class="center_flex">
+            <button class="button"><a href="/addCompany.html" class="text_decorator">Добавить сотрудника</a></button>
+            </div>
+        <br>
+
+            <div class="list_component" id="employee_list">
+
+
+            </div>
+        <script src="/js/employee_list.js"></script>
+    </body>
 </html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Информация о сотруднике</title>
+</head>
+    <body>
+
+        <header>
+          <div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
+          <div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
+          <div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
+        </header>
+
+        <h1 class="title">Информация о сотруднике</h1>
+
+        <div class="center_flex">
+            <button class="button"><a href="/addCompany.html" class="text_decorator">Добавить документ</a></button>
+            </div>
+        <br>
+        <div class="center_flex">
+          <div class="employee_info center_text" id="employee">
+                <div>Фамилия: <span id="surname"> 123</span> <button id="button_surname">изменить</button></div>
+                <div>Имя: <span id="name"> 123</span> <button id="button_name">изменить</button></div>
+                <div>Отчество: <span id="patronomic"> 123</span> <button id="button_patronomic">изменить</button></div>
+                <div>Должность: <span id="positionCom"> 123</span> <button id="button_positionCom">изменить</button></div>
+                <div>Дата рождения: <span id="heppyDate"> 123</span> <button id="button_heppyDate">изменить</button></div>
+                <div>Дата трудоустройства: <span id="dateTrud"> 123</span> <button id="button_dateTrud">изменить</button></div>
+                <div>Номер телефона: <span id="telephoneNumber"> 123</span> <button id="button_telephoneNumber">изменить</button></div>
+                <div>Адрес регистрации: <span id="addressReg"> 123</span> <button id="button_addressReg">изменить</button></div>
+                <div>ИНН: <span id="inn"> 123</span> <button id="button_inn">изменить</button></div>
+                <div>Серия паспорта: <span id="passportSerial"> 123</span> <button id="button_passportSerial">изменить</button></div>
+                <div>Номер паспорта: <span id="passportNumber"> 123</span> <button id="button_passportNumber">изменить</button></div>
+                <div>Дата выдачи паспорта: <span id="passportGovDate"> 123</span> <button id="button_passportGovDate">изменить</button></div>
+                <div>Кем выдан: <span id="passportGovName"> 123</span> <button id="button_passportGovName">изменить</button></div>
+                <div>СНИЛС: <span id="snils"> 123</span> <button id="button_snils">изменить</button></div>
+                <div>Гражданство: <span id="govermentStatus"> 123</span> <button id="button_govermentStatus">изменить</button></div>
+            </div>  
+            <div>
+             <span>Список документов</span>   
+             <div class="doc_list" id="doc_list">
+
+             </div>
+            </div>
+            
+        </div>
+            
+        <script src="/js/employee.js"></script>
+    </body>
+</html>
