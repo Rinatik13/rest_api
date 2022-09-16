@@ -1,30 +1,23 @@
 let res = localStorage.getItem('employee');
-let employee;
-// = JSON.parse(res);
+let employee = JSON.parse(res);
 let empl_inf = document.getElementById('employee');
 
-employee = {
-    "addressReg" : "test",
-    "dateTrud" : "10.01.2022"
-}
 
 addressReg.innerHTML = employee.addressReg;
 dateTrud.innerHTML = employee.dateTrud;
-documentPdfList
-govermentStatus
-heppyDate
-id
-inn
-name
-passportGovDate
-passportGovName
-passportNumber
-passportSerial
-patronymic
-positionCom
-snils
-surname
-telephoneNumber
+govermentStatus.innerHTML = employee.govermentStatus;
+heppyDate.innerHTML = employee.heppyDate;
+inn.innerHTML = employee.inn;
+empl_name.innerHTML = employee.name;
+passportGovDate.innerHTML = employee.passportGovDate;
+passportGovName.innerHTML = employee.passportGovName;
+passportNumber.innerHTML = employee.passportNumber;
+passportSerial.innerHTML = employee.passportSerial;
+patronymic.innerHTML = employee.patronymic;
+positionCom.innerHTML = employee.positionCom;
+snils.innerHTML = employee.snils;
+surname.innerHTML = employee.surname;
+telephoneNumber.innerHTML = employee.telephoneNumber;
 
 // тут реализуем добавление списка документов
 // if(companyList === null){
