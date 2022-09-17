@@ -73,6 +73,10 @@ public class Employee {
     @Column(name = "date_trud")
     private String dateTrud;
 
+    // ид компании
+    @Column(name = "company_id")
+    private int company_id;
+
     // список сканов документов
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "employee_docs",
@@ -221,5 +225,13 @@ public class Employee {
 
     public void setDocumentPdfList(List<DocumentPdf> documentPdfList) {
         this.documentPdfList = documentPdfList;
+    }
+
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
     }
 }

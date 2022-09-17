@@ -2,7 +2,6 @@ package com.calisto.spring.rest_api.forms.rosneft;
 
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Contract;
-import com.calisto.spring.rest_api.entity.DocumentPdf;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
@@ -98,38 +97,19 @@ public class GeneratorDocForm3 {
 
                 // предмет договора
                 addCell(pdfContract.getName(),bigTable);
-
-                // Наименование участника, адрес, контактный телефон Заказчика
-                // надо добавить реализацию получение названия компаний с инн запроса налоговой
-//                cell = new Cell()
-//                        .add(pdfContract.getTwoObject().getSmallNameFormCompany() + " \"" +
-//                                pdfContract.getTwoObject().getSmallNameCompany() + "\"," +
-//                                pdfContract.getTwoObject().getAddressCompany() + ", " +
-//                                pdfContract.getTwoObject().getTelephoneCompany())
-//                        .setFont(font)
-//                        .setFontSize(8)
-//                        .setTextAlignment(TextAlignment.CENTER);
-//                bigTable.addCell(cell);
+                // наименование заказчика
+                addCell(pdfContract.getSmileNameZakaz()+ ", инн: " + pdfContract.getInnZakaz() + ", " + pdfContract.getAddressZakaz(),bigTable);
 
                 // Полная сумма договора
                 addCell(pdfContract.getSumm()+" руб.",bigTable);
 
                 // Дата заключения/завершения договора
                 addCell(
-//                sf.format
-                        (pdfContract.getDate()) + "/" +
-//                        sf.format
-                                (pdfContract.getEndDate()),bigTable);
+                        (pdfContract.getDate()) + " / " +
+                                (pdfContract.getEndDate()) + ", 100%",bigTable);
 
                 // Роль участника
-                // объём выполнения работ стоит по умолчанию 100%
-                // добавить роли... надо их откудато брать. или по умолчанию всегда субподрядчик
-//                cell = new Cell()
-//                        .add(pdfContract.getRole() + ", 100%")
-//                        .setFont(font)
-//                        .setFontSize(8)
-//                        .setTextAlignment(TextAlignment.CENTER);
-//                bigTable.addCell(cell);
+                addCell("Субподрядчик, 100%",bigTable);
 
                 // Сведения о претензиях
                 // по умолчанию нету

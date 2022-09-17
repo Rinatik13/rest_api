@@ -13,6 +13,7 @@ public class Oborudovanie {
     private String date;
     private String status;
     private String ps;
+    private int company_id;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "oborudovanie_docs",
     joinColumns = @JoinColumn(name = "oborudovanie_id"),
@@ -20,6 +21,14 @@ public class Oborudovanie {
     private List<DocumentPdf> documentPdfList;
 
     public Oborudovanie() {
+    }
+
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
     }
 
     public int getId() {

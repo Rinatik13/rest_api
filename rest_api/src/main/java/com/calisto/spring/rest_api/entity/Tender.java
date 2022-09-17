@@ -14,8 +14,16 @@ public class Tender {
     private String web_adress;
     private String number;
     private String innZakaz;
-
+    private int company_id;
     public Tender() {
+    }
+
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
     }
 
     public int getId() {

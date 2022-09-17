@@ -1,4 +1,4 @@
-package com.calisto.spring.rest_api.companents;
+package com.calisto.spring.rest_api.components;
 
 import org.springframework.stereotype.Component;
 

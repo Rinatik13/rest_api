@@ -10,6 +10,7 @@ public class Prodact {
     private int id;
     private String name;
     private String model;
+    private int company_id;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "prodact_docs",
@@ -18,6 +19,14 @@ public class Prodact {
     private List<DocumentPdf> documentPdfList;
 
     public Prodact() {
+    }
+
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
     }
 
     public int getId() {

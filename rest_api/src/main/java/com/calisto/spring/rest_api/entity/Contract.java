@@ -11,8 +11,12 @@ public class Contract {
     private String date;
     private String endDate;
     private String innZakaz;
+
+    private String smileNameZakaz;
+    private String addressZakaz;
     private String innIspolnitel;
     private String summ;
+    private int company_id;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "contract_docs",
             joinColumns = @JoinColumn(name = "contract_id"),
@@ -20,6 +24,30 @@ public class Contract {
     private List<DocumentPdf> documentPdfList;
 
     public Contract() {
+    }
+
+    public String getSmileNameZakaz() {
+        return smileNameZakaz;
+    }
+
+    public void setSmileNameZakaz(String smileNameZakaz) {
+        this.smileNameZakaz = smileNameZakaz;
+    }
+
+    public String getAddressZakaz() {
+        return addressZakaz;
+    }
+
+    public void setAddressZakaz(String addressZakaz) {
+        this.addressZakaz = addressZakaz;
+    }
+
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
     }
 
     public int getId() {

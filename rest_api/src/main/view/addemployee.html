@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Информация о сотруднике</title>
+</head>
+<body>
+
+    <header>
+		<div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
+		<div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
+		<div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
+	</header>
+
+    <h1 class="title">Информация о сотруднике</h1>
+
+        <form class="registration_blok" id="add_employee" onsubmit>
+            <input type="text" id="empl_id" style="visibility:hidden">
+            <input type="text" placeholder="Имя" id="empl_name">
+            <input type="text" placeholder="Фамилия" id="empl_surname">
+            <input type="text" placeholder="Отчество" id="empl_patronymic">
+            <input type="text" placeholder="Должность" id="empl_positionCom">
+            <input type="text" placeholder="Дата рождения" id="empl_heppyDate">
+            <input type="text" placeholder="Дата трудоустройства" id="empl_dateTrud">
+            <input type="text" placeholder="Номер телефона" id="empl_telephoneNumber">
+            <input type="text" placeholder="Адрес регистрации" id="empl_addressReg">
+            <input type="text" placeholder="Инн" id="empl_inn">
+            <input type="text" placeholder="Серия паспорта" id="empl_passportSerial">
+            <input type="text" placeholder="Номер паспорта" id="empl_passportNumber">
+            <input type="text" placeholder="Дата выдачи паспорта" id="empl_passportGovDate">
+            <input type="text" placeholder="Кем выдан" id="empl_passportGovName">
+            <input type="text" placeholder="СНИЛС" id="empl_snils">
+            <input type="text" placeholder="Гражданство" id="empl_govermentStatus">  
+        
+            <br>
+            <span id="error_add_company" style="color:red"></span>
+            <input class="button" type="submit" value="Сохранить">
+        </form>
+<script src="/js/addemployee.js"></script>
+</body>
+</html>

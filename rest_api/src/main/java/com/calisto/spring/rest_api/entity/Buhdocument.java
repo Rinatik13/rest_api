@@ -11,6 +11,8 @@ public class Buhdocument {
     private String dateName;
     private double oborotiDate;
     private String countEmployeeDate;
+
+    private int company_id;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "buh_docs",
             joinColumns = @JoinColumn(name = "buh_id"),
@@ -18,6 +20,14 @@ public class Buhdocument {
     List<DocumentPdf> documentPdfList;
 
     public Buhdocument() {
+    }
+
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
     }
 
     public int getId() {

@@ -13,6 +13,7 @@ public class License {
     private String number;
     private String endDate;
     private String nameGovCom;
+    private int company_id;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "licenzii_docs",
             joinColumns = @JoinColumn(name = "licenzii_id"),
@@ -20,6 +21,14 @@ public class License {
     private List<DocumentPdf> documentPdfList;
 
     public License() {
+    }
+
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
     }
 
     public int getId() {

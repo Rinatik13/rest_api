@@ -13,6 +13,8 @@ public class Akkredit {
     private String date;
     private String endDate;
 
+    private int company_id;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "akkredit_docs",
             joinColumns = @JoinColumn(name = "akkredit_id"),
@@ -20,6 +22,14 @@ public class Akkredit {
     private List<DocumentPdf> documentPdfList;
 
     public Akkredit() {
+    }
+
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
     }
 
     public int getId() {

@@ -6,7 +6,7 @@ let list = document.getElementById("employee_list")
 document.getElementById("list_count").innerHTML = employees.length;
 
 if(employees === null){
-    list.innerText = 'Компании отсутствуют.';
+    list.innerText = 'Сотрудники отсутствуют';
 }
 else {
     for (let a = 0; a<employees.length; a++){
@@ -28,3 +28,12 @@ const openHtml = (event) =>{
 button_info.forEach(button_info =>{
     button_info.addEventListener('click', openHtml);    
     }) 
+
+const clearEmployee = (event) => {
+    localStorage.removeItem('employee');
+}
+
+const button_add = document.querySelector("#addEmployee");
+
+button_add.addEventListener('click', clearEmployee);
+

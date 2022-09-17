@@ -66,49 +66,31 @@ public class GeneratorDocForm5 {
                 addCell(i + "\n",table);
             }
 
+            // **********************************************************************
             // необходимо реализовать цыкл и сборку данных по должностям. конкретно. можно попробывать всех работников
             // здесь надо реализовать выдачу всех данных по кадрам
-//            int i = 1;
-//            for (int num = 0; num<company.getDepartmentsCompany().get(0).getArrayListDepartments().size();num++){
-//                Department department = company.getDepartmentsCompany().get(0).getArrayListDepartments().get(num);
-//
-//                // добавляем порядковый номер в таблице
-//                cell = new Cell()
-//                        .add(i +"")
-//                        .setFont(font)
-//                        .setFontSize(8)
-//                        .setTextAlignment(TextAlignment.CENTER)
-//                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-//                table.addCell(cell);
-//
-//                // добавляем название депортамента/отдела
-//                cell = new Cell()
-//                        .add(department.getName())
-//                        .setFont(font)
-//                        .setFontSize(8)
-//                        .setTextAlignment(TextAlignment.CENTER)
-//                        .setVerticalAlignment(VerticalAlignment.MIDDLE);
-//                table.addCell(cell);
-//
-                // добавляем кол-во людей
+
+            // добавляем кол-во людей
                 int countEmpl = company.getEmployeeList().size();
 //
 
                 countSummEmpl = countSummEmpl+countEmpl;
                 addCell(countEmpl + "",table);
-
+                addCell(" ", table);
+                addCell(" ", table);
                 // добавляем место нахождение отдела
                 addCell(company.getAddressCompany(),table);
 
                 // добавляем количество человек которое участник собирается использовать
                 countSummEmplWork = countSummEmplWork + countEmpl;
                 addCell(countEmpl + "",table);
-                addCell("/", table);
+
+                addCell("X", table);
                 addCell("ВСЕГО", table);
                 addCell(countSummEmpl + "",table);
                 addCell("\n",table);
                 addCell(countSummEmplWork + "",table);
-
+//*******************************************************************************************
 
             // добавляем печать и подпись
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();

@@ -122,51 +122,51 @@ public class Company {
 
     // список сотрудников
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "company_employee",
+    @JoinTable(name = "employee",
             joinColumns = @JoinColumn(name = "company_id"),
-            inverseJoinColumns = @JoinColumn(name = "employee_id"))
+            inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Employee> employeeList;
 
     // список бухгалтерских документов
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "company_buh",
+    @JoinTable(name = "buhdocument",
             joinColumns = @JoinColumn(name = "company_id"),
-            inverseJoinColumns = @JoinColumn(name = "buh_id"))
+            inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Buhdocument> buhdocumentList;
 
     // список оборудования
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "company_oborydovanie",
+    @JoinTable(name = "oborydovanie",
             joinColumns = @JoinColumn(name = "company_id"),
-            inverseJoinColumns = @JoinColumn(name = "oborydovanie_id"))
+            inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Oborudovanie> oborudovanieList;
 
     // список товаров
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "company_prodact",
+    @JoinTable(name = "prodact",
             joinColumns = @JoinColumn(name = "company_id"),
-            inverseJoinColumns = @JoinColumn(name = "prodact_id"))
+            inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Prodact> prodactList;
 
     // список договоров
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "company_contract",
+    @JoinTable(name = "contract",
             joinColumns = @JoinColumn(name = "company_id"),
-            inverseJoinColumns = @JoinColumn(name = "contract_id"))
+            inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Contract> contractList;
 
     // список допусков, лицензий и прочего
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "company_licenzii",
+    @JoinTable(name = "license",
             joinColumns = @JoinColumn(name = "company_id"),
-            inverseJoinColumns = @JoinColumn(name = "licenzii_id"))
+            inverseJoinColumns = @JoinColumn(name = "id"))
     private List<License> licenseList;
 
     // список аккредитаций
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "company_akkredit",
+    @JoinTable(name = "akkredit",
             joinColumns = @JoinColumn(name = "company_id"),
-            inverseJoinColumns = @JoinColumn(name = "akkredit_id"))
+            inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Akkredit> akkreditList;
 
     // список основных документов (устав, приказы, решения и прочее)
