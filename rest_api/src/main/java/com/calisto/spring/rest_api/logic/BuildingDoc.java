@@ -47,7 +47,14 @@ public class BuildingDoc {
         doc10.launch(company,komFolder+"\\Коммерческое предложение.pdf",tender,summ);
         GeneratorDocForm17 doc17 = new GeneratorDocForm17();
         doc17.launch(company,komFolder+"\\Подтверждение работы граждан РФ.pdf",tender);
+
+        SpisokSpravok spisokSpravok = new SpisokSpravok();
+
+        DocGeneratorsPDF docGeneratorsPDF = new DocGeneratorsPDF();
+        docGeneratorsPDF.generatorLaunch(company,tender,spisokSpravok,date,kvalifFolder.getAbsolutePath());
+
         copyDoc = new CopyDocument();
+
         // добавляем документы компании в папку квалификационной части
         for (int i = 0; i<company.getDocumentPdfList().size(); i++){
 

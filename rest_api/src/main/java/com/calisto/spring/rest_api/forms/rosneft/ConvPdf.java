@@ -134,14 +134,15 @@ public class ConvPdf {
                 paragraphBodyText.setFont(font);
 
             // печать
+                company.getStampList().get(0).getAddress();
                 ImageData imageData = ImageDataFactory
-                        .create("C:\\Тендеры\\Оттиски печатей и подписей\\MS.jpg");
+                        .create(company.getStampList().get(0).getAddress());
                 Image image = new Image(imageData);
                 image.scaleAbsolute(100,100);
 
             // подпись
                 ImageData imageData1 = ImageDataFactory
-                        .create("C:\\Тендеры\\Оттиски печатей и подписей\\подпись МС.jpg");
+                        .create(company.getSignatureList().get(0).getAddress());
                 Image image1 = new Image(imageData1);
                 image1.scaleAbsolute(50,45);
 

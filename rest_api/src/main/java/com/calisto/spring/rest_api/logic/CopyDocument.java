@@ -9,7 +9,7 @@ import java.io.*;
 public class CopyDocument {
     public void copyDoc(DocumentPdf doc, String addressFolder){
         String addressFrom = doc.getAddress();
-        String name = doc.getName() + doc.getId();
+        String name = doc.getName() + " " + doc.getId();
         FileInputStream is = null;
         FileOutputStream os = null;
         try {

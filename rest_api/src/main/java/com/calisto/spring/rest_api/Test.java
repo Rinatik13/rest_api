@@ -21,9 +21,19 @@ public class Test {
         buhdocumentList.add(buhdocument1);
         buhdocumentList.add(buhdocument1);
         DocumentPdf documentPdf = new DocumentPdf();
-        documentPdf.setName("Document");
-        documentPdf.setAddress("C:\\java\\blank\\StampEndSignature\\MS.jpg");
+        DocumentPdf documentPdf1 = new DocumentPdf();
+        documentPdf1.setName("Печать");
+        documentPdf1.setId(1);
+        documentPdf1.setAddress("C:\\java\\blank\\StampEndSignature\\MS.jpg");
+
+        DocumentPdf documentPdf2 = new DocumentPdf();
+        documentPdf2.setName("Подпись");
+        documentPdf2.setId(2);
+        documentPdf2.setAddress("C:\\java\\blank\\StampEndSignature\\подпись МС.jpg");
+        documentPdf.setName("Приказ на руководителя");
+        documentPdf.setAddress("C:\\java\\blank\\DocCompany\\Приказ на руководителя.pdf");
         List<DocumentPdf> documentPdfList = new ArrayList<>();
+
         documentPdfList.add(documentPdf);
         company.setStampList(documentPdfList);
         company.setSignatureList(documentPdfList);
@@ -55,6 +65,13 @@ public class Test {
         oborudovanie.setModel("Кактус");
         oborudovanie.setStatus("арендованный");
         oborudovanie.setPs("Огнезащитное");
+        List<DocumentPdf> stampList = new ArrayList<>();
+        stampList.add(documentPdf1);
+        List<DocumentPdf> signatureList = new ArrayList<>();
+        signatureList.add(documentPdf2);
+
+        company.setStampList(stampList);
+        company.setSignatureList(signatureList);
 
         List<DocumentPdf> comDocs = new ArrayList<>();
         DocumentPdf doc = new DocumentPdf();
@@ -85,7 +102,8 @@ public class Test {
         company.setOborudovanieList(oborudovanieList);
         company.setAddressCompany("Мухосранск");
         company.setSmallNameCompany("ООО \"ФОРД\"");
+        company.setFullNameCompany("Общество с ограниченной ответственностью \"ФОРД\"");
         BuildingDoc docB = new BuildingDoc();
-        docB.build(company,tender,"C:\\java\\blank\\forms3","12.09.2022",100000);
+        docB.build(company,tender,"C:\\java\\blank\\forms3","18.09.2022",100000);
     }
 }
