@@ -5,7 +5,17 @@ public class Link {
     private String method;
     private boolean templated;
 
+    private String operation_id;
+
     public Link() {
+    }
+
+    public String getOperation_id() {
+        return operation_id;
+    }
+
+    public void setOperation_id(String operation_id) {
+        this.operation_id = operation_id;
     }
 
     public String getHref() {
