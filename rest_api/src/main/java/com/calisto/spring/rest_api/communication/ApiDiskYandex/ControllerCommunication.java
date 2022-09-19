@@ -1,7 +1,6 @@
 package com.calisto.spring.rest_api.communication.ApiDiskYandex;
 
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
-import org.apache.tomcat.util.buf.Utf8Encoder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,10 +10,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.net.*;
-import java.nio.charset.CharsetEncoder;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 // реализуем управление работы с Yandex Api диском
 public class ControllerCommunication {
@@ -74,54 +72,6 @@ public class ControllerCommunication {
         return responseEntity.getBody();
     }
 
-    public String uploadFile(String url, String urlMyFile) {
-        URL url1 = null;
-        try {
-            url1 = new URL(url);
-            HttpURLConnection httpCon = (HttpURLConnection) url1.openConnection();
-            httpCon.setDoOutput(true);
-            httpCon.setRequestMethod("PUT");
-//            httpCon.setRequestProperty("application","x-www-form-urlencoded");
-//            httpCon.setRequestProperty("Content-Type", "form-data");
-            httpCon.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            DataOutputStream out = new DataOutputStream(httpCon.getOutputStream());
-
-
-            DataInputStream reader = new DataInputStream(new FileInputStream(urlMyFile));
-            BufferedInputStream buf = new BufferedInputStream(reader);
-            out.writeBytes(buf.toString());;
-            out.flush();
-            out.close();
-            httpCon.getInputStream();
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return "Загрузилось!";
-    }
-
-//        try {
-
-//            URLConnection connection = new URL(url).openConnection();
-//            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//            connection.setDoOutput(true);
-//            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-//            int i;
-//            String result = "";
-//            while ((i=inputStream.read()) != -1){
-//                result+=i;
-//            }
-//            writer.write(result);
-//            inputStream.close();
-//            writer.close();
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return "Загрузилось";
-//    }
-
     public  HttpURLConnection getHttpConnection(String url, String type){
         URL uri = null;
         HttpURLConnection con = null;
@@ -133,34 +83,28 @@ public class ControllerCommunication {
             con.setDoInput(true);
             con.setConnectTimeout(60000); //60 secs
             con.setReadTimeout(60000); //60 secs
-//            con.setRequestProperty("Accept-Encoding", "Your Encoding");
-//            con.setRequestProperty("Content-Type", "Your Encoding");
+
         }catch(Exception e){
             throw new RuntimeException(e);
         }
         return con;
     }
 
-    public void yourmethod(String url, String type, String reqbody){
+    // метод позволяет отправить файлы на сервер по открытому url адресу
+    // указываем тим PUT, POST, DELETE, GET
+    // после указываем адрес где хранится заветный файл
+    public void uploadFile(String url, String type, String reqbody){
         HttpURLConnection con = null;
         String result = null;
         try {
             con = getHttpConnection( url , type);
-            //you can add any request body here if you want to post
             if( reqbody != null){
                 con.setDoInput(true);
                 con.setDoOutput(true);
                 DataOutputStream out = new DataOutputStream(con.getOutputStream());
 
-                InputStreamReader reader = new InputStreamReader(new FileInputStream(reqbody));
-                BufferedReader bufferedReader = new BufferedReader(reader);
-                String line;
-                String res = "";
-                while ((line = bufferedReader.readLine()) != null) {
-                    res += line;
-                }
-                byte[] buffer = res.getBytes();
-                out.write(buffer, 0, buffer.length);
+                byte[] buffer = Files.readAllBytes(Paths.get(reqbody));
+                out.write(buffer);
                 out.close();
             }
             con.connect();
