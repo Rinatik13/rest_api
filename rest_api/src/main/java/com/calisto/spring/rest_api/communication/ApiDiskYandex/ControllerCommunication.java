@@ -60,44 +60,13 @@ public class ControllerCommunication {
         else{
             myUrl+= addressPath + "/";
             System.out.println("Добавляем: " +  addressFolrder);
-//            for (String s : nameList) {
-//                myUrl = myUrl + addressFolrder + "/";
-//            System.out.println(myUrl);
                 ResponseEntity<Link> responseEntity = restTemplate
                         .exchange(myUrl + addressFolrder, HttpMethod.PUT, request, new ParameterizedTypeReference<Link>() {
                 });
                 links.add(responseEntity.getBody());
-//            }
             myUrl = URLApi;
             return links;
         }
-
-//        }
-        // если адрес без / то это одиночное название папки
-        // если есть / то надо уже сделать больше 1й папки
-//        else {
-//            myUrl += addressPath + "/";
-//            if (addressFolrder.contains("/")) {
-//                String[] nameList = addressFolrder.split("/");
-//
-//                for (String s : nameList) {
-//                    myUrl = myUrl + s + "/";
-//                    ResponseEntity<Link> responseEntity = restTemplate.exchange(myUrl, HttpMethod.PUT, request, new ParameterizedTypeReference<Link>() {
-//                    });
-//                    links.add(responseEntity.getBody());
-//                }
-//                myUrl = URLApi;
-//                return links;
-//            } else {
-//
-//                myUrl = myUrl + addressFolrder + "/";
-//                ResponseEntity<Link> responseEntity = restTemplate.exchange(myUrl, HttpMethod.PUT, request, new ParameterizedTypeReference<Link>() {
-//                });
-//                links.add(responseEntity.getBody());
-//                myUrl = URLApi;
-//                return links;
-//            }
-//        }
     }
 
 
@@ -155,8 +124,8 @@ public class ControllerCommunication {
                 con.setDoOutput(true);
                 DataOutputStream out = new DataOutputStream(con.getOutputStream());
 
-                byte[] buffer = Files.readAllBytes(Paths.get(reqbody));
-                out.write(buffer);
+//                byte[] buffer = Files.readAllBytes(Paths.get(reqbody));
+                out.writeBytes(reqbody);
                 out.close();
             }
             con.connect();
