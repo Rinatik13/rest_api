@@ -4,6 +4,7 @@ import com.calisto.spring.rest_api.DaO.company.CompanyDaO;
 import com.calisto.spring.rest_api.entity.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.calisto.spring.rest_api.logic.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -22,8 +23,10 @@ public class CompanyServiceImpl implements CompanyService{
     @Override
     @Transactional
     public Company add(Company company) {
-    companyDaO.add(company);
-    return company;
+        Company result = new Company();
+    result = companyDaO.add(company);
+    BuildPath.buildCompanyPath(company);
+    return result;
     }
 
     @Override

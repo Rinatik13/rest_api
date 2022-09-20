@@ -21,7 +21,7 @@ public class ControllerCommunicationTest extends ControllerCommunication {
 
     @Test
     public void testCreateFolder() {
-        createFolder("user_1/companys/company_1");
+        createFolder("user_1/companys/company_1",null);
     }
 
     @Test

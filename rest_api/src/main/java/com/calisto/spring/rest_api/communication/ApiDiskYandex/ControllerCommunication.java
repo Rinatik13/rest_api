@@ -6,6 +6,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
@@ -15,6 +16,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 // реализуем управление работы с Yandex Api диском
+
 public class ControllerCommunication {
     String URLApi = "https://cloud-api.yandex.net/v1/disk/resources?path=";
     String URLApiDown = "https://cloud-api.yandex.net/v1/disk/resources/download?path=";
@@ -23,11 +25,10 @@ public class ControllerCommunication {
     String OAuth = "AQAAAAAPGEiVAADLW-o0sA3bOkg9j-CFcK4lxJA";
     RestTemplate restTemplate = new RestTemplate();
     HttpHeaders headers = new HttpHeaders();
-
+    HttpEntity<String> request = new HttpEntity<>(headers);
     // метод удаляет папку или файл, или всё сразу
     public String delete(String address) {
-        headers.add(auth, OAuth);
-        HttpEntity<String> request = new HttpEntity<>(headers);
+
         ResponseEntity<String> responseEntity = restTemplate.exchange(URLApi + address, HttpMethod.DELETE, request, new ParameterizedTypeReference<String>() {
         });
         return responseEntity.getBody();
@@ -35,19 +36,70 @@ public class ControllerCommunication {
 
     // метод создаёт папки. надо ещё протестировать более изошрённо
     // получает адрес файла и запихивает его в массив и далее работает с массивом
-    public List<Link> createFolder(String address) {
-        String[] nameList = address.split("/");
+    public List<Link> createFolder(String addressFolrder, String addressPath) {
+
         headers.add(auth, OAuth);
+        headers.add("Accept","application/json");
         List<Link> links = new ArrayList<>();
-        HttpEntity<String> request = new HttpEntity<>(headers);
-        for (String s : nameList) {
-            URLApi = URLApi + s + "/";
-            ResponseEntity<Link> responseEntity = restTemplate.exchange(URLApi, HttpMethod.PUT, request, new ParameterizedTypeReference<Link>() {
-            });
-            links.add(responseEntity.getBody());
+
+        String myUrl = URLApi;
+        if (addressPath == null) {
+            String[] nameList = addressFolrder.split("/");
+
+            for (String s : nameList) {
+                myUrl = myUrl + s + "/";
+                System.out.println("Добавляем: " + s);
+                ResponseEntity<Link> responseEntity = restTemplate
+                        .exchange(myUrl, HttpMethod.PUT, request, new ParameterizedTypeReference<Link>() {
+                });
+                links.add(responseEntity.getBody());
+            }
+            myUrl = URLApi;
+            return links;
         }
-        return links;
+        else{
+            myUrl+= addressPath + "/";
+            System.out.println("Добавляем: " +  addressFolrder);
+//            for (String s : nameList) {
+//                myUrl = myUrl + addressFolrder + "/";
+//            System.out.println(myUrl);
+                ResponseEntity<Link> responseEntity = restTemplate
+                        .exchange(myUrl + addressFolrder, HttpMethod.PUT, request, new ParameterizedTypeReference<Link>() {
+                });
+                links.add(responseEntity.getBody());
+//            }
+            myUrl = URLApi;
+            return links;
+        }
+
+//        }
+        // если адрес без / то это одиночное название папки
+        // если есть / то надо уже сделать больше 1й папки
+//        else {
+//            myUrl += addressPath + "/";
+//            if (addressFolrder.contains("/")) {
+//                String[] nameList = addressFolrder.split("/");
+//
+//                for (String s : nameList) {
+//                    myUrl = myUrl + s + "/";
+//                    ResponseEntity<Link> responseEntity = restTemplate.exchange(myUrl, HttpMethod.PUT, request, new ParameterizedTypeReference<Link>() {
+//                    });
+//                    links.add(responseEntity.getBody());
+//                }
+//                myUrl = URLApi;
+//                return links;
+//            } else {
+//
+//                myUrl = myUrl + addressFolrder + "/";
+//                ResponseEntity<Link> responseEntity = restTemplate.exchange(myUrl, HttpMethod.PUT, request, new ParameterizedTypeReference<Link>() {
+//                });
+//                links.add(responseEntity.getBody());
+//                myUrl = URLApi;
+//                return links;
+//            }
+//        }
     }
+
 
     // метод получает Link, данный класс JSON объект ответа яндекс диска
     // в нём содержится данные для скачивания файла
