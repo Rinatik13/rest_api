@@ -1,4 +1,5 @@
-
+let res = localStorage.getItem("company");
+let companyId = JSON.parse(res);
 
 let documentPdf = {
     id : "" ,
