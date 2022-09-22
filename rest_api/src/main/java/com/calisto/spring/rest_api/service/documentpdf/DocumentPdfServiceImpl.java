@@ -29,7 +29,7 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
         ControllerCommunication controller = new ControllerCommunication();
         documentPdfDaO.add(documentPdf);
         System.out.println(documentPdf);
-        String url = controller.getUploadFile("123.pdf")
+        String url = controller.getUploadFile(documentPdf.getAddress() + "/" + documentPdf.getName() + ".pdf")
                 .getHref();
         controller.uploadFile(url,"PUT", body);
         documentPdf.setBody(body);

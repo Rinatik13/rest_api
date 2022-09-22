@@ -10,8 +10,8 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) {
         Tender tender = new Tender();
-        tender.setName("Чистка приблуды!");
-        tender.setNumber("РН202123");
+        tender.setName("Новый тендер");
+        tender.setNumber("РН202124");
 
         Company company = new Company();
         List<Buhdocument>buhdocumentList = new ArrayList<>();
