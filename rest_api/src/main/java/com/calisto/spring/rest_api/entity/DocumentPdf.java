@@ -18,8 +18,6 @@ public class DocumentPdf {
     @Transient
     private String body;
 
-//    @Enumerated
-//    private DocumentBlock block;
     private String address;
 
     public DocumentPdf() {

@@ -115,6 +115,7 @@ public class ControllerCommunication {
     // указываем тим PUT, POST, DELETE, GET
     // после указываем адрес где хранится заветный файл
     public void uploadFile(String url, String type, String reqbody){
+        System.out.println(reqbody);
         HttpURLConnection con = null;
         String result = null;
         try {
