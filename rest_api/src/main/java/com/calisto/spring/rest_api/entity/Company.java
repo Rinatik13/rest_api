@@ -136,7 +136,7 @@ public class Company {
 
     // список оборудования
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "oborydovanie",
+    @JoinTable(name = "oborudovanie",
             joinColumns = @JoinColumn(name = "company_id"),
             inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Oborudovanie> oborudovanieList;

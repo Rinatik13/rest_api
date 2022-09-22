@@ -1,5 +1,6 @@
 package com.calisto.spring.rest_api.entity;
 
+import com.calisto.spring.rest_api.enums.DocumentBlock;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.layout.element.Image;
@@ -16,6 +17,9 @@ public class DocumentPdf {
 
     @Transient
     private String body;
+
+    @Enumerated
+    private DocumentBlock block;
     private String address;
 
     public DocumentPdf() {

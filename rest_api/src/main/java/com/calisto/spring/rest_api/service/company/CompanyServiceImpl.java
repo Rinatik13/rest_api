@@ -23,8 +23,7 @@ public class CompanyServiceImpl implements CompanyService{
     @Override
     @Transactional
     public Company add(Company company) {
-        Company result = new Company();
-    result = companyDaO.add(company);
+    Company result = companyDaO.add(company);
     BuildPath.buildCompanyPath(company);
     return result;
     }

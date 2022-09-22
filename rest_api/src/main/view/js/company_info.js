@@ -22,3 +22,48 @@ document.getElementById("bank_name").innerHTML = company.nameBank;
 document.getElementById("rSchet").innerHTML = company.checkingAccountBank;
 document.getElementById("kSchet").innerHTML = company.correspondentAccountBank
 document.getElementById("bank_address").innerHTML = company.addressBank;
+
+
+
+
+
+let documentPdf = {
+    id : "" ,
+    name : "" ,
+    body : "" ,
+    address : ""
+}
+let button_add_doc = document.getElementById("#add_doc");
+button_add_doc.querySelector.addEventListener('click', uploadFile)
+// document.querySelector("#add_doc").addEventListener('click', uploadFile);
+
+async function uploadFile(event){
+    event.preventDefault();
+let file = document.getElementById("file").files[0];
+let reader = new FileReader();
+reader.readAsBinaryString(file)
+reader.onload = function(){
+    documentPdf.body = reader.result;
+}
+reader.onerror = function(){
+    console.log(reader.error);
+}
+
+await fetch('http://localhost:8080/api/calisto/documentpdf/add',{
+        method: 'POST',
+        body: JSON.stringify(documentPdf),
+        headers:  {
+            'Content-Type': 'application/json',
+        },
+        }
+        )
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+                
+        }
+            );
+
+}
+
+

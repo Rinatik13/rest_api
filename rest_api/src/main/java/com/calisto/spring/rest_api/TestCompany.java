@@ -101,6 +101,7 @@ public class TestCompany {
         company.setAddressCompany("Мухосранск");
         company.setSmallNameCompany("ООО \"ФОРД\"");
         company.setFullNameCompany("Общество с ограниченной ответственностью \"ФОРД\"");
+        company.setUser_id(1);
 
         return company;
     }

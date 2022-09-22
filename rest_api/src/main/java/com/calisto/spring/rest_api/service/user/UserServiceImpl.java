@@ -2,6 +2,7 @@ package com.calisto.spring.rest_api.service.user;
 
 import com.calisto.spring.rest_api.DaO.user.UserDaO;
 import com.calisto.spring.rest_api.entity.User;
+import com.calisto.spring.rest_api.logic.BuildPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User add(User user) {
         userDaO.add(user);
+        BuildPath.buildUserPath(user);
         return user;
     }
 

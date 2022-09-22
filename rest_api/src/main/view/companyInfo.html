@@ -16,6 +16,24 @@
 	</header>
 
     <h1 class="title">Информация о компании</h1>
+
+    <div class="text">
+        <button id="company_doc" class="button"><a href="/companyDocList.html" class="text_decorator">Учредительные документы</a></button>
+        <br>
+        <button id="buh_doc" class="button"><a href="/buhDocList.html" class="text_decorator">Бухгалтерские документы</a></button>
+        <br>
+        <button id="employee_list" class="button"><a href="/employeeList.html" class="text_decorator">Список сотрудников</a></button>
+        <br>
+        <button id="oborudovanie_list" class="button"><a href="/oborudovanieList.html" class="text_decorator">Список оборудования</a></button>
+        <br>
+        <button id="cars_list" class="button"><a href="/carsList.html" class="text_decorator">Список техники</a></button>
+        <br>
+        <button id="contract_list" class="button"><a href="/contractList.html" class="text_decorator">Список договоров</a></button>
+        <br>
+        <button id="licenzii_list" class="button"><a href="/licenziiList.html" class="text_decorator">Список лицензий, допусков</a></button>
+    </div>
+    <br>
+
 <div class="center_flex" id="my_company_info">
     <div id="company_info">
         <div>Полное название организации : <span id="full_name" ></span><button>изменить</button></div>
@@ -40,20 +58,14 @@
         <div>Адрес банка : <span id="bank_address" name=""></span><button>изменить</button></div>
     </div>
 
-    <div class="list_company">
-        <button id="company_doc" class="button"><a href="/companyDocList.html" class="text_decorator">Учредительные документы</a></button>
-        <br>
-        <button id="buh_doc" class="button"><a href="/buhDocList.html" class="text_decorator">Бухгалтерские документы</a></button>
-        <br>
-        <button id="employee_list" class="button"><a href="/employeeList.html" class="text_decorator">Список сотрудников</a></button>
-        <br>
-        <button id="oborudovanie_list" class="button"><a href="/oborudovanieList.html" class="text_decorator">Список оборудования</a></button>
-        <br>
-        <button id="cars_list" class="button"><a href="/carsList.html" class="text_decorator">Список техники</a></button>
-        <br>
-        <button id="contract_list" class="button"><a href="/contractList.html" class="text_decorator">Список договоров</a></button>
-        <br>
-        <button id="licenzii_list" class="button"><a href="/licenziiList.html" class="text_decorator">Список лицензий, допусков</a></button>
+    <div>
+        Список документов
+        <form action="" id="add_doc">
+            <input type="text" id="text_inpyt" placeholder="Имя файла">
+            <input type="file" id="file">
+            <button>Добавить файл</button>
+        </form>
+        <!-- <script src="./js/addDocument.js"></script> -->
     </div>
 
 </div>

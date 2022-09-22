@@ -1,5 +1,5 @@
-let res = localStorage.getItem("company");
-let companyId = JSON.parse(res);
+// let res = localStorage.getItem("company");
+// let companyId = JSON.parse(res);
 
 let documentPdf = {
     id : "" ,
@@ -7,8 +7,9 @@ let documentPdf = {
     body : "" ,
     address : ""
 }
-
-document.querySelector("button").addEventListener("click", uploadFile);
+let button_add_doc = document.getElementById("#add_doc");
+button_add_doc.querySelector.addEventListener('click', uploadFile)
+// document.querySelector('button').addEventListener("click", uploadFile);
 
 async function uploadFile(event){
     event.preventDefault();
