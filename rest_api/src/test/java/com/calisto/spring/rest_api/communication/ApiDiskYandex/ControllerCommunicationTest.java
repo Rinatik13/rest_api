@@ -46,4 +46,16 @@ public class ControllerCommunicationTest extends ControllerCommunication {
         uploadFile(url,"PUT",urlMyFile);
     }
 
+    @Test
+    public void testGetUplUpFile2() {
+        try {
+            Link result = getDownFile("1234.zip");
+            URL url  = new URL(result.getHref());
+            System.out.println(url);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     }

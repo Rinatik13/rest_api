@@ -9,9 +9,7 @@ import static org.junit.Assert.*;
 public class TestStreamDocumentTest extends TestStreamDocument {
 
     @Test
-    public void testLaunch() {
-
-        OutputStream outputStream = null;
-       launch();
+    public void testLaunch() throws IOException, InterruptedException {
+    launch();
     }
 }

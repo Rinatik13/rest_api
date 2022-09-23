@@ -145,4 +145,35 @@ public class ControllerCommunication {
             throw new RuntimeException(e);
         }
     }
+    public void uploadFileByte(String url, String type, byte[] reqbody){
+        System.out.println(reqbody);
+        HttpURLConnection con = null;
+        String result = null;
+        try {
+            con = getHttpConnection( url , type);
+            if( reqbody != null){
+                con.setDoInput(true);
+                con.setDoOutput(true);
+                DataOutputStream out = new DataOutputStream(con.getOutputStream());
+
+//                byte[] buffer = Files.readAllBytes(Paths.get(reqbody));
+                out.write(reqbody);
+                out.close();
+            }
+            con.connect();
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String temp = null;
+            StringBuilder sb = new StringBuilder();
+            while((temp = in.readLine()) != null){
+                sb.append(temp).append(" ");
+            }
+            result = sb.toString();
+            in.close();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 }

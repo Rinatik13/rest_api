@@ -1,5 +1,7 @@
 package com.calisto.spring.rest_api.controller;
 
+import com.calisto.spring.rest_api.communication.ApiDiskYandex.ControllerCommunication;
+import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.service.tender.TenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +34,12 @@ public class TenderController {
     public String delete(@PathVariable int id){
         tenderService.delete(id);
         return "Удалено!";
+    }
+
+    @GetMapping("/build/{id}")
+    public Link getDownloadDocument(@PathVariable int id){
+        ControllerCommunication communication = new ControllerCommunication();
+        Link url = communication.getDownFile("1234.zip");
+        return url;
     }
 }
