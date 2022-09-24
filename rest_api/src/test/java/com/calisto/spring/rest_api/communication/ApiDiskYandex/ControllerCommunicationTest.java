@@ -40,8 +40,8 @@ public class ControllerCommunicationTest extends ControllerCommunication {
 
     @Test
     public void testYourmethod() {
-        String url = getUploadFile("test/2.pdf").getHref();
-        String urlMyFile = "C:\\java\\test\\1.pdf";
+        String url = getUploadFile("user_1/company_0/tenderId_1.zip").getHref();
+        String urlMyFile = "C:\\java\\test\\1.zip";
 
         uploadFile(url,"PUT",urlMyFile);
     }
@@ -49,7 +49,7 @@ public class ControllerCommunicationTest extends ControllerCommunication {
     @Test
     public void testGetUplUpFile2() {
         try {
-            Link result = getDownFile("1234.zip");
+            Link result = getDownFile("user_1/company_0/tenderId_1.zip");
             URL url  = new URL(result.getHref());
             System.out.println(url);
 

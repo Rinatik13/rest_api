@@ -9,11 +9,7 @@ public class BuildPathTest extends BuildPath {
     public void buildPathTest(){
         TestCompany testCompany = new TestCompany();
         Company company = testCompany.getCompany();
-        Company company1 = testCompany.getCompany();
-        company1.setId(2);
-
         BuildPath.buildCompanyPath(company);
-        BuildPath.buildCompanyPath(company1);
     }
 
     @Test

@@ -4,6 +4,7 @@ import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
+import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -17,10 +18,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 // информация о собственниках (акционерах компании)
-public class GeneratorDocForm2 {
-    public void launch(Company company, String address, Tender tender, String textDate) {
+public class GeneratorDocForm2 implements GeneratorDoc{
+    String nameFile = "Информация о собственниках";
+    @Override
+    public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 
-        try {
             BaseFont baseFont = new BaseFont();
             PdfFont font = baseFont.getFont();
 
@@ -69,7 +71,7 @@ public class GeneratorDocForm2 {
                     "по состоянию на " +
                             // тут надо добавить актуальную дату
                             // пока поставим по умолчанию
-                            textDate +
+                            date +
                             ".\n";
 
             // таблица с информацией о собственниках
@@ -248,7 +250,8 @@ public class GeneratorDocForm2 {
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();
             Table table2 = tableStampEndSignature.createTableStampEndSignature(company, font);
 
-            PdfWriter pdfWriter = new PdfWriter(address);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
             String inter = "\n";
@@ -319,10 +322,17 @@ public class GeneratorDocForm2 {
 
             // закрываем документ
             document.close();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            return byteArrayOutputStream;
         }
+
+    @Override
+    public String getNameFile() {
+        return nameFile;
+    }
+
+    @Override
+    public String getPath() {
+        return "Квалификационная часть";
     }
 
     private void addCell(String text, Table table) {

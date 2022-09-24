@@ -4,6 +4,7 @@ import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
+import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -16,10 +17,11 @@ import java.io.IOException;
 
 // создаём документ подтверждения участника закупки наличия согласия на
 // обработку персональных данных
-public class GeneratorDocForm7 {
-    public void launch(Company company, String address, Tender tender) {
+public class GeneratorDocForm7 implements GeneratorDoc{
+        String fileName = "Согласие юр лица на обработку персональных данных";
+    @Override
+    public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 
-        try {
             // добавляем шрифт для отображения Русского языка в пдф
             // стандартный шрифт для всего документа
             BaseFont baseFont = new BaseFont();
@@ -138,8 +140,8 @@ public class GeneratorDocForm7 {
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();
             Table table4 = tableStampEndSignature.createTableStampEndSignature(company,font);
 
-
-            PdfWriter pdfWriter = new PdfWriter(address);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
 
@@ -189,10 +191,16 @@ public class GeneratorDocForm7 {
 
             document.close();
 
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            return byteArrayOutputStream;
     }
+
+        @Override
+        public String getNameFile() {
+                return fileName;
+        }
+
+        @Override
+        public String getPath() {
+                return "Квалификационная часть";
+        }
 }

@@ -104,6 +104,6 @@ public class Test {
         company.setSmallNameCompany("ООО \"ФОРД\"");
         company.setFullNameCompany("Общество с ограниченной ответственностью \"ФОРД\"");
         BuildingDoc docB = new BuildingDoc();
-        docB.build(company,tender,"C:\\java\\blank\\forms3","18.09.2022",100000);
+//        docB.build(company,tender,"18.09.2022",100000);
     }
 }

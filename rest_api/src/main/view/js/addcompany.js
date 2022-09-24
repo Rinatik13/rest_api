@@ -48,12 +48,8 @@ async function addCompany(event){
         .then(response => response.json())
         .then(json => {
             console.log(json);
-            let res = localStorage.getItem('user');
-            let user_info = JSON.parse(res);
-            let companyList = user_info.companyList;
-            companyList.push(json)
-            localStorage.setItem('user',JSON.stringify(user_info));
+         window.location ='http://127.0.0.1:5500/companyList.html';   
         }
             );
-        window.location ='http://127.0.0.1:5500/companyList.html';
+        
     }

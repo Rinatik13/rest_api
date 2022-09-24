@@ -4,6 +4,7 @@ import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
+import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -17,12 +18,12 @@ import com.itextpdf.layout.property.TextAlignment;
 import java.io.IOException;
 
 // создаём коммерческое предложение по форме № 10
-public class GeneratorDocForm10 {
+public class GeneratorDocForm10 implements GeneratorDoc{
+    String fileName = "Коммерческое предложение форма 10";
+    @Override
 
-    public void launch(Company company, String address, Tender tender, double summ) {
+    public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 
-
-        try {
             // добавляем шрифт для отображения Русского языка в пдф
             // стандартный шрифт для всего документа
             BaseFont baseFont = new BaseFont();
@@ -67,82 +68,85 @@ public class GeneratorDocForm10 {
             // добавляем название компании
             String littleNameCom =
                     fullSizeNameCompany;
-
-            // таблица с лотами и стоимостью
             Table table = new Table(8);
-            createTable(table,"№ п/п",8);
-            createTable(table,"Наименование и содержание этапа работ",8);
-            createTable(table,"Ед. измерения объема работ",8);
-            createTable(table,"Объем работ",8);
-            createTable(table,"Единичная расценка, руб. без НДС",8);
-            createTable(table,"Сумма НДС, руб. ",8);
-            createTable(table,"Общая стоимость работ, руб. без НДС",8);
-            createTable(table,"Общая стоимость работ, руб. с НДС",8);
+    try {
+        // таблица с лотами и стоимостью
 
-            // в цыкле необходимо реализовать получение информации по лотам на которые мы заявляемся
-            // цену за лот вписать в таблицу
+        createTable(table, "№ п/п", 8);
+        createTable(table, "Наименование и содержание этапа работ", 8);
+        createTable(table, "Ед. измерения объема работ", 8);
+        createTable(table, "Объем работ", 8);
+        createTable(table, "Единичная расценка, руб. без НДС", 8);
+        createTable(table, "Сумма НДС, руб. ", 8);
+        createTable(table, "Общая стоимость работ, руб. без НДС", 8);
+        createTable(table, "Общая стоимость работ, руб. с НДС", 8);
+
+        // в цыкле необходимо реализовать получение информации по лотам на которые мы заявляемся
+        // цену за лот вписать в таблицу
 
 //            for (int i = 0; i<8; i++){
 //                createTable(table,"\n",8);
 //            }
 
-            // порядковый номер наименование и содержание этапа работ
-            createTable(table, "1.",8);
+        // порядковый номер наименование и содержание этапа работ
+        createTable(table, "1.", 8);
 
-            // наименование и содержание этапа работ
-            createTable(table,tender.getName(),8);
+        // наименование и содержание этапа работ
+        createTable(table, tender.getName(), 8);
 
-            // Ед. измерения объёма работ
-            createTable(table,"шт",8);
+        // Ед. измерения объёма работ
+        createTable(table, "шт", 8);
 
-            // Объем работ
-            createTable(table,"1",8);
+        // Объем работ
+        createTable(table, "1", 8);
 
-            // Единичная расценка, руб. без НДС
-            createTable(table,summ + "", 8);
+        // Единичная расценка, руб. без НДС
+        createTable(table, summ + "", 8);
 
-            // Сумма НДС, руб.
-            createTable(table,((summ * 1.2)-summ) + "",8);
+        // Сумма НДС, руб.
+        createTable(table, ((summ * 1.2) - summ) + "", 8);
 
-            // Общая стоимость работ, руб. без НДС
-            createTable(table,summ + "",8);
+        // Общая стоимость работ, руб. без НДС
+        createTable(table, summ + "", 8);
 
-            // Общая стоимость работ руб. с НДС
-            createTable(table,(summ * 1.2) + "",8);
+        // Общая стоимость работ руб. с НДС
+        createTable(table, (summ * 1.2) + "", 8);
 
-            // далее хранятся итоговые значения по столбцам
-            createTable(table," ", 8);
-            createTable(table,"ИТОГО без НДС, руб.", 8);
-            createTable(table,"х", 8);
-            createTable(table,"х", 8);
-            // тут надо получать данные откудато!
-            createTable(table,summ + "", 8);
-            createTable(table,"х", 8);
-            createTable(table,summ + "", 8);
-            createTable(table,"х", 8);
+        // далее хранятся итоговые значения по столбцам
+        createTable(table, " ", 8);
+        createTable(table, "ИТОГО без НДС, руб.", 8);
+        createTable(table, "х", 8);
+        createTable(table, "х", 8);
+        // тут надо получать данные откудато!
+        createTable(table, summ + "", 8);
+        createTable(table, "х", 8);
+        createTable(table, summ + "", 8);
+        createTable(table, "х", 8);
 
-            createTable(table," ", 8);
-            createTable(table,"НДС, руб.", 8);
-            createTable(table,"х", 8);
-            createTable(table,"х", 8);
-            createTable(table,"х", 8);
-            // сюда вставляем Сумму НДС
-            createTable(table,((summ * 1.2)-summ) +"", 8);
-            createTable(table,"х", 8);
-            createTable(table,"х", 8);
+        createTable(table, " ", 8);
+        createTable(table, "НДС, руб.", 8);
+        createTable(table, "х", 8);
+        createTable(table, "х", 8);
+        createTable(table, "х", 8);
+        // сюда вставляем Сумму НДС
+        createTable(table, ((summ * 1.2) - summ) + "", 8);
+        createTable(table, "х", 8);
+        createTable(table, "х", 8);
 
-            createTable(table," ", 8);
-            createTable(table,"ИТОГО (цена заявки на участие в закупке) с НДС, руб.", 8);
-            createTable(table,"х", 8);
-            createTable(table,"х", 8);
-            createTable(table,"х", 8);
-            createTable(table,"х", 8);
-            createTable(table,"х", 8);
-            // сюда данные вставляем откуда то
-            createTable(table,(summ * 1.2) +"", 8);
+        createTable(table, " ", 8);
+        createTable(table, "ИТОГО (цена заявки на участие в закупке) с НДС, руб.", 8);
+        createTable(table, "х", 8);
+        createTable(table, "х", 8);
+        createTable(table, "х", 8);
+        createTable(table, "х", 8);
+        createTable(table, "х", 8);
+        // сюда данные вставляем откуда то
+        createTable(table, (summ * 1.2) + "", 8);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
 
-
-            // тут добавляем единственный текст в документе, после таблицы
+        // тут добавляем единственный текст в документе, после таблицы
             String bodyTextDoc =
                     "Настоящее предложение является " +
                             // тут надо выбрать предложение делимое или нет
@@ -157,7 +161,8 @@ public class GeneratorDocForm10 {
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();
             Table table4 = tableStampEndSignature.createTableStampEndSignature(company,font);
 
-            PdfWriter pdfWriter = new PdfWriter(address);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
             String inter = "\n";
@@ -214,13 +219,17 @@ public class GeneratorDocForm10 {
             document.add(table4);
 
             document.close();
+            return byteArrayOutputStream;
+    }
 
+    @Override
+    public String getNameFile() {
+        return fileName;
+    }
 
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    public String getPath() {
+        return "Коммерческая часть";
     }
 
     private void createTable(Table table, String text, int size) throws IOException {

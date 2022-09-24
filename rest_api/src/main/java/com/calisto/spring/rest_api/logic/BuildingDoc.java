@@ -1,74 +1,98 @@
 package com.calisto.spring.rest_api.logic;
 
+import com.calisto.spring.rest_api.communication.ApiDiskYandex.ControllerCommunication;
+import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Contract;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.forms.rosneft.*;
+import com.itextpdf.kernel.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class BuildingDoc {
     @Autowired
     CopyDocument copyDoc;
 
-    public void build(Company company, Tender tender, String addressFolder, String date, double summ){
+    @Autowired
+    GeneratorDoc generatorDoc;
 
-        File address = new File(addressFolder);
-        address.mkdir();
-        File generalFolder = new File(addressFolder + "\\" + tender.getName() + " " + tender.getNumber());
-        File komFolder = new File(generalFolder + "\\Коммерческая часть");
-        File tehFolder = new File(generalFolder + "\\Техническая часть");
-        File kvalifFolder = new File(generalFolder + "\\Квалификационная часть");
-        generalFolder.mkdir();
-        komFolder.mkdir();
-        tehFolder.mkdir();
-        kvalifFolder.mkdir();
+    public Link build(Company company, Tender tender, String date, double summ) throws IOException {
+        ControllerCommunication controllerCommunication = new ControllerCommunication();
+        // созраняем ардес архива
+        String addressZip = "user_" + company.getUser_id() + "/company_" + company.getId() +"/"
+                + "tenderId_" + tender.getId() + ".zip";
+        // получаем ссылку для загрузки архива
+        System.out.println("Создаём архив по адресу: "+ addressZip);
+        String url = controllerCommunication.getUploadFile(addressZip).getHref();
 
-        GeneratorDocForm1a doc = new GeneratorDocForm1a();
-        doc.launch(company,kvalifFolder + "\\Сведения о компании.pdf", tender);
-        GeneratorDocForm2 doc2 = new GeneratorDocForm2();
-        doc2.launch(company,kvalifFolder + "\\Информация о собственниках.pdf",tender,date);
-        GeneratorDocForm3 doc3 = new GeneratorDocForm3();
-        doc3.launch(company,kvalifFolder+"\\Список договоров.pdf",tender);
-        GeneratorDocForm4 doc4 = new GeneratorDocForm4();
-        doc4.launch(company,kvalifFolder+"\\Справка о мтр.pdf",tender);
-        GeneratorDocForm5 doc5 = new GeneratorDocForm5();
-        doc5.launch(company,kvalifFolder+"\\Сведения о кадровых ресурсах.pdf",tender);
-        GeneratorDocForm6 doc6 = new GeneratorDocForm6();
-        doc6.launch(company,kvalifFolder+"\\Согласие физ лица.pdf",tender,date);
-        GeneratorDocForm7 doc7 = new GeneratorDocForm7();
-        doc7.launch(company,kvalifFolder+"\\Согласие юр лица.pdf",tender);
-        GeneratorDocForm8 doc8 = new GeneratorDocForm8();
-        doc8.launch(company,tehFolder+"\\Техническое предложение.pdf",tender,date);
-        GeneratorDocForm9 doc9 = new GeneratorDocForm9();
-        doc9.launch(company,komFolder+"\\Письмо о подаче заявки.pdf",tender,date,summ);
-        GeneratorDocForm10 doc10 = new GeneratorDocForm10();
-        doc10.launch(company,komFolder+"\\Коммерческое предложение.pdf",tender,summ);
-        GeneratorDocForm17 doc17 = new GeneratorDocForm17();
-        doc17.launch(company,komFolder+"\\Подтверждение работы граждан РФ.pdf",tender);
+        // создаём общий поток для создания архива
+        ByteArrayOutputStream zipStream = new ByteArrayOutputStream();
+        ZipOutputStream zip = new ZipOutputStream(zipStream);
 
-        SpisokSpravok spisokSpravok = new SpisokSpravok();
 
-        DocGeneratorsPDF docGeneratorsPDF = new DocGeneratorsPDF();
-        docGeneratorsPDF.generatorLaunch(company,tender,spisokSpravok,date,kvalifFolder.getAbsolutePath());
 
-        copyDoc = new CopyDocument();
 
-        // добавляем документы компании в папку квалификационной части
-        for (int i = 0; i<company.getDocumentPdfList().size(); i++){
+        List<GeneratorDoc> generatorDocList = new ArrayList<>();
+        generatorDocList.add(new GeneratorDocForm1a());
+        generatorDocList.add(new GeneratorDocForm2());
+        generatorDocList.add(new GeneratorDocForm3());
+        generatorDocList.add(new GeneratorDocForm4());
+        generatorDocList.add(new GeneratorDocForm5());
+        generatorDocList.add(new GeneratorDocForm6());
+        generatorDocList.add(new GeneratorDocForm7());
+        generatorDocList.add(new GeneratorDocForm8());
+        generatorDocList.add(new GeneratorDocForm9());
+        generatorDocList.add(new GeneratorDocForm10());
+        generatorDocList.add(new GeneratorDocForm11());
+        generatorDocList.add(new GeneratorDocForm15());
+        generatorDocList.add(new GeneratorDocForm16());
+        generatorDocList.add(new GeneratorDocForm17());
+        generatorDocList.add(new GeneratorDocForm17Table());
 
-            copyDoc.copyDoc(company.getDocumentPdfList().get(i),kvalifFolder.getAbsolutePath());
-        }
-        // добавляем все договора в папку квалификационная часть
-        for (int i = 0; i<company.getContractList().size();i++){
-            Contract contract = company.getContractList().get(i);
-            for (int a = 0; a<contract.getDocumentPdfList().size();a++){
-                copyDoc.copyDoc(contract.getDocumentPdfList().get(i), kvalifFolder.getAbsolutePath());
-            }
+        // создаём документы для сохранения в архив
 
+        for (GeneratorDoc doc : generatorDocList){
+            addZipEntry(zip, doc, company, tender,date,summ);
         }
 
+        zip.close();
+
+
+        // загружаем созданный архив на сервер яндекс диска
+        controllerCommunication.uploadFileByte(url,"PUT", zipStream.toByteArray());
+        System.out.println("Начинаем получать Link для скачивания файла: " + addressZip);
+        // получаем ссылку на скачивание заархивированного пакета документов
+        ControllerCommunication communication = new ControllerCommunication();
+        Link link = null;
+        try{
+            link = communication.getDownFile(addressZip);
+            System.out.println(link);
+        } catch (Exception e){
+            System.out.println("Чёто какая то хуйня.");
+            System.out.println(e);
+        }
+        return link;
+    }
+
+    private void addZipEntry(ZipOutputStream zip, GeneratorDoc generatorDoc, Company company, Tender tender, String date, double summ) {
+        GeneratorDoc doc = generatorDoc;
+        System.out.println("создаём поток документа: " + generatorDoc.getNameFile());
+        ByteArrayOutputStream streamDoc = doc.launch(company,tender,date,summ);
+        ZipEntry zipEntry = new ZipEntry(tender.getId() + "/" + generatorDoc.getPath() + "/" + generatorDoc.getNameFile() +".pdf");
+        try {
+            zip.putNextEntry(zipEntry);
+            zip.write(streamDoc.toByteArray());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

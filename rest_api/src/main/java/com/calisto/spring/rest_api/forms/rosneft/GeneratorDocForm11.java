@@ -4,6 +4,7 @@ import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
+import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -18,11 +19,11 @@ import java.io.IOException;
 
 // создаём документ план распределения объёмов выполнения работ коллективного
 // участника закупки
-public class GeneratorDocForm11 {
-    public void launch(Company company, String address, Tender tender) {
+public class GeneratorDocForm11 implements GeneratorDoc{
+    String fileName = "План распределения объёмов";
+    @Override
+    public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 
-
-        try {
             // добавляем шрифт для отображения Русского языка в пдф
             // стандартный шрифт для всего документа
             BaseFont baseFont = new BaseFont();
@@ -72,8 +73,8 @@ public class GeneratorDocForm11 {
             // добавляем печать и подпись
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();
             Table table4 = tableStampEndSignature.createTableStampEndSignature(company,font);
-
-            PdfWriter pdfWriter = new PdfWriter(address);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
             String inter = "\n";
@@ -96,11 +97,17 @@ public class GeneratorDocForm11 {
 
             // закрываем документ
             document.close();
+return byteArrayOutputStream;
+    }
 
+    @Override
+    public String getNameFile() {
+        return fileName;
+    }
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    public String getPath() {
+        return "Коммерческая часть";
     }
 
     private void createNewCellTable(Table table, String text) {

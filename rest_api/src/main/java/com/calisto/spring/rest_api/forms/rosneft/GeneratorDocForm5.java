@@ -5,6 +5,7 @@ import com.calisto.spring.rest_api.entity.Employee;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
+import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -19,9 +20,11 @@ import com.itextpdf.layout.property.VerticalAlignment;
 import java.io.FileNotFoundException;
 
 // формируем сведения по кадровым ресурсам
-public class GeneratorDocForm5 {
-    public void launch(Company company, String address, Tender tender) {
-        try {
+public class GeneratorDocForm5 implements GeneratorDoc{
+    String fileName = "Сведения о кадровых ресурсах";
+    @Override
+    public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
+
             // добавляем шрифт для отображения Русского языка в пдф
             // стандартный шрифт для всего документа
             BaseFont baseFont = new BaseFont();
@@ -95,8 +98,8 @@ public class GeneratorDocForm5 {
             // добавляем печать и подпись
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();
             Table table2 = tableStampEndSignature.createTableStampEndSignature(company,font);
-
-            PdfWriter pdfWriter = new PdfWriter(address);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
             String inter = "\n";
@@ -129,9 +132,17 @@ public class GeneratorDocForm5 {
 
             document.close();
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        return byteArrayOutputStream;
+    }
+
+    @Override
+    public String getNameFile() {
+        return fileName;
+    }
+
+    @Override
+    public String getPath() {
+        return "Квалификационная часть";
     }
 
     private void addCell(String text, Table table) {

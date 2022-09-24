@@ -1,3 +1,31 @@
+let result = localStorage.getItem('user');
+let user = JSON.parse(result);
+
+document.addEventListener("DOMContentLoaded", loadList)
+
+async function loadList(){
+await fetch('http://localhost:8080/api/calisto/user/get',{
+                    method: 'POST',
+                    body: JSON.stringify(user),
+                    headers:  {
+                        'Content-Type': 'application/json',
+                    },
+                    }
+                    )
+                    .then(response => response.json())
+    
+                    .then(json => {
+                        console.log(json);
+                            if(json.login === null || json.password === null){
+                                document.getElementById('error_login').innerText = 'Логин или пароль не верные.'
+                            }
+                            else{
+                            localStorage.setItem('user',JSON.stringify(json)); 
+                            }
+                    }
+                        );
+}
+
 let res = localStorage.getItem('user');
 let user_info = JSON.parse(res);
 let companyList = user_info.companyList;

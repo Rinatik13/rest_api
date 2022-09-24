@@ -5,6 +5,7 @@ import com.calisto.spring.rest_api.entity.Contract;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
+import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -21,10 +22,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 // форма № 3 список договоров с информацией по ним
-public class GeneratorDocForm3 {
+public class GeneratorDocForm3 implements GeneratorDoc{
+    String fileName = "Список договоров";
+    @Override
+    public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 
-    public void launch(Company company, String address, Tender tender) {
-        try {
             BaseFont baseFont = new BaseFont();
             PdfFont font = baseFont.getFont();
 
@@ -123,8 +125,8 @@ public class GeneratorDocForm3 {
             // добавляем печать и подпись
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();
             Table table2 = tableStampEndSignature.createTableStampEndSignature(company,font);
-
-            PdfWriter pdfWriter = new PdfWriter(address);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument, PageSize.A4.rotate());
             String inter = "\n";
@@ -163,10 +165,17 @@ public class GeneratorDocForm3 {
 
             // закрываем документ
             document.close();
+            return byteArrayOutputStream;
+    }
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    public String getNameFile() {
+        return fileName;
+    }
+
+    @Override
+    public String getPath() {
+        return "Квалификационная часть";
     }
 
     private void addCell(String text, Table table) {

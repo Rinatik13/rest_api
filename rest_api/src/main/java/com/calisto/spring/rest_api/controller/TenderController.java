@@ -7,6 +7,7 @@ import com.calisto.spring.rest_api.service.tender.TenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -37,9 +38,7 @@ public class TenderController {
     }
 
     @GetMapping("/build/{id}")
-    public Link getDownloadDocument(@PathVariable int id){
-        ControllerCommunication communication = new ControllerCommunication();
-        Link url = communication.getDownFile("1234.zip");
-        return url;
+    public Link getDownloadDocument(@PathVariable int id) throws IOException {
+        return tenderService.getLink(id);
     }
 }

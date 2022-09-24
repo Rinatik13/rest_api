@@ -11,7 +11,7 @@ public class Tender {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String web_adress;
+    private String web_address;
     private String number;
     private String innZakaz;
     private int company_id;
@@ -43,11 +43,11 @@ public class Tender {
     }
 
     public String getWeb_adress() {
-        return web_adress;
+        return web_address;
     }
 
     public void setWeb_adress(String web_adress) {
-        this.web_adress = web_adress;
+        this.web_address = web_adress;
     }
 
     public String getNumber() {

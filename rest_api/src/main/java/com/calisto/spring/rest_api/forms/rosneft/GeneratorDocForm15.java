@@ -4,6 +4,7 @@ import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
+import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -17,11 +18,11 @@ import com.itextpdf.layout.property.TextAlignment;
 import java.io.IOException;
 
 // создаём опись документов
-public class GeneratorDocForm15 {
-    public void launch(Company company, String address, Tender tender) {
+public class GeneratorDocForm15 implements GeneratorDoc{
+    String fileName = "Опись документов";
+    @Override
+    public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 
-
-        try {
             // добавляем шрифт для отображения Русского языка в пдф
             // стандартный шрифт для всего документа
             BaseFont baseFont = new BaseFont();
@@ -126,8 +127,8 @@ public class GeneratorDocForm15 {
             // добавляем печать и подпись
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();
             Table table4 = tableStampEndSignature.createTableStampEndSignature(company,font);
-
-            PdfWriter pdfWriter = new PdfWriter(address);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
             String inter = "\n";
@@ -179,11 +180,17 @@ public class GeneratorDocForm15 {
 
             // закрываем документ
             document.close();
+            return byteArrayOutputStream;
+    }
 
+    @Override
+    public String getNameFile() {
+        return fileName;
+    }
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    public String getPath() {
+        return "Квалификационная часть";
     }
 
     private void createTableCell(Table table, String text) {

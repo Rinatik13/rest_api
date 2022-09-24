@@ -4,6 +4,7 @@ import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
+import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -15,10 +16,10 @@ import com.itextpdf.layout.property.TextAlignment;
 import java.io.IOException;
 
 // создаём форму подтверждения отсутствия принадлежности к СМП и МСП
-public class GeneratorDocForm16 {
-    public void launch(Company company, String address, Tender tender) {
-
-        try {
+public class GeneratorDocForm16 implements GeneratorDoc{
+        String fileName = "Подтверждение отсутствия принадлежности к СМП и МСП";
+    @Override
+    public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 
             // добавляем шрифт для отображения Русского языка в пдф
             // стандартный шрифт для всего документа
@@ -77,8 +78,8 @@ public class GeneratorDocForm16 {
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();
             Table table4 = tableStampEndSignature.createTableStampEndSignature(company,font);
 
-
-            PdfWriter pdfWriter = new PdfWriter(address);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
             String inter = "\n";
@@ -133,9 +134,16 @@ public class GeneratorDocForm16 {
 
             // закрываем документ
             document.close();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            return byteArrayOutputStream;
     }
+
+        @Override
+        public String getNameFile() {
+                return fileName;
+        }
+
+        @Override
+        public String getPath() {
+                return "Квалификационная часть";
+        }
 }

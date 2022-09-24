@@ -4,6 +4,7 @@ import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
+import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -17,11 +18,13 @@ import java.text.SimpleDateFormat;
 
 // создаём документ подтверждения согласия физического лица на обработку персональных
 // данных
-public class GeneratorDocForm6 {
-    public void launch(Company company, String address, Tender tender, String date) {
+public class GeneratorDocForm6 implements GeneratorDoc{
+        String fileName = "Сгласие физ лица на обработку персональных данных";
+    @Override
+    public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 
 
-        try {
+
             // добавляем шрифт для отображения Русского языка в пдф
             // стандартный шрифт для всего документа
             BaseFont baseFont = new BaseFont();
@@ -105,8 +108,8 @@ public class GeneratorDocForm6 {
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();
             Table table = tableStampEndSignature.createTableSignature(company,font,date);
 
-
-            PdfWriter pdfWriter = new PdfWriter(address);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
             String inter = "\n";
@@ -136,12 +139,16 @@ public class GeneratorDocForm6 {
             // добавляем подписанта
             document.add(table);
             document.close();
-
-
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            return byteArrayOutputStream;
     }
+
+        @Override
+        public String getNameFile() {
+                return fileName;
+        }
+
+        @Override
+        public String getPath() {
+                return "Квалификационная часть";
+        }
 }
