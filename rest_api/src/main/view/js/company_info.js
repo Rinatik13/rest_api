@@ -1,3 +1,39 @@
+let result = localStorage.getItem('company');
+let my_company = JSON.parse(result);
+
+document.addEventListener("DOMContentLoaded", loadList)
+
+async function loadList(){
+await fetch('http://localhost:8080/api/calisto/company/get/' + company.id,{
+                    method: 'GET',
+                    headers:  {
+                        'Content-Type': 'application/json',
+                    },
+                    }
+                    )
+                    .then(response => response.json())
+    
+                    .then(json => {
+                        console.log(json);
+                            localStorage.setItem('company',JSON.stringify(json)); 
+                    }
+                        );
+
+let docs_list = company.documentPdfList;
+
+    if(docs_list == ""){
+        document.getElementById("list_docs").innerHTML = "Документы отсутствуют";
+    } 
+    else
+    {
+        for(let a = 0; a<docs_list.length; a++){
+        let block_list = document.createElement('div');
+        block_list.innerHTML = "№" + (a+1) + ": " + docs_list[a].name + " <button class=\"button, button_delete\" name='"+ a +"'>Удалить</button>";
+        document.querySelector('.docs_list').appendChild(block_list);
+        }  
+    }
+}
+
 let res = localStorage.getItem('company');
 let company = JSON.parse(res);
 
@@ -23,15 +59,17 @@ document.getElementById("rSchet").innerHTML = company.checkingAccountBank;
 document.getElementById("kSchet").innerHTML = company.correspondentAccountBank
 document.getElementById("bank_address").innerHTML = company.addressBank;
 
+
+
 let documentPdf = {
     id : "" ,
     name : "" ,
     body : "" ,
-    address : "user_" + company.user_id + "/company_" + company.id
+    address : company.id
 }
 
-let button_add_doc = document.getElementById("#add_doc");
-button_add_doc.querySelector.addEventListener('click', uploadFile)
+let button_add_doc = document.getElementById("add_doc");
+button_add_doc.addEventListener('click', uploadFile)
 
 async function uploadFile(event){
     event.preventDefault();
@@ -59,7 +97,4 @@ await fetch('http://localhost:8080/api/calisto/documentpdf/add',{
                 
         }
             );
-
 }
-
-

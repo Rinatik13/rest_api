@@ -48,7 +48,6 @@ const openHtml = (event) =>{
     let company_info = companyList[com_num];
     localStorage.setItem('company',JSON.stringify(company_info));
     window.location = "http://127.0.0.1:5500/companyInfo.html";
-    console.log(company_info)
 }
 
 button_info.forEach(button_info =>{

@@ -1,21 +1,39 @@
 package com.calisto.spring.rest_api.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 @Entity
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotEmpty(message = "Не указано название договора.")
+    @Size(min = 2, max = 255, message = "Введён не корректный размер названия договора.")
     private String name;
+    @NotEmpty(message = "Не указана дата договора.")
+    @Size(min = 10, max = 10, message = "Введён не корректный размер даты договора.")
     private String date;
+    @NotEmpty(message = "Не указана дата окончания договора.")
+    @Size(min = 10, max = 10, message = "Введён не корректный размер даты окончания договора.")
     private String endDate;
+    @NotEmpty (message = "Не указан ИНН организации заказчика.")
+    @Size(min = 5,max = 10, message = "Введён не корректный размер ИНН организации заказчика.")
     private String innZakaz;
-
+    @NotEmpty(message = "Не указано название организации заказчика.")
+    @Size(min = 2, max = 255, message = "Введён не корректный размер названия организации заказчика.")
     private String smileNameZakaz;
+    @NotEmpty(message = "Не указан адрес организации заказчика.")
+    @Size(min = 2, max = 255, message = "Введён не корректный размер адреса организации заказчика.")
     private String addressZakaz;
+    @NotEmpty (message = "Не указан ИНН организации исполнителя.")
+    @Size(min = 5,max = 10, message = "Введён не корректный размер ИНН организации исполнителя.")
     private String innIspolnitel;
+    @NotEmpty(message = "Не указана сумма договора.")
+    @Size(min = 2, max = 255, message = "Введён не корректный размер суммы договора.")
     private String summ;
+    @NotEmpty(message = "Не введён id организации исполнителя.")
     private int company_id;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "contract_docs",

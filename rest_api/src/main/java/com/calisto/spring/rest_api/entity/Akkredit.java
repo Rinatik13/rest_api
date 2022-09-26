@@ -1,6 +1,8 @@
 package com.calisto.spring.rest_api.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -9,10 +11,16 @@ public class Akkredit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String innGov;
+    @NotEmpty(message = "Не указан номер лицензии.")
+    @Size(min = 1, max = 255, message = "Не корректный размер номера.")
     private String number;
+    @NotEmpty(message = "Не указана дата.")
+    @Size(min = 9, max = 10, message = "Введён не корректный размер даты")
     private String date;
+    @NotEmpty(message = "Не указана дата окончания действия лицензии.")
+    @Size(min = 9, max = 10, message = "Введён некоректный расзмер даты")
     private String endDate;
-
+    @NotEmpty (message = "Отсутствует id компании.")
     private int company_id;
 
     @ManyToMany(cascade = CascadeType.ALL)

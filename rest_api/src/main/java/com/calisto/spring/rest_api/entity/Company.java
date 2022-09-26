@@ -1,6 +1,9 @@
 package com.calisto.spring.rest_api.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 // компания
@@ -15,98 +18,137 @@ public class Company {
     private int id;
 
     // полное название формы организации
+    @NotEmpty(message = "Не указана форма организации.")
+    @Size(min = 2, max = 255, message = "Введён не корректный размер название формы организации.")
     @Column(name = "full_name_form_com")
     private String fullNameFormCompany;
 
     // полное название организации
+    @NotEmpty(message = "Не указано название организации.")
+    @Size(min = 2, max = 255, message = "Введён не корректный размер названия организации.")
     @Column(name = "full_name_com")
     private String fullNameCompany;
 
     // сокращённое название организации
+    @NotEmpty(message = "Не указано название организации.")
+    @Size(min = 2, max = 255, message = "Введён не корректный размер названия организации.")
     @Column(name = "small_name_com")
     private String smallNameCompany;
 
     // юридический адрес организации
+    @NotEmpty(message = "Не указан адрес организации.")
+    @Size(min = 2, max = 255, message = "Введён не корректный размер адреса организации.")
     @Column(name = "address_com")
     private String addressCompany;
 
     // почтовый адрес организации
+    @NotEmpty (message = "Не указан почтовый адрес организации.")
+    @Size(min = 2,max = 255, message = "Введён не корректный размер почтового адреса организации.")
     @Column(name = "mail_address_com")
     private String mailAddressCompany;
 
     // инн
+    @NotEmpty (message = "Не указан ИНН организации.")
+    @Size(min = 5,max = 10, message = "Введён не корректный размер ИНН организации.")
     @Column(name = "inn_com")
     private String innCompany;
 
     // кпп
+    @NotEmpty (message = "Не указан КПП организации.")
+    @Size(min = 8,max = 9, message = "Введён не корректный размер КПП организации.")
     @Column(name = "kpp_com")
     private String kppCompany;
 
     // огрн
+    @NotEmpty (message = "Не указан ОГРН(ОРГНИП) организации.")
+    @Size(min = 13,max = 15, message = "Введён не корректный размер ОГРН (ОГРНИП) организации.")
     @Column(name = "registration_number_com")
     private String registrationNumberCompany;
 
     // орган выдавший свидетельство о регистрации
+    @NotEmpty (message = "Не указано имя организации выдавшего свидетельство.")
+    @Size(min = 2, max = 255, message = "Введён не корректный размер названия органа выдавшего свидетельство.")
     @Column(name = "registration_number_gov_com")
     private String registrationNumberGovCompany;
 
     // дата выдачи регистрации
+    @NotEmpty(message = "Не указана дата выдачи свидетельства о регистрации.")
+    @Size(min = 10, max = 10, message = "Введён не корректный размер даты свидетельства о регистрации.")
     @Column(name = "date_registration_number_gov_doc")
     private String dateRegistrationNumberGovDoc;
 
     // дата регистрации организации
+    @NotEmpty(message = "Не указана дата регистрации организации.")
+    @Size(min = 10, max = 10, message = "Введён не корректный размер даты регистрации.")
     @Column(name = "date_registration_com")
     private String dateRegistrationCompany;
 
     // бик банка
+    @Size(min = 5,max = 10, message = "Введён не корректный размер ИНН Банка.")
     @Column(name = "bank_number")
     private String bankNumber;
 
     // название формы банка
+    @Size(min = 2, max = 255, message = "Введён не корректный размер названия формы Банка.")
     @Column(name = "name_form_bank")
     private String nameFormBank;
 
     // название банка
+    @Size(min = 2, max = 255, message = "Введён не корректный размер названия Банка.")
     @Column(name = "name_bank")
     private String nameBank;
 
     // адрес банка
+    @Size(min = 2, max = 255, message = "Введён не корректный размер адреса Банка.")
     @Column(name = "address_bank")
     private String addressBank;
 
     // расчётный счёт в банке
+    @Size(min = 20, max = 20, message = "Введён не корректный размер расчётного счёта Банка.")
     @Column(name = "checking_account_bank")
     private String checkingAccountBank;
 
     // корреспонденский счёт в банке
+    @Size(min = 20, max = 20, message = "Введён не корректный размер корреспондентского счёта Банка.")
     @Column(name = "correspondent_account_bank")
     private String correspondentAccountBank;
 
     // ОКПО
+    @NotEmpty(message = "Не указано ОКПО организации (ИП).")
+    @Size(min = 8, max = 10, message = "Введён не корректный размер ОКПО организации (ИП).")
     @Column(name = "okpo_com")
     private String okpoCompany;
 
     // ОКАТО
+    @NotEmpty(message = "Не указано ОКАТО организации (ИП).")
+    @Size(min = 2, max = 11, message = "Введён не корректный размер ОКАТО организации (ИП).")
     @Column(name = "okato_com")
     private String okatoCompany;
 
     // ОКВЭД (основной)
+    @NotEmpty(message = "Не указано основной ОКВЭД организации (ИП).")
+    @Size(min = 2, max = 5, message = "Введён не корректный размер основного ОКВЭД организации (ИП).")
     @Column(name = "okved_com")
     private String okvedCompany;
 
     // электронная почта
+    @Email
+    @Size(min = 5, max = 255, message = "Введён не корректный размер электронной почты.")
     @Column(name = "email_com")
     private String emailCompany;
 
     // телефон
+    @Size(min = 12, max = 12, message = "Введён не корректный размер телефона организации.")
     @Column(name = "telephone_com")
     private String telephoneCompany;
 
     // сайт
+    @Size (min = 3, max = 255, message = "Введён не корректный размер названия сайта оргинизации.")
     @Column(name = "web_site_com")
     private String webSiteCompany;
 
     // уставный капитал
+    @NotEmpty(message = "Не указана сумма уставного капитала.")
     @Column(name = "summ")
     private double summ;
 
@@ -118,6 +160,7 @@ public class Company {
     private int smpstatus;
 
     // ид пользователя
+    @NotEmpty(message = "Не введён id пользователя.")
     private int user_id;
 
     // список сотрудников

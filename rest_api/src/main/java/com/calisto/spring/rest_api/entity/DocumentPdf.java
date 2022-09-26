@@ -1,11 +1,12 @@
 package com.calisto.spring.rest_api.entity;
 
-import com.calisto.spring.rest_api.enums.DocumentBlock;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.layout.element.Image;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.net.MalformedURLException;
 
 @Entity
@@ -13,11 +14,14 @@ public class DocumentPdf {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotEmpty(message = "Не указано название файла.")
+    @Size(min = 1, max = 255, message = "Введён не корректный размер названия файла.")
     private String name;
 
     @Transient
     private String body;
-
+    @NotEmpty(message = "Не указан адрес файла.")
+    @Size(min = 1, max = 255, message = "Введён не корректный размер названия адреса файла.")
     private String address;
 
     public DocumentPdf() {

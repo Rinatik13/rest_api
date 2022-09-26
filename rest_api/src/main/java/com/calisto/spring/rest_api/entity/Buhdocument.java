@@ -1,6 +1,8 @@
 package com.calisto.spring.rest_api.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 @Entity
 
@@ -8,10 +10,16 @@ public class Buhdocument {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotEmpty(message = "Не указана дата.")
+    @Size(min = 9, max = 10, message = "Введён не корректный размер даты")
     private String dateName;
+    @NotEmpty
     private double oborotiDate;
+    @NotEmpty(message = "Не указана дата.")
+    @Size(min = 1, max = 255, message = "Введён не корректное количество сотрудников")
     private String countEmployeeDate;
 
+    @NotEmpty(message = "Отсутствует id компании.")
     private int company_id;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "buh_docs",
