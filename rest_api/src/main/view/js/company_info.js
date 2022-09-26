@@ -23,19 +23,15 @@ document.getElementById("rSchet").innerHTML = company.checkingAccountBank;
 document.getElementById("kSchet").innerHTML = company.correspondentAccountBank
 document.getElementById("bank_address").innerHTML = company.addressBank;
 
-
-
-
-
 let documentPdf = {
     id : "" ,
     name : "" ,
     body : "" ,
-    address : ""
+    address : "user_" + company.user_id + "/company_" + company.id
 }
+
 let button_add_doc = document.getElementById("#add_doc");
 button_add_doc.querySelector.addEventListener('click', uploadFile)
-// document.querySelector("#add_doc").addEventListener('click', uploadFile);
 
 async function uploadFile(event){
     event.preventDefault();

@@ -40,6 +40,7 @@ else {
         document.querySelector('.list_company').appendChild(elem);
     }
 }
+
 const button_info = document.querySelectorAll(".button_info");
 
 const openHtml = (event) =>{
