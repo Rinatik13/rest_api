@@ -5,7 +5,6 @@ import com.calisto.spring.rest_api.DaO.tender.TenderDaO;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
-import com.calisto.spring.rest_api.forms.rosneft.BuilderDocs;
 import com.calisto.spring.rest_api.logic.BuildingDoc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

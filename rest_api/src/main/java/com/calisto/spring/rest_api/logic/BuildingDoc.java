@@ -3,8 +3,10 @@ package com.calisto.spring.rest_api.logic;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.ControllerCommunication;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
 import com.calisto.spring.rest_api.entity.Company;
-import com.calisto.spring.rest_api.entity.Contract;
 import com.calisto.spring.rest_api.entity.Tender;
+import com.calisto.spring.rest_api.forms.obshie_spravki.GeneratorSpravok;
+import com.calisto.spring.rest_api.forms.obshie_spravki.ListSpravok;
+import com.calisto.spring.rest_api.forms.obshie_spravki.SpravkaDoc;
 import com.calisto.spring.rest_api.forms.rosneft.*;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class BuildingDoc {
 
     @Autowired
     GeneratorDoc generatorDoc;
+
+    @Autowired
+    SpravkaDoc spravkaDoc;
 
     public Link build(Company company, Tender tender, String date, double summ) throws IOException {
         ControllerCommunication controllerCommunication = new ControllerCommunication();
@@ -56,6 +61,19 @@ public class BuildingDoc {
         generatorDocList.add(new GeneratorDocForm16());
         generatorDocList.add(new GeneratorDocForm17());
         generatorDocList.add(new GeneratorDocForm17Table());
+
+        List<String[]> listSpravok = ListSpravok.getListSpravok(company,tender);
+        // добавляем в лист справки
+        for (int a = 0; a < listSpravok.size(); a++){
+            String[] text = new String[3];
+                    text = listSpravok.get(a);
+            System.out.println("Создаём поток документов: " + text[0]);
+            SpravkaDoc doc = new GeneratorSpravok();
+            doc.setNumDoc(a+1);
+            doc.setNameDoc(text[0]);
+            doc.setBodyDocCompany(text[2]);
+            generatorDocList.add(doc);
+        }
 
         // создаём документы для сохранения в архив
 

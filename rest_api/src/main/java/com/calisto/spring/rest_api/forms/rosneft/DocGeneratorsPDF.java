@@ -11,8 +11,7 @@ public class DocGeneratorsPDF {
     public void generatorLaunch(Company company,
                                 Tender tender,
                                 SpisokSpravok documentMapList,
-                                String dateDoc,
-                                String addressDocPac){
+                                String dateDoc){
         Map<String, Boolean> map = documentMapList.generatorMapList();
         Iterator < Map.Entry<String,Boolean>> iterator = map.entrySet().iterator();
         int numberDoc = 1;
@@ -21,17 +20,15 @@ public class DocGeneratorsPDF {
             Map.Entry<String, Boolean> myMapList = iterator.next();
             String key = myMapList.getKey();
             Boolean value = myMapList.getValue();
-            if (value==true){
+            if (value){
                 switch (key){
-
                     case "Наличие людских ресурсов":
                         convPdf.launch(company,
-                                addressDocPac + "\\Наличие людских ресурсов.pdf",
                                 "Гарантийное письмо.",
                                 dateDoc,
                                  company.getSmallNameCompany() + " " +
                                         "гарантирует наличие свободных людских ресурсов не менее " +
-                                        company.getEmployeeList().size() + " " +
+                                        tender.getCountEmployee() + " " +
                                         "человек готовых выполнить работы по закупке: №" +
                                         tender.getNumber() + " " +
                                         tender.getName() + ".",
@@ -40,8 +37,7 @@ public class DocGeneratorsPDF {
                         break;
 
                     case "Не эксплуатируем объекты 1 и 2 кл опасности":
-                        convPdf.launch(company, addressDocPac +
-                                        "\\Не эксплуатируем объекты 1 и 2 класса опасности.pdf",
+                        convPdf.launch(company,
                                 "Информационное письмо.",
                                 dateDoc,
                                 "По запросу на предмет закупки: №"+ tender.getNumber() + " " +
@@ -57,8 +53,7 @@ public class DocGeneratorsPDF {
                         break;
 
                     case "Отсутствие судебных разбирательств":
-                        convPdf.launch(company, addressDocPac +
-                                        "\\Справка об отсутствии судебных разбирательств.pdf",
+                        convPdf.launch(company,
                         "Отсутствие судебных разбирательств.",
                         dateDoc,
                                 company.getSmallNameCompany() + " " +
@@ -75,8 +70,6 @@ public class DocGeneratorsPDF {
 
                     case "Согласие с договором":
                         convPdf.launch(company,
-                                addressDocPac +
-                                        "\\Согласие с договором.pdf",
                                 "Согласие с договором.",
                                 dateDoc,
                                 company.getSmallNameCompany() + " " +
@@ -92,8 +85,6 @@ public class DocGeneratorsPDF {
 
                     case "Согласие с выполнением работ":
                         convPdf.launch(company,
-                                addressDocPac +
-                                        "\\Согласие с выполнением работ.pdf",
                         "Согласие с выполнением работ.",
                         dateDoc,
                                         company.getSmallNameCompany() + " " +
@@ -107,8 +98,6 @@ public class DocGeneratorsPDF {
 
                     case "Согласие со сроком оплаты":
                         convPdf.launch(company,
-                                addressDocPac +
-                                        "\\Согласие со сроком оплаты.pdf",
                                 "Согласие со сроком оплаты.",
                         dateDoc,
                                         company.getSmallNameCompany() + " " +
@@ -122,8 +111,6 @@ public class DocGeneratorsPDF {
 
                     case "Привлекаем собственный транспорт":
                         convPdf.launch(company,
-                                addressDocPac +
-                                        "\\Привлекаем собственный транспорт.pdf",
                                 "Информационное письмо о привлечение собственного транспорта.",
                                 dateDoc,
                         "Настоящим участник закупки " +
@@ -140,8 +127,6 @@ public class DocGeneratorsPDF {
 
                     case "Гарантийное письмо о наличии СИЗ и прочего":
                         convPdf.launch(company,
-                                addressDocPac +
-                                        "\\Гарантийное письмо о наличии средств защиты изолирующего типа.pdf",
                                 "Гарантийное письмо о наличии средств защиты изолирующего типа.",
                                 dateDoc,
                         "Настоящим участник закупки " +
@@ -158,8 +143,6 @@ public class DocGeneratorsPDF {
 
                     case "Согласие идти в субподряд":
                         convPdf.launch(company,
-                                addressDocPac +
-                                        "\\Согласие идти в субподряд.pdf",
                                 "Согласие идти в субподряд.",
                                 dateDoc,
                         "Настоящим сообщаем, что компания " +
@@ -177,8 +160,6 @@ public class DocGeneratorsPDF {
 
                     case "Согласие на проведение добровольного технического аудита":
                         convPdf.launch(company,
-                                addressDocPac +
-                                        "\\Согласие на проведение добровольного технического аудита.pdf",
                                 "Согласие на проведение добровольного технического аудита.",
                                 dateDoc,
                                         company.getSmallNameCompany() + " " +
@@ -194,8 +175,6 @@ public class DocGeneratorsPDF {
 
                     case "Согласие на выполнение работ в соответствии с техническим заданием":
                         convPdf.launch(company,
-                                addressDocPac +
-                                        "\\Согласие на выполнение работ в соответствии с тех заданием.pdf",
                                 "Согласие на выполнение работ в соответствии с техническим заданием.",
                                 dateDoc,
                         "Настоящим сообщаем, что компания " +
@@ -211,8 +190,6 @@ public class DocGeneratorsPDF {
 
                     case "Согласие на изменение объёма":
                         convPdf.launch(company,
-                                addressDocPac +
-                                        "\\Согласие на изменение объёма.pdf",
                                 "Согласие на изменение объёма.",
                                 dateDoc,
                         "Настоящим сообщаем, что компания " +
@@ -224,7 +201,6 @@ public class DocGeneratorsPDF {
                                 tender.getName() + ".", numberDoc);
                         numberDoc++;
                         break;
-
                 }
             }
         }

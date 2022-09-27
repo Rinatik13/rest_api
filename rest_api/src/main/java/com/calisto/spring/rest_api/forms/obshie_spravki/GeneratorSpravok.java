@@ -1,6 +1,8 @@
-package com.calisto.spring.rest_api.forms.rosneft;
+package com.calisto.spring.rest_api.forms.obshie_spravki;
 
 import com.calisto.spring.rest_api.entity.Company;
+import com.calisto.spring.rest_api.entity.Tender;
+import com.calisto.spring.rest_api.forms.rosneft.GeneratorDoc;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.io.source.ByteArrayOutputStream;
@@ -21,17 +23,13 @@ import com.itextpdf.layout.property.VerticalAlignment;
 
 import java.io.IOException;
 
+public class GeneratorSpravok implements SpravkaDoc {
+    String nameDoc = "";
+    int documentNumber = 0;
+    String bodyDocCompany = "";
 
-// класс
-public class ConvPdf {
-
-    // получаем данные Компания, адрес файла, название документа, дату документа и тело документа
-    // далее обрабатываем эти данные и создаём на основе этих данных ПДФ файл
-    // так сказать наш основной файл
-    public ByteArrayOutputStream launch(Company company,
-                                        String nameDoc,
-                                        String dateCompany,
-                                        String bodyDocCompany, int numberDoc){
+    @Override
+    public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 
         // добавляем полное название компании в шапку файла
         String topFullNameFileDocCompany = company.getFullNameCompany();
@@ -61,7 +59,7 @@ public class ConvPdf {
         String toCompany = "В закупочную комиссию.";
 
         // добавляем дату документа
-        String dateDocCompany = dateCompany + " № " + numberDoc + "\n";
+        String dateDocCompany = date + " № " + nameDoc + "\n";
 
         // добавляем тело документа
         String textBodyDocCompany = "   " + bodyDocCompany + "\n\n\n";
@@ -79,7 +77,7 @@ public class ConvPdf {
                 "                                  " +
                         company.getEmployeeList().get(0).giveFullName() + ".";
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            try {
+        try {
 
             PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
@@ -97,61 +95,61 @@ public class ConvPdf {
             // создаём параграфф и добавялем туда начало шапки документа
             // название формы организации + название самой организации
             // центруем текст
-                Paragraph paragraphTop = new Paragraph(topFullNameFileDocCompany);
-                paragraphTop.setTextAlignment(TextAlignment.CENTER);
-                paragraphTop.setFont(font)
-                        .setBold()
-                        .setFontSize(12)
-                        .setVerticalAlignment(VerticalAlignment.TOP);
+            Paragraph paragraphTop = new Paragraph(topFullNameFileDocCompany);
+            paragraphTop.setTextAlignment(TextAlignment.CENTER);
+            paragraphTop.setFont(font)
+                    .setBold()
+                    .setFontSize(12)
+                    .setVerticalAlignment(VerticalAlignment.TOP);
 
             // добавляем в шапку основыне реквизиты компании
             // центруем текст
-                Paragraph paragraphTopRek = new Paragraph(requisitesCompany);
-                paragraphTopRek.setTextAlignment(TextAlignment.CENTER);
-                paragraphTopRek.setFont(font)
-                        .setFontSize(10);
+            Paragraph paragraphTopRek = new Paragraph(requisitesCompany);
+            paragraphTopRek.setTextAlignment(TextAlignment.CENTER);
+            paragraphTopRek.setFont(font)
+                    .setFontSize(10);
 
             // добавляем разграничивающую линию для отделения шапки от основной части документа
-                Paragraph paragraphLine = new Paragraph(line);
-                paragraphLine.setTextAlignment(TextAlignment.CENTER);
+            Paragraph paragraphLine = new Paragraph(line);
+            paragraphLine.setTextAlignment(TextAlignment.CENTER);
 
             // добавляем название комисси
-                Paragraph paragraph = new Paragraph(toCompany);
-                paragraph.setTextAlignment(TextAlignment.RIGHT);
-                paragraph.setFont(font);
+            Paragraph paragraph = new Paragraph(toCompany);
+            paragraph.setTextAlignment(TextAlignment.RIGHT);
+            paragraph.setFont(font);
 
             // добавляем название документа
             // центруем текст
-                Paragraph paragraphNameDoc = new Paragraph(nameDocCompany);
-                paragraphNameDoc.setTextAlignment(TextAlignment.CENTER);
-                paragraphNameDoc.setFont(font).setBold();
+            Paragraph paragraphNameDoc = new Paragraph(nameDocCompany);
+            paragraphNameDoc.setTextAlignment(TextAlignment.CENTER);
+            paragraphNameDoc.setFont(font).setBold();
 
             // добавляем дату документа слева
-                Paragraph paragraphDateDoc = new Paragraph(dateDocCompany);
-                paragraphDateDoc.setTextAlignment(TextAlignment.LEFT);
-                paragraphDateDoc.setFont(font);
+            Paragraph paragraphDateDoc = new Paragraph(dateDocCompany);
+            paragraphDateDoc.setTextAlignment(TextAlignment.LEFT);
+            paragraphDateDoc.setFont(font);
 
             // добавляем основной текст документа
-                Paragraph paragraphBodyText = new Paragraph(textBodyDocCompany);
-                paragraphBodyText.setFont(font);
+            Paragraph paragraphBodyText = new Paragraph(textBodyDocCompany);
+            paragraphBodyText.setFont(font);
 
-                // необходимо реализовать вызов случайной подписи и печати
-                // ************************************************
+            // необходимо реализовать вызов случайной подписи и печати
+            // ************************************************
             // печать
-                company.getStampList().get(0).getAddress();
-                ImageData imageData = ImageDataFactory
-                        .create(company.getStampList().get(0).getAddress());
-                Image image = new Image(imageData);
-                image.scaleAbsolute(100,100);
+            company.getStampList().get(0).getAddress();
+            ImageData imageData = ImageDataFactory
+                    .create(company.getStampList().get(0).getAddress());
+            Image image = new Image(imageData);
+            image.scaleAbsolute(100,100);
 
             // подпись
-                ImageData imageData1 = ImageDataFactory
-                        .create(company.getSignatureList().get(0).getAddress());
-                Image image1 = new Image(imageData1);
-                image1.scaleAbsolute(50,45);
+            ImageData imageData1 = ImageDataFactory
+                    .create(company.getSignatureList().get(0).getAddress());
+            Image image1 = new Image(imageData1);
+            image1.scaleAbsolute(50,45);
 
             // добавляем подписанта документа
-                Border border = new GrooveBorder(new DeviceGray(10),0);
+            Border border = new GrooveBorder(new DeviceGray(10),0);
 
             Table table = new Table(4);
             Cell cell = new Cell()
@@ -191,8 +189,45 @@ public class ConvPdf {
             document.close();
             return byteArrayOutputStream;
         } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
+            throw new RuntimeException(e);
+        }
     }
+
+    @Override
+    public String getNameFile() {
+        return nameDoc;
+    }
+
+    @Override
+    public String getPath() {
+        return "Квалификационная часть";
+    }
+
+    public String getNameDoc() {
+        return nameDoc;
+    }
+
+    @Override
+    public void setNumDoc(int id) {
+        this.documentNumber = id;
+    }
+
+    @Override
+    public void setNameDoc(String nameDoc) {
+        this.nameDoc = nameDoc;
+    }
+
+    public int getDocumentNumber() {
+        return documentNumber;
+    }
+
+    public String getBodyDocCompany() {
+        return bodyDocCompany;
+    }
+
+    @Override
+    public void setBodyDocCompany(String bodyDocCompany) {
+        this.bodyDocCompany = bodyDocCompany;
+    }
+
 }

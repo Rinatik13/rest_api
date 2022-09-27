@@ -24,6 +24,16 @@ public class TestCompany {
         documentPdf1.setId(1);
         documentPdf1.setAddress("C:\\java\\blank\\StampEndSignature\\MS.jpg");
 
+        Akkredit akkredit = new Akkredit();
+        akkredit.setCompany_id(0);
+        akkredit.setDate("10.01.2022");
+        akkredit.setInnGov("1234567890");
+        akkredit.setNumber("1");
+        akkredit.setName("Должная осмотрительность");
+        List<Akkredit> akkreditList = new ArrayList<>();
+        akkreditList.add(akkredit);
+        company.setAkkreditList(akkreditList);
+
         DocumentPdf documentPdf2 = new DocumentPdf();
         documentPdf2.setName("Подпись");
         documentPdf2.setId(2);
@@ -98,9 +108,9 @@ public class TestCompany {
         oborudovanieList.add(oborudovanie);
         oborudovanieList.add(oborudovanie2);
         company.setOborudovanieList(oborudovanieList);
-        company.setAddressCompany("Мухосранск");
-        company.setSmallNameCompany("ООО \"ФОРД\"");
-        company.setFullNameCompany("Общество с ограниченной ответственностью \"ФОРД\"");
+        company.setAddressCompany("г.Уфа");
+        company.setSmallNameCompany("ООО \"Альбина и КО\"");
+        company.setFullNameCompany("Общество с ограниченной ответственностью \"Альбина и КО\"");
         company.setUser_id(1);
 
         return company;
