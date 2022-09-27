@@ -10,8 +10,14 @@ public class Akkredit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotEmpty(message = "Не указан ИНН аккредитующей организации.")
+    @Size(min = 5,max = 10, message = "Введён не корректный размер ИНН организации.")
     private String innGov;
-    @NotEmpty(message = "Не указан номер лицензии.")
+    @NotEmpty(message = "Не указано название аккредитующей организации.")
+    @Size(min = 1, max = 255, message = "Не корректный размер номера.")
+    private String name;
+
+    @NotEmpty(message = "Не указан номер аккредитации.")
     @Size(min = 1, max = 255, message = "Не корректный размер номера.")
     private String number;
     @NotEmpty(message = "Не указана дата.")
@@ -86,5 +92,13 @@ public class Akkredit {
 
     public void setDocumentPdfList(List<DocumentPdf> documentPdfList) {
         this.documentPdfList = documentPdfList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

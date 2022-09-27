@@ -17,7 +17,6 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.VerticalAlignment;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 

@@ -1,6 +1,9 @@
 package com.calisto.spring.rest_api.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -8,12 +11,20 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @NotEmpty(message = "Не указано имя пользователя.")
+    @Size(min = 2, max = 255, message = "Введён не корректный размер имени пользователя.")
     private String name;
+    @NotEmpty(message = "Не указан логин пользователя.")
+    @Size(min = 2, max = 255, message = "Введён не корректный размер логина пользователя.")
     private String login;
+    @Size(min = 2, max = 255, message = "Введён не корректный размер ИНН пользователя.")
     private String inn;
+    @Email
     private String email;
+    @Size(min = 12, max = 12, message = "Введён не корректный размер телефона организации.")
     private String phone;
+    @NotEmpty(message = "Не указан пароль пользователя.")
+    @Size(min = 8, max = 255, message = "Введён не корректный размер пароля пользователя.")
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)

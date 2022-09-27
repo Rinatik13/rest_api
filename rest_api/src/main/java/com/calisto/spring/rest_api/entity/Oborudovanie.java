@@ -1,6 +1,8 @@
 package com.calisto.spring.rest_api.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -8,11 +10,22 @@ public class Oborudovanie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotEmpty(message = "Не указано имя оборудования.")
+    @Size(min = 1, max = 255, message = "Введён не корректный размер имени оборудования.")
     private String name;
+    @NotEmpty(message = "Не указана модель оборудования.")
+    @Size(min = 1, max = 255, message = "Введён не корректный размер имени модели оборудования.")
     private String model;
+    @NotEmpty(message = "Не указана дата регистрации оборудования.")
+    @Size(min = 10, max = 10, message = "Введён не корректный размер даты регистрации оборудования.")
     private String date;
+    @NotEmpty(message = "Не указан статус собственности оборудования.")
+    @Size(min = 1, max = 255, message = "Введён не корректный размер статуса собственности оборудования.")
     private String status;
+
+    @Size(min = 1, max = 255, message = "Введён не корректный размер прочего текста.")
     private String ps;
+    @NotEmpty(message = "Не указан id компании.")
     private int company_id;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "oborudovanie_docs",

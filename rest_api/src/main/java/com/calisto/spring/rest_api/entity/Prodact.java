@@ -1,6 +1,8 @@
 package com.calisto.spring.rest_api.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -8,8 +10,13 @@ public class Prodact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotEmpty(message = "Не указано имя продукта.")
+    @Size(min = 1, max = 255, message = "Введён не корректный размер имени продукта.")
     private String name;
+    @NotEmpty(message = "Не указано модель продукта.")
+    @Size(min = 1, max = 255, message = "Введён не корректный размер модели продукта.")
     private String model;
+    @NotEmpty(message = "Не указано id компании.")
     private int company_id;
 
     @ManyToMany(cascade = CascadeType.ALL)
