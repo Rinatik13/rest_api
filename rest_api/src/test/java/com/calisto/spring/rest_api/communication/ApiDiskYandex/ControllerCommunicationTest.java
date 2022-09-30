@@ -4,12 +4,10 @@ import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
 import org.junit.Test;
 
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 
 public class ControllerCommunicationTest extends ControllerCommunication {
 

@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class GetUpLink {
-    private final String URL = "https://cloud-api.yandex.net/v1/disk/resources/download?path=test/Устав.pdf";
+    private final String URL = "https://cloud-api.yandex.net/v1/disk/resources/download?path=2.pdf";
     public Link getUrlUpFile(){
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders header = new HttpHeaders();

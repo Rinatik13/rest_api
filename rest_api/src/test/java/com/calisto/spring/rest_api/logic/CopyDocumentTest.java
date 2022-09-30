@@ -20,11 +20,8 @@ public class CopyDocumentTest extends CopyDocument {
             Link link = api.getUrlUpFile();
             URL url = new URL(link.getHref());
             URLConnection connection = url.openConnection();
-
             InputStream inputStream = connection.getInputStream();
-            Files.copy(inputStream,new File("C:\\java\\test2\\Скачанный Устав.pdf").toPath());
-
-
+            Files.copy(inputStream,new File("C:\\java\\test\\999.pdf").toPath());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

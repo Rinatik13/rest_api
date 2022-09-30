@@ -233,7 +233,11 @@ public class Company {
             inverseJoinColumns = @JoinColumn(name = "docs_id"))
     private List<DocumentPdf> stampList;
 
-
+    @ManyToMany (cascade = CascadeType.ALL)
+    @JoinTable(name = "tender",
+    joinColumns = @JoinColumn(name = "company_id"),
+    inverseJoinColumns = @JoinColumn(name = "id"))
+    private List<Tender> tenderList;
 
     public Company() {
     }
@@ -540,5 +544,13 @@ public class Company {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
+    }
+
+    public List<Tender> getTenderList() {
+        return tenderList;
+    }
+
+    public void setTenderList(List<Tender> tenderList) {
+        this.tenderList = tenderList;
     }
 }

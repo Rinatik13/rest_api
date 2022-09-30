@@ -1,7 +1,9 @@
 package com.calisto.spring.rest_api.service.documentpdf;
 
+import com.calisto.spring.rest_api.DaO.company.CompanyDaO;
 import com.calisto.spring.rest_api.DaO.documentpdf.DocumentPdfDaO;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.ControllerCommunication;
+import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.DocumentPdf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
     @Autowired
     DocumentPdfDaO documentPdfDaO;
 
+    @Autowired
+    CompanyDaO companyDaO;
+
     @Override
     @Transactional
     public List<DocumentPdf> getAll() {
@@ -25,11 +30,25 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
     @Transactional
     public DocumentPdf add(DocumentPdf documentPdf) {
         String body = documentPdf.getBody();
-        System.out.println(body);
+        String address = "";
         ControllerCommunication controller = new ControllerCommunication();
+
+        Company company = new Company();
+
+        // сохраняем файл по адресу
+        // если файл имеет адрес компании(уставные документы и прочее)
+        if (!documentPdf.getAddress().contains("/")){
+            company = companyDaO.getCompany(Integer.parseInt(documentPdf.getAddress()));
+            address = "user_" + company.getUser_id() + "/company_" + company.getUser_id();
+        }
+        else {
+            String [] addressPath = documentPdf.getAddress().split("/");
+            company = companyDaO.getCompany(Integer.parseInt(addressPath[0]));
+            address = "user_" + company.getUser_id() + "/company_" + company.getUser_id() + "/" + addressPath[2];
+        }
+        documentPdf.setAddress(address);
         documentPdfDaO.add(documentPdf);
-        System.out.println(documentPdf);
-        String url = controller.getUploadFile(documentPdf.getAddress() + "/" + documentPdf.getName() + ".pdf")
+        String url = controller.getUploadFile(address + "/" + documentPdf.getName() + ".pdf")
                 .getHref();
         controller.uploadFile(url,"PUT", body);
         documentPdf.setBody(body);

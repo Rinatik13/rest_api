@@ -39,6 +39,7 @@ public class TenderController {
 
     @GetMapping("/build/{id}")
     public Link getDownloadDocument(@PathVariable int id) throws IOException {
+        System.out.println("Подготовка пакета документов");
         return tenderService.getLink(id);
     }
 }

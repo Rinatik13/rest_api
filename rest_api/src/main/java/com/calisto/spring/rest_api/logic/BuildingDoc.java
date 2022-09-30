@@ -1,8 +1,10 @@
 package com.calisto.spring.rest_api.logic;
 
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.ControllerCommunication;
+import com.calisto.spring.rest_api.communication.ApiDiskYandex.LoadDocumentToZip;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
 import com.calisto.spring.rest_api.entity.Company;
+import com.calisto.spring.rest_api.entity.DocumentPdf;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.forms.obshie_spravki.GeneratorSpravok;
 import com.calisto.spring.rest_api.forms.obshie_spravki.ListSpravok;
@@ -74,6 +76,13 @@ public class BuildingDoc {
             doc.setBodyDocCompany(text[2]);
             generatorDocList.add(doc);
         }
+        System.out.println("Скачиваем файлы с яндекс диска");
+        // добавляем цикл скачивания всех документов в архив
+        List<DocumentPdf> documentPdfList = new ArrayList<>();
+        documentPdfList.addAll(company.getDocumentPdfList());
+        for (int i = 0; i < documentPdfList.size(); i++){
+            addZipEntryDocumentCopy(zip,documentPdfList.get(i),tender);
+        }
 
         // создаём документы для сохранения в архив
 
@@ -105,6 +114,22 @@ public class BuildingDoc {
         System.out.println("создаём поток документа: " + generatorDoc.getNameFile());
         ByteArrayOutputStream streamDoc = doc.launch(company,tender,date,summ);
         ZipEntry zipEntry = new ZipEntry(tender.getId() + "/" + generatorDoc.getPath() + "/" + generatorDoc.getNameFile() +".pdf");
+        try {
+            zip.putNextEntry(zipEntry);
+            zip.write(streamDoc.toByteArray());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void addZipEntryDocumentCopy(ZipOutputStream zip, DocumentPdf documentPdf, Tender tender) {
+        LoadDocumentToZip loadDocumentToZip = new LoadDocumentToZip();
+        String address = documentPdf.getAddress() + "/" + documentPdf.getName() + ".pdf";
+        System.out.println("Address: " + address );
+        System.out.println("Создаём поток документа: " + documentPdf.getName());
+        ByteArrayOutputStream streamDoc = loadDocumentToZip.getLoadDocument(address);
+        ZipEntry zipEntry = new ZipEntry(tender.getId() + "/Квалификационная часть/" + documentPdf.getName() +".pdf");
         try {
             zip.putNextEntry(zipEntry);
             zip.write(streamDoc.toByteArray());

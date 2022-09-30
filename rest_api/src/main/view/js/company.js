@@ -41,7 +41,9 @@ else {
     }
 }
 
+
 const button_info = document.querySelectorAll(".button_info");
+
 
 const openHtml = (event) =>{
     let com_num = parseInt(event.target.name);

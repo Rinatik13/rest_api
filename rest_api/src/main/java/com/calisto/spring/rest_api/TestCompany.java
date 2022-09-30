@@ -92,8 +92,19 @@ public class TestCompany {
         doc2.setAddress("C:\\java\\blank\\DocCompany\\Выписка ЕГРЮЛ.pdf");
         doc2.setId(2);
 
-        comDocs.add(doc);
-        comDocs.add(doc2);
+        DocumentPdf documentPdf3 = new DocumentPdf();
+        documentPdf3.setId(9);
+        documentPdf3.setName("Письмо");
+        documentPdf3.setAddress("user_1/company_0/");
+
+        DocumentPdf documentPdf4 = new DocumentPdf();
+        documentPdf4.setId(9);
+        documentPdf4.setName("Письмо 2");
+        documentPdf4.setAddress("user_1/company_0/");
+
+        comDocs.add(documentPdf3);
+        comDocs.add(documentPdf4);
+//        comDocs.add(doc2);
 
         company.setDocumentPdfList(comDocs);
 
