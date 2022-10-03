@@ -23,11 +23,19 @@ public class Tender {
     @NotEmpty (message = "Не указан ИНН организации.")
     @Size(min = 5,max = 10, message = "Введён не корректный размер ИНН организации.")
     private String innZakaz;
+    @NotEmpty (message = "Не указан название организации.")
+    @Size(min = 1, max = 255, message = "Введён не корректный размер номера закупки.")
+    private String name_company;
     @NotEmpty(message = "Не указан id компании.")
     private int company_id;
-
     private int countEmployee;
     public Tender() {
+    }
+    public String getName_company() {
+        return name_company;
+    }
+    public void setName_company(String name_company) {
+        this.name_company = name_company;
     }
 
     public int getCompany_id() {

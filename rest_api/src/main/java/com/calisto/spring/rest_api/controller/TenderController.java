@@ -23,6 +23,7 @@ public class TenderController {
 
     @PostMapping("/add")
     public Tender addTender(@RequestBody Tender tender){
+
         return tenderService.add(tender);
     }
 

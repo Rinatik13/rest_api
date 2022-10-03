@@ -36,6 +36,7 @@ async function addCompany(event){
     user_id: id_user
     }
 
+    console.log(company);
 
     await fetch('http://localhost:8080/api/calisto/company/add',{
         method: 'POST',

@@ -55,7 +55,7 @@ public class Company {
 
     // кпп
     @NotEmpty (message = "Не указан КПП организации.")
-    @Size(min = 8,max = 9, message = "Введён не корректный размер КПП организации.")
+    @Size(min = 8,max = 10, message = "Введён не корректный размер КПП организации.")
     @Column(name = "kpp_com")
     private String kppCompany;
 
@@ -84,32 +84,32 @@ public class Company {
     private String dateRegistrationCompany;
 
     // бик банка
-    @Size(min = 5,max = 10, message = "Введён не корректный размер ИНН Банка.")
+//    @Size(min = 5,max = 10, message = "Введён не корректный размер ИНН Банка.")
     @Column(name = "bank_number")
     private String bankNumber;
 
     // название формы банка
-    @Size(min = 2, max = 255, message = "Введён не корректный размер названия формы Банка.")
+//    @Size(min = 2, max = 255, message = "Введён не корректный размер названия формы Банка.")
     @Column(name = "name_form_bank")
     private String nameFormBank;
 
     // название банка
-    @Size(min = 2, max = 255, message = "Введён не корректный размер названия Банка.")
+//    @Size(min = 2, max = 255, message = "Введён не корректный размер названия Банка.")
     @Column(name = "name_bank")
     private String nameBank;
 
     // адрес банка
-    @Size(min = 2, max = 255, message = "Введён не корректный размер адреса Банка.")
+//    @Size(min = 2, max = 255, message = "Введён не корректный размер адреса Банка.")
     @Column(name = "address_bank")
     private String addressBank;
 
     // расчётный счёт в банке
-    @Size(min = 20, max = 20, message = "Введён не корректный размер расчётного счёта Банка.")
+//    @Size(min = 20, max = 20, message = "Введён не корректный размер расчётного счёта Банка.")
     @Column(name = "checking_account_bank")
     private String checkingAccountBank;
 
     // корреспонденский счёт в банке
-    @Size(min = 20, max = 20, message = "Введён не корректный размер корреспондентского счёта Банка.")
+//    @Size(min = 20, max = 20, message = "Введён не корректный размер корреспондентского счёта Банка.")
     @Column(name = "correspondent_account_bank")
     private String correspondentAccountBank;
 
@@ -138,17 +138,16 @@ public class Company {
     private String emailCompany;
 
     // телефон
-    @Size(min = 12, max = 12, message = "Введён не корректный размер телефона организации.")
+//    @Size(min = 12, max = 12, message = "Введён не корректный размер телефона организации.")
     @Column(name = "telephone_com")
     private String telephoneCompany;
 
     // сайт
-    @Size (min = 3, max = 255, message = "Введён не корректный размер названия сайта оргинизации.")
+//    @Size (min = 3, max = 255, message = "Введён не корректный размер названия сайта оргинизации.")
     @Column(name = "web_site_com")
     private String webSiteCompany;
 
     // уставный капитал
-    @NotEmpty(message = "Не указана сумма уставного капитала.")
     @Column(name = "summ")
     private double summ;
 
@@ -160,7 +159,7 @@ public class Company {
     private int smpstatus;
 
     // ид пользователя
-    @NotEmpty(message = "Не введён id пользователя.")
+    @Column(name = "user_id")
     private int user_id;
 
     // список сотрудников
@@ -552,5 +551,51 @@ public class Company {
 
     public void setTenderList(List<Tender> tenderList) {
         this.tenderList = tenderList;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", fullNameFormCompany='" + fullNameFormCompany + '\'' +
+                ", fullNameCompany='" + fullNameCompany + '\'' +
+                ", smallNameCompany='" + smallNameCompany + '\'' +
+                ", addressCompany='" + addressCompany + '\'' +
+                ", mailAddressCompany='" + mailAddressCompany + '\'' +
+                ", innCompany='" + innCompany + '\'' +
+                ", kppCompany='" + kppCompany + '\'' +
+                ", registrationNumberCompany='" + registrationNumberCompany + '\'' +
+                ", registrationNumberGovCompany='" + registrationNumberGovCompany + '\'' +
+                ", dateRegistrationNumberGovDoc='" + dateRegistrationNumberGovDoc + '\'' +
+                ", dateRegistrationCompany='" + dateRegistrationCompany + '\'' +
+                ", bankNumber='" + bankNumber + '\'' +
+                ", nameFormBank='" + nameFormBank + '\'' +
+                ", nameBank='" + nameBank + '\'' +
+                ", addressBank='" + addressBank + '\'' +
+                ", checkingAccountBank='" + checkingAccountBank + '\'' +
+                ", correspondentAccountBank='" + correspondentAccountBank + '\'' +
+                ", okpoCompany='" + okpoCompany + '\'' +
+                ", okatoCompany='" + okatoCompany + '\'' +
+                ", okvedCompany='" + okvedCompany + '\'' +
+                ", emailCompany='" + emailCompany + '\'' +
+                ", telephoneCompany='" + telephoneCompany + '\'' +
+                ", webSiteCompany='" + webSiteCompany + '\'' +
+                ", summ=" + summ +
+                ", aktivSumm=" + aktivSumm +
+                ", smpstatus=" + smpstatus +
+                ", user_id=" + user_id +
+                ", employeeList=" + employeeList +
+                ", buhdocumentList=" + buhdocumentList +
+                ", oborudovanieList=" + oborudovanieList +
+                ", prodactList=" + prodactList +
+                ", contractList=" + contractList +
+                ", licenseList=" + licenseList +
+                ", akkreditList=" + akkreditList +
+                ", documentPdfList=" + documentPdfList +
+                ", signatureList=" + signatureList +
+                ", stampList=" + stampList +
+                ", tenderList=" + tenderList +
+                '}';
     }
 }

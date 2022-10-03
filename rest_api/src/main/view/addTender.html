@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Новый тендер</title>
+</head>
+<body>
+
+    <header>
+		<div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
+		<div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
+		<div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
+	</header>
+
+    <h1 class="title">Новый тендер</h1>
+
+    <form action="" class="registration_blok" id="add_tender" onsubmit="">
+        <input type="text" placeholder="Номер закупки" id="number">
+        <input type="text" placeholder="Название тендера" id="name">
+        <input type="text" placeholder="Ссылка на закупку" id="tender_url">
+        <input type="text" placeholder="Краткое название заказчика" id="name_company">
+        <input type="text" placeholder="Инн заказчика" id="inn_company">
+        <input type="number" placeholder="Требуемое количество сотрудников" id="count_empl">
+        <br>
+        <span id="error_add_company" style="color:red">test</span>
+        <input class="button" type="submit" value="Добавить">
+    </form>
+
+<script src="/js/addTender.js"></script>
+</body>
+</html>
