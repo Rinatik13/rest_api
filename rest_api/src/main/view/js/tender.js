@@ -49,7 +49,8 @@ const openBuild = async (event) => {
                     .then(response => response.json())
                     .then(json => {
                         console.log(json);
-                            localStorage.setItem('tender',JSON.stringify(json)); 
+                            localStorage.setItem('link',JSON.stringify(json));
+                            window.location = "http://127.0.0.1:5500/linkZip.html";
                     }
                         );
                 
