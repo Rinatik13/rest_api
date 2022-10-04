@@ -19,9 +19,10 @@ document.addEventListener("DOMContentLoaded", loadList)
 function loadList(){
 let res1 = localStorage.getItem('link');
 let url1 = JSON.parse(res1);
+let link = url1.href;
 let a = document.getElementById("a");
 a.innerText = "Скачать";
-a.href = url1;
+a.href = link;
 a.download = ""; 
 }
 
