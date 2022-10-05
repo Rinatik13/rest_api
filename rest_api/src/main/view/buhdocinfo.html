@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Информация о бухгалтерских документах</title>
+</head>
+<body>
+
+    <header>
+		<div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
+		<div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
+		<div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
+	</header>
+
+    <h1 class="title">Информация о бухгалтерских документах</h1>
+
+    <!-- <div class="text">
+        <button id="tender_list" class="button"><a href="/tenderList.html" class="text_decorator">Список тендеров</a></button
+         <br>
+        <button id="buh_doc" class="button"><a href="/buhDocList.html" class="text_decorator">Бухгалтерские документы</a></button>
+        <br>
+        <button id="employee_list" class="button"><a href="/employeeList.html" class="text_decorator">Список сотрудников</a></button>
+        <br>
+        <button id="oborudovanie_list" class="button"><a href="/oborudovanieList.html" class="text_decorator">Список оборудования</a></button>
+        <br>
+        <button id="cars_list" class="button"><a href="/carsList.html" class="text_decorator">Список техники</a></button>
+        <br>
+        <button id="contract_list" class="button"><a href="/contractList.html" class="text_decorator">Список договоров</a></button>
+        <br>
+        <button id="licenzii_list" class="button"><a href="/licenziiList.html" class="text_decorator">Список лицензий, допусков</a></button>
+    </div>
+    <br> -->
+
+<div class="center_flex" id="my_company_info">
+    <div id="company_info">
+        <div>Год бухгалтерских данных : <span id="buh_data" ></span><button>изменить</button></div>
+        <div>Обороты за год : <span id="oboroti_data" ></span><button>изменить</button></div>
+        <div>Количество сотрудников : <span id="buh_data_count_empl" name=""></span><button>изменить</button></div>
+    </div>
+
+    <div>
+        Список учредительных документов
+        <form action="" id="add_doc">
+            <input type="text" id="text_inpyt" placeholder="Имя файла">
+            <input type="file" id="file">
+            <button>Добавить файл</button>
+        </form>
+        <br>
+        <div id="list_docs" class="docs_list">
+        </div>
+    </div>
+
+</div>
+    
+
+<script src="/js/company_info.js"></script>
+</body>
+</html>
