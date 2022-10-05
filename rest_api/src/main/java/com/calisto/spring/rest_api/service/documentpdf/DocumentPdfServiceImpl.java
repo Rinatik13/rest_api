@@ -44,7 +44,7 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
         else {
             String [] addressPath = documentPdf.getAddress().split("/");
             company = companyDaO.getCompany(Integer.parseInt(addressPath[0]));
-            address = "user_" + company.getUser_id() + "/company_" + company.getUser_id() + "/" + addressPath[2];
+            address = "user_" + company.getUser_id() + "/company_" + company.getUser_id() + "/" + addressPath[1];
         }
         documentPdf.setAddress(address);
         documentPdfDaO.add(documentPdf);
