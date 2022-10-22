@@ -24,9 +24,12 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User add(User user) {
-        userDaO.add(user);
-        BuildPath.buildUserPath(user);
-        return user;
+        if (checkAvailabilityUser(user)){
+            userDaO.add(user);
+            BuildPath.buildUserPath(user);
+            return user;
+        }
+        return null;
     }
 
     @Override
@@ -57,5 +60,18 @@ public class UserServiceImpl implements UserService {
             }
         }
         return result;
+    }
+
+    public boolean checkAvailabilityUser(User user){
+        boolean resultCheckUser = true;
+        List<User> userList = userDaO.getAll();
+        for (User userInDataBase : userList){
+            if (userInDataBase.getLogin().equals(user.getLogin())) {
+                resultCheckUser = false;
+                break;
+            }
+        }
+        // добавить вывод ошибки если такой логин уже есть в базе
+        return resultCheckUser;
     }
 }
