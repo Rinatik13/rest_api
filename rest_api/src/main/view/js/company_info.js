@@ -63,20 +63,23 @@ document.getElementById("bank_address").innerHTML = company.addressBank;
 // запрос не отправляется на сервер
 
 let button_add_doc = document.getElementById('#add_doc');
-button_add_doc.querySelector.addEventListener('click', uploadFile);
+document.querySelector('button').addEventListener("click", uploadFile);
+// button_add_doc.querySelector.addEventListener('click', uploadFile);
 
-async function uploadFile(event){
-    event.preventDefault();
     let documentPdf = {
     id : "" ,
     name : "" ,
-    body : "" ,
-    address : company.id
-}
+    body : "" 
+    }
+
+async function uploadFile(event){
+
+event.preventDefault();
 let file = document.getElementById("file").files[0];
 let reader = new FileReader();
 reader.readAsBinaryString(file)
 reader.onload = function(){
+    document.address = company.id;
     documentPdf.body = reader.result;
 }
 reader.onerror = function(){
@@ -93,8 +96,7 @@ await fetch('http://localhost:8080/api/calisto/documentpdf/add',{
         )
         .then(response => response.json())
         .then(json => {
-            console.log(json);
-                
+            console.log(json);        
         }
             );
 }

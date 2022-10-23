@@ -32,6 +32,7 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
         String body = documentPdf.getBody();
         String address = "";
         ControllerCommunication controller = new ControllerCommunication();
+        System.out.println(body);
 
         Company company = new Company();
 
@@ -39,19 +40,20 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
         // если файл имеет адрес компании(уставные документы и прочее)
         if (!documentPdf.getAddress().contains("/")){
             company = companyDaO.getCompany(Integer.parseInt(documentPdf.getAddress()));
-            address = "user_" + company.getUser_id() + "/company_" + company.getUser_id();
+            address = "user_" + company.getUser_id() + "/company_" + company.getId();
         }
         else {
             String [] addressPath = documentPdf.getAddress().split("/");
             company = companyDaO.getCompany(Integer.parseInt(addressPath[0]));
-            address = "user_" + company.getUser_id() + "/company_" + company.getUser_id() + "/" + addressPath[1];
+            address = "user_" + company.getUser_id() + "/company_" + company.getId() + "/" + addressPath[1];
         }
+        documentPdf.setBody(body);
         documentPdf.setAddress(address);
         documentPdfDaO.add(documentPdf);
         String url = controller.getUploadFile(address + "/" + documentPdf.getName() + ".pdf")
                 .getHref();
         controller.uploadFile(url,"PUT", body);
-        documentPdf.setBody(body);
+
         return documentPdf;
     }
 
