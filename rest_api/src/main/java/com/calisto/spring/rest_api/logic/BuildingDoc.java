@@ -80,8 +80,8 @@ public class BuildingDoc {
         // добавляем цикл скачивания всех документов в архив
         List<DocumentPdf> documentPdfList = new ArrayList<>();
         documentPdfList.addAll(company.getDocumentPdfList());
-        for (int i = 0; i < documentPdfList.size(); i++){
-            addZipEntryDocumentCopy(zip,documentPdfList.get(i),tender);
+        for (DocumentPdf documentPdf : documentPdfList) {
+            addZipEntryDocumentCopy(zip, documentPdf, tender);
         }
 
         // создаём документы для сохранения в архив
@@ -120,7 +120,6 @@ public class BuildingDoc {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void addZipEntryDocumentCopy(ZipOutputStream zip, DocumentPdf documentPdf, Tender tender) {
