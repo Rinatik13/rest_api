@@ -63,7 +63,7 @@ document.getElementById("bank_address").innerHTML = company.addressBank;
 // запрос не отправляется на сервер
 
 let button_add_doc = document.getElementById('#add_doc');
-document.querySelector('button').addEventListener("click", uploadFile);
+// document.querySelector('button').addEventListener("click", uploadFile);
 // button_add_doc.querySelector.addEventListener('click', uploadFile);
 
     let documentPdf = {
