@@ -32,7 +32,7 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
         String body = documentPdf.getBody();
         String address = "";
         ControllerCommunication controller = new ControllerCommunication();
-        System.out.println(body);
+        System.out.println("Загрузка файла размером: " + body.length());
 
         Company company = new Company();
 
