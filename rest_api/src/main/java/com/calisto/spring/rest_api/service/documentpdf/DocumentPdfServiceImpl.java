@@ -3,6 +3,7 @@ package com.calisto.spring.rest_api.service.documentpdf;
 import com.calisto.spring.rest_api.DaO.company.CompanyDaO;
 import com.calisto.spring.rest_api.DaO.documentpdf.DocumentPdfDaO;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.ControllerCommunication;
+import com.calisto.spring.rest_api.entity.Akkredit;
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.DocumentPdf;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +42,22 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
         if (!documentPdf.getAddress().contains("/")){
             company = companyDaO.getCompany(Integer.parseInt(documentPdf.getAddress()));
             address = "user_" + company.getUser_id() + "/company_" + company.getId();
+            company.getDocumentPdfList().add(documentPdf);
         }
         else {
             String [] addressPath = documentPdf.getAddress().split("/");
             company = companyDaO.getCompany(Integer.parseInt(addressPath[0]));
             address = "user_" + company.getUser_id() + "/company_" + company.getId() + "/" + addressPath[1];
+
+            // добавить механизм добавления/прикрипления файла к тому или иному блоку в БД.
+
+            // akkredit , buhdocuments , contracts , employees , licenses , oborudovanies , prodacts
+
+            if ("akkredit".equals(addressPath[addressPath.length-1])){
+//                Akkredit akkredit =
+            }
+
+
         }
         documentPdf.setBody(body);
         documentPdf.setAddress(address);
