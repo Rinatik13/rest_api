@@ -15,8 +15,6 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
-
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 public class GeneratorDocForm1a implements GeneratorDoc{

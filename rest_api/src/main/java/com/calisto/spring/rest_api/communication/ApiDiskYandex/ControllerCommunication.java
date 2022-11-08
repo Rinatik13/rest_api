@@ -100,8 +100,8 @@ public class ControllerCommunication {
             con.setRequestMethod(type); //type: POST, PUT, DELETE, GET
             con.setDoOutput(true);
             con.setDoInput(true);
-            con.setConnectTimeout(60000); //60 secs
-            con.setReadTimeout(60000); //60 secs
+            con.setConnectTimeout(150000); //150 secs
+            con.setReadTimeout(150000); //150 secs
 
         }catch(Exception e){
             throw new RuntimeException(e);
@@ -113,7 +113,7 @@ public class ControllerCommunication {
     // указываем тим PUT, POST, DELETE, GET
     // после указываем адрес где хранится заветный файл
     public void uploadFile(String url, String type, String reqbody){
-        System.out.println(reqbody);
+        System.out.println("Загружаем файл длинной: " + reqbody.length() + " символов.");
         HttpURLConnection con = null;
         String result = null;
         try {

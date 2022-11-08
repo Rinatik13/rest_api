@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.net.URL;
 import java.util.List;
 
 @Service
@@ -35,14 +34,14 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
         ControllerCommunication controller = new ControllerCommunication();
         System.out.println("Загрузка файла размером: " + body.length());
 
-        Company company = new Company();
+        Company company;
 
         // сохраняем файл по адресу
         // если файл имеет адрес компании(уставные документы и прочее)
         if (!documentPdf.getAddress().contains("/")){
             company = companyDaO.getCompany(Integer.parseInt(documentPdf.getAddress()));
             address = "user_" + company.getUser_id() + "/company_" + company.getId();
-            company.getDocumentPdfList().add(documentPdf);
+
         }
         else {
             String [] addressPath = documentPdf.getAddress().split("/");
@@ -61,7 +60,10 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
         }
         documentPdf.setBody(body);
         documentPdf.setAddress(address);
-        documentPdfDaO.add(documentPdf);
+//        documentPdfDaO.add(documentPdf);
+        //добавили такое решение, вносим изменения в саму компанию.
+        company.getDocumentPdfList().add(documentPdf);
+        companyDaO.add(company);
         String url = controller.getUploadFile(address + "/" + documentPdf.getName() + ".pdf")
                 .getHref();
         controller.uploadFile(url,"PUT", body);
