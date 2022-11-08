@@ -26,7 +26,7 @@ public class Tender {
     @NotEmpty (message = "Не указан название организации.")
     @Size(min = 1, max = 255, message = "Введён не корректный размер номера закупки.")
     private String name_company;
-    @NotEmpty(message = "Не указан id компании.")
+//    @NotEmpty(message = "Не указан id компании.")
     private int company_id;
     private int countEmployee;
     public Tender() {
@@ -100,5 +100,19 @@ public class Tender {
 
     public void setCountEmployee(int countEmployee) {
         this.countEmployee = countEmployee;
+    }
+
+    @Override
+    public String toString() {
+        return "Tender{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", web_address='" + web_address + '\'' +
+                ", number='" + number + '\'' +
+                ", innZakaz='" + innZakaz + '\'' +
+                ", name_company='" + name_company + '\'' +
+                ", company_id=" + company_id +
+                ", countEmployee=" + countEmployee +
+                '}';
     }
 }

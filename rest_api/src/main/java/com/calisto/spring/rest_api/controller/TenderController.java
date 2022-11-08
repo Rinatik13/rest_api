@@ -23,6 +23,7 @@ public class TenderController {
 
     @PostMapping("/add")
     public Tender addTender(@RequestBody Tender tender){
+        System.out.println("Получили новый тендер:" + tender.toString());
 
         return tenderService.add(tender);
     }

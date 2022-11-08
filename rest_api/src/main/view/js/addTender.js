@@ -11,13 +11,13 @@ async function addTender (event){
     let com_id = company.id;
 
     tender = {
-        name : el.name,
-        web_address : el.tender_url,
-        number : el.number,
-        innZakaz : el.inn_company,
+        name : el.name.value,
+        web_address : el.tender_url.value,
+        number : el.number.value,
+        innZakaz : el.inn_company.value,
         company_id : com_id,
-        countEmployee : el.count_empl,
-        name_company : el.name_company
+        countEmployee : el.count_empl.value,
+        name_company : el.name_company.value
     }
 
     console.log(tender);
