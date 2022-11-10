@@ -4,7 +4,7 @@ let buhdoc = JSON.parse(result);
 document.addEventListener("DOMContentLoaded", loadList)
 
 async function loadList(){
-await fetch('http://localhost:8080/api/calisto/buhdoc/get/' + buhdoc.id,{
+await fetch('http://localhost:8080/api/calisto/buhdocument/get/' + buhdoc.id,{
                     method: 'GET',
                     headers:  {
                         'Content-Type': 'application/json',

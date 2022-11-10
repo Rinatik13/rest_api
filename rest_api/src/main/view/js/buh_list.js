@@ -9,16 +9,17 @@ if(buh_list === ""){
 else {
     for (let a = 0; a<buh_list.length; a++){
         let elem = document.createElement('div');
-        elem.innerHTML = "№"+ (a+1) + " " + buh_list[a].dateName + " " + buh_list[a].oborotiDate +" <button class=\"button button_info\" name='" + a + "'>Информация</button> <button class=\"button button_delete\" name='"+ a +"'> Удалить</button><br><br>";
+        elem.innerHTML = "№"+ (a+1) + ": " + buh_list[a].dateName + " год, среднегодовой оборот: " + buh_list[a].oborotiDate +" млн. руб. <button class=\"button button_info\" name='" + a + "'>Информация</button> <button class=\"button button_delete\" name='"+ a +"'> Удалить</button><br><br>";
         document.querySelector('.list_component').appendChild(elem);
     }
 }
+
 const button_info = document.querySelectorAll(".button_info");
 
 const openHtml = (event) =>{
     let buh_num = parseInt(event.target.name);
-    let buhdoc = employees[buh_num];
-    localStorage.setItem("buhdocument",JSON.stringify(buhdoc));
+    let buhdoc = buh_list[buh_num];
+    localStorage.setItem('buhdocument',JSON.stringify(buhdoc));
     window.location = "http://127.0.0.1:5500/buhdocinfo.html";
     console.log(buhdoc)
 }
