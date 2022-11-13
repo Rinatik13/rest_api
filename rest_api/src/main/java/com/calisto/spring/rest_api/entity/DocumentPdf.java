@@ -20,9 +20,18 @@ public class DocumentPdf {
 
     @Transient
     private String body;
+
+
     @NotEmpty(message = "Не указан адрес файла.")
     @Size(min = 1, max = 255, message = "Введён не корректный размер названия адреса файла.")
     private String address;
+
+    // id company
+    private int company_id;
+    // block
+    private String block;
+    // id block
+    private int block_id;
 
     public DocumentPdf() {
     }
@@ -70,5 +79,29 @@ public class DocumentPdf {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
+    }
+
+    public String getBlock() {
+        return block;
+    }
+
+    public void setBlock(String block) {
+        this.block = block;
+    }
+
+    public int getBlock_id() {
+        return block_id;
+    }
+
+    public void setBlock_id(int block_id) {
+        this.block_id = block_id;
     }
 }

@@ -20,6 +20,7 @@ public class DocumentPdfController {
 
     @PostMapping("/add")
     public DocumentPdf addDocumentPdf(@RequestBody DocumentPdf documentPdf){
+        System.out.println("Приняли документ: " + documentPdf.getName());
         return documentPdfService.add(documentPdf);
     }
 

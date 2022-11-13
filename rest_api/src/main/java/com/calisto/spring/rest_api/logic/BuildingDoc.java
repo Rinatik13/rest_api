@@ -3,9 +3,7 @@ package com.calisto.spring.rest_api.logic;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.ControllerCommunication;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.LoadDocumentToZip;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
-import com.calisto.spring.rest_api.entity.Company;
-import com.calisto.spring.rest_api.entity.DocumentPdf;
-import com.calisto.spring.rest_api.entity.Tender;
+import com.calisto.spring.rest_api.entity.*;
 import com.calisto.spring.rest_api.forms.obshie_spravki.GeneratorSpravok;
 import com.calisto.spring.rest_api.forms.obshie_spravki.ListSpravok;
 import com.calisto.spring.rest_api.forms.obshie_spravki.SpravkaDoc;
@@ -68,7 +66,7 @@ public class BuildingDoc {
         // добавляем в лист справки
         for (int a = 0; a < listSpravok.size(); a++){
             String[] text = new String[3];
-                    text = listSpravok.get(a);
+            text = listSpravok.get(a);
             System.out.println("Создаём поток документов: " + text[0]);
             SpravkaDoc doc = new GeneratorSpravok();
             doc.setNumDoc(a+1);
@@ -80,6 +78,66 @@ public class BuildingDoc {
         // добавляем цикл скачивания всех документов в архив
         List<DocumentPdf> documentPdfList = new ArrayList<>();
         documentPdfList.addAll(company.getDocumentPdfList());
+
+        List<Buhdocument> buhdocuments = company.getBuhdocumentList();
+
+        for (Buhdocument buhdocument : buhdocuments){
+            List<DocumentPdf> documentPdfs = buhdocument.getDocumentPdfList();
+            for (DocumentPdf documentPdf:documentPdfs){
+                documentPdfList.add(documentPdf);
+            }
+        }
+
+        List<Akkredit> akkredits = company.getAkkreditList();
+
+        for (Akkredit akkredit : akkredits){
+            List<DocumentPdf> documentPdfs = akkredit.getDocumentPdfList();
+            for (DocumentPdf documentPdf:documentPdfs){
+                documentPdfList.add(documentPdf);
+            }
+        }
+
+        List<Contract> contracts = company.getContractList();
+
+        for (Contract contract:contracts){
+            List<DocumentPdf> documentPdfs = contract.getDocumentPdfList();
+            for (DocumentPdf documentPdf:documentPdfs){
+                documentPdfList.add(documentPdf);
+            }
+        }
+
+        List<Employee> employees = company.getEmployeeList();
+        for (Employee employee : employees){
+            List<DocumentPdf> documentPdfs = employee.getDocumentPdfList();
+            for (DocumentPdf documentPdf:documentPdfs){
+                documentPdfList.add(documentPdf);
+            }
+        }
+
+        List<License> licenses = company.getLicenseList();
+        for (License license:licenses){
+            List<DocumentPdf> documentPdfs = license.getDocumentPdfList();
+            for (DocumentPdf documentPdf:documentPdfs){
+                documentPdfList.add(documentPdf);
+            }
+        }
+
+        List<Oborudovanie> oborudovanies = company.getOborudovanieList();
+        for (Oborudovanie oborudovanie:oborudovanies){
+            List<DocumentPdf> documentPdfs = oborudovanie.getDocumentPdfList();
+            for (DocumentPdf documentPdf:documentPdfs){
+                documentPdfList.add(documentPdf);
+            }
+        }
+
+        List<Prodact> prodacts = company.getProdactList();
+        for (Prodact prodact:prodacts){
+            List<DocumentPdf> documentPdfs = prodact.getDocumentPdfList();
+            for (DocumentPdf documentPdf:documentPdfs){
+                documentPdfList.add(documentPdf);
+            }
+        }
+
         for (DocumentPdf documentPdf : documentPdfList) {
             addZipEntryDocumentCopy(zip, documentPdf, tender);
         }
@@ -89,9 +147,8 @@ public class BuildingDoc {
         for (GeneratorDoc doc : generatorDocList){
             addZipEntry(zip, doc, company, tender,date,summ);
         }
-
+        // закрываем создание архива 
         zip.close();
-
 
         // загружаем созданный архив на сервер яндекс диска
         controllerCommunication.uploadFileByte(url,"PUT", zipStream.toByteArray());

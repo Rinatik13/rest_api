@@ -18,19 +18,19 @@
     <h1 class="title">Информация о бухгалтерских документах</h1>
 
 <div class="center_flex" id="my_company_info">
-    <div id="company_info">
-        <div>Год бухгалтерских данных : <span id="buh_data" ></span><button>изменить</button></div>
-        <div>Обороты за год : <span id="oboroti_data" ></span><button>изменить</button></div>
-        <div>Количество сотрудников : <span id="buh_data_count_empl" name=""></span><button>изменить</button></div>
+    <div id="buhdoc_info">
+        <div>Год бухгалтерских данных : <span id="buh_data" ></span></div>
+        <div>Обороты за год : <span id="oboroti_data" ></span></div>
+        <div>Количество сотрудников : <span id="buh_data_count_empl" name=""></span></div>
     </div>
 
     <div>
         Список учредительных документов
-        <form action="" id="add_doc">
-            <input type="text" id="text_inpyt" placeholder="Имя файла">
+        <div class="center_flex">
+            <input type="text" id="file_name" placeholder="Имя файла">
             <input type="file" id="file">
             <button>Добавить файл</button>
-        </form>
+            </div>
         <br>
         <div id="list_docs" class="docs_list">
         </div>

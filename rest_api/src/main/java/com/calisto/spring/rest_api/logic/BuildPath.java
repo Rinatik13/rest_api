@@ -36,10 +36,10 @@ public class BuildPath {
         lists.add("oborudovanies");
         lists.add("prodacts");
         lists.add("tenders");
+        lists.add("signatureStamp");
         for (String addres : lists){
             ControllerCommunication myController = new ControllerCommunication();
             linkList = myController.createFolder(addres,fullCompanyPath);
         }
     }
-
 }

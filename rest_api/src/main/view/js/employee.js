@@ -1,7 +1,9 @@
+let resCompany = localStorage.getItem('company');
+let company = JSON.parse(resCompany);
 let res = localStorage.getItem('employee');
 let employee = JSON.parse(res);
+let empl_doc_list = employee.documentPdfList;
 let empl_inf = document.getElementById('employee');
-
 
 addressReg.innerHTML = employee.addressReg;
 dateTrud.innerHTML = employee.dateTrud;
@@ -19,15 +21,55 @@ snils.innerHTML = employee.snils;
 surname.innerHTML = employee.surname;
 telephoneNumber.innerHTML = employee.telephoneNumber;
 
-// тут реализуем добавление списка документов
-// if(companyList === null){
-//     list.innerText = 'Сотрудники отсутствуют.';
-// }
-// else {
-//     for (let a = 0; a<companyList.length; a++){
-//         let elem = document.createElement('div');
-//         elem.innerHTML = companyList[a].smallNameCompany + " <button class=\"button\" name='" + a + "'>Информация</button> <button class=\"button\" name='"+ a +"'> Удалить</button>";
-//         document.querySelector('.list_company').appendChild(elem);
-//     }
-// }
+let list = document.getElementById('doc_list');
 
+// тут реализуем добавление списка документов
+if(empl_doc_list === null){
+    list.innerText = 'Список пуст.';
+}
+else {
+    for (let a = 0; a<empl_doc_list.length; a++){
+        let elem = document.createElement('div');
+        elem.innerHTML = "№ " + (a+1) + empl_doc_list[a].name + " <button class=\"button\" name='" + a + "'>Информация</button> <button class=\"button\" name='"+ a +"'> Удалить</button>";
+        document.querySelector('.doc_list').appendChild(elem);
+    }
+}
+
+
+document.querySelector('button').addEventListener('click', uploadFile);
+
+async function uploadFile(event){
+event.preventDefault();
+
+let el = document.getElementById('file_name');
+
+let file = document.getElementById('file').files[0];
+let reader = new FileReader();
+reader.readAsBinaryString(file)
+reader.onload = async function(){
+    documentPdf = {
+        name : el.value,
+        body : reader.result,
+        address : company.id + "/employees"
+    }
+    console.log(documentPdf);
+
+    await fetch('http://localhost:8080/api/calisto/documentpdf/add',{
+        method: 'POST',
+        body: JSON.stringify(documentPdf),
+        headers:  {
+            'Content-Type': 'application/json',
+        },
+        }
+        )
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+        }
+            );
+        window.location = "http://127.0.0.1:5500/employeeinfo.html"
+}
+reader.onerror = function(){
+    console.log(reader.error);
+}
+}

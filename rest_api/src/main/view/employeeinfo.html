@@ -17,11 +17,11 @@
 
         <h1 class="title">Информация о сотруднике</h1>
 
-        <div class="center_flex">
+        <!-- <div class="center_flex">
             <button class="button"><a href="/addemployee.html" class="text_decorator">Изменить данные</a></button>
             <button class="button"><a href="/adddocument.html" class="text_decorator">Добавить документ</a></button>
             </div>
-        <br>
+        <br> -->
         <div class="center_flex">
           <div class="employee_info center_text" id="employee">
                 <div>Фамилия: <span id="surname"></span></button></div>
@@ -41,6 +41,13 @@
                 <div>Гражданство: <span id="govermentStatus"></span></div>
             </div>  
             <div>
+
+          <input type="text" id="file_name" placeholder="Имя файла">
+          <input type="file" id="file">
+          <button>Добавить файл</button>
+          <br>
+          
+
              <span>Список документов</span>   
              <div class="doc_list" id="doc_list">
              </div>

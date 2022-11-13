@@ -1,7 +1,3 @@
-let result = localStorage.getItem('buhdocument');
-let buhdoc = JSON.parse(result);
-
-document.addEventListener("DOMContentLoaded", loadList)
 
 async function loadList(){
 await fetch('http://localhost:8080/api/calisto/buhdocument/get/' + buhdoc.id,{
@@ -20,11 +16,23 @@ await fetch('http://localhost:8080/api/calisto/buhdocument/get/' + buhdoc.id,{
                             buhdoc = JSON.parse(result); 
                     }
                         );
-
-
+}
+let result = localStorage.getItem('buhdocument');
+let buhdoc = JSON.parse(result);
+let documentPdf;
+let res = localStorage.getItem('company');
+let company = JSON.parse(res);
 let docs_list = buhdoc.documentPdfList;
 
-    if(docs_list == ""){
+document.addEventListener("DOMContentLoaded", loadList)
+
+// let el = document.getElementById('buhdoc_info');
+
+document.getElementById("buh_data").innerHTML = buhdoc.dateName;
+document.getElementById("oboroti_data").innerHTML = buhdoc.oborotiDate;
+document.getElementById("buh_data_count_empl").innerHTML = buhdoc.countEmployeeDate;
+
+    if(docs_list === ""){
         document.getElementById("list_docs").innerHTML = "Документы отсутствуют";
     } 
     else
@@ -35,34 +43,28 @@ let docs_list = buhdoc.documentPdfList;
         document.querySelector('.docs_list').appendChild(block_list);
         }  
     }
-}
 
-let res = localStorage.getItem('company');
-let company = JSON.parse(res);
-
-let documentPdf = {
-    id : "" ,
-    name : "" ,
-    body : "" ,
-    address : company.id + "/buhdocuments" 
-}
-
-let button_add_doc = document.getElementById("add_doc");
-button_add_doc.addEventListener('click', uploadFile)
+document.querySelector('button').addEventListener('click', uploadFile);
 
 async function uploadFile(event){
-    event.preventDefault();
-let file = document.getElementById("file").files[0];
+event.preventDefault();
+
+let el = document.getElementById('file_name');
+
+let file = document.getElementById('file').files[0];
 let reader = new FileReader();
 reader.readAsBinaryString(file)
-reader.onload = function(){
-    documentPdf.body = reader.result;
-}
-reader.onerror = function(){
-    console.log(reader.error);
-}
+reader.onload = async function(){
+    documentPdf = {
+        name : el.value,
+        body : reader.result,
+        company_id : company.id,
+        block : "buhdocuments",
+        block_id : buhdoc.id
+    }
+    console.log(documentPdf);
 
-await fetch('http://localhost:8080/api/calisto/documentpdf/add',{
+    await fetch('http://localhost:8080/api/calisto/documentpdf/add',{
         method: 'POST',
         body: JSON.stringify(documentPdf),
         headers:  {
@@ -73,7 +75,11 @@ await fetch('http://localhost:8080/api/calisto/documentpdf/add',{
         .then(response => response.json())
         .then(json => {
             console.log(json);
-                
         }
             );
+        window.location = "http://127.0.0.1:5500/buhdocinfo.html"
+}
+reader.onerror = function(){
+    console.log(reader.error);
+}
 }

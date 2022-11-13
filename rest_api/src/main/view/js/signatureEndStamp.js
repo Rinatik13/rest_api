@@ -1,6 +1,4 @@
-let res = localStorage.getItem('company');
-let company = JSON.parse(res);
-let documentPdflist = company.documentPdfList;
+
 let list = document.getElementById("all_doc_list")
 let documentPdf;
 
@@ -24,14 +22,30 @@ async function loadList(){
                             );
     }
 
-if(documentPdflist === null){
+let res = localStorage.getItem('company');
+let company = JSON.parse(res);
+let signatures = company.signatureList;
+let stamps = company.stampList;
+
+if(signatures === null){
     list.innerText = 'Список пуст';
 }
 else {
-    for (let a = 0; a<documentPdflist.length; a++){
+    for (let a = 0; a<signatures.length; a++){
         let elem = document.createElement('div');
-        elem.innerHTML = "№"+ (a+1) + " " + documentPdflist[a].name + " <button class=\"button button_delete\" name='"+ a +"'> Удалить</button><br><br>";
-        document.querySelector('.list_component').appendChild(elem);
+        elem.innerHTML = "№"+ (a+1) + ": " + signatures[a].name + " <button class=\"button button_delete\" name='"+ a +"'> Удалить</button><br><br>";
+        document.querySelector('.list_component_signature').appendChild(elem);
+    }
+}
+
+if(stamps === null){
+    list.innerText = 'Список пуст';
+}
+else {
+    for (let a = 0; a<stamps.length; a++){
+        let elem = document.createElement('div');
+        elem.innerHTML = "№"+ (a+1) + ": " + stamps[a].name + " <button class=\"button button_delete\" name='"+ a +"'> Удалить</button><br><br>";
+        document.querySelector('.list_component_stamp').appendChild(elem);
     }
 }
 
@@ -40,6 +54,8 @@ document.querySelector('button').addEventListener('click', uploadFile);
 
 async function uploadFile(event){
 event.preventDefault();
+
+let radioInputPath = document.getElementsByTagName('element').value;
 
 let el = document.getElementById('file_name');
 
@@ -50,9 +66,7 @@ reader.onload = async function(){
     documentPdf = {
         name : el.value,
         body : reader.result,
-        company_id : company.id,
-        block : "all_docs",
-        block_id : "0"
+        address : company.id + "/signatureStamp"
     }
     console.log(documentPdf);
 
@@ -69,7 +83,7 @@ reader.onload = async function(){
             console.log(json);
         }
             );
-        window.location = "http://127.0.0.1:5500/all_docList.html"
+        window.location = "http://127.0.0.1:5500/signatureEndStamp.html"
 }
 reader.onerror = function(){
     console.log(reader.error);

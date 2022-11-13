@@ -5,25 +5,31 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/style.css">
-  <title>Список учредительных документов</title>
+  <title>Список подписей и печатей</title>
 </head>
     <body>
+
         <header>
           <div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
           <div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
           <div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
         </header>
-        <h1 class="title">Список учредительных документов</h1>
 
-        <div class="center_flex">
+        <h1 class="title">Список подписей и печатей</h1>
+
+        <div class="list_component">
           <input type="text" id="file_name" placeholder="Имя файла">
           <input type="file" id="file">
+          <input type="radio" id="signature" value="signature" name="element"> Подпись
+          <input type="radio" id="stamp" value="stamp" name="element"> Печать
           <button>Добавить файл</button>
-          </div>
-
-        <br>
-            <div class="list_component" id="all_doc_list">
             </div>
-        <script src="/js/all_doc_list.js"></script>
-    </body>
+        <br>
+<div class="center_flex">
+  <div class="list_component_signature" id="doc_signature"><h4>Подписи</h4></div>
+  <div class="list_component_stamp" id="doc_stamp"><h4>Печати</h4></div>  
+</div>
+            
+<script src="/js/signatureEndStamp.js"></script>
+</body>
 </html>
