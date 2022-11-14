@@ -1,10 +1,13 @@
 let res = localStorage.getItem('company');
 let company = JSON.parse(res);
 let buh_list = company.buhdocumentList;
-let list = document.getElementById("component_list");
+let list = document.getElementById('component_list');
 
-if(buh_list === ""){
-    document.getElementById("component_list").innerText = 'Бухгалтерские документы отсутствуют';
+
+if(buh_list == undefined){
+    let elem = document.createElement('div');
+    elem.innerHTML = "Бухгалтерские документы отсутствуют";
+    document.querySelector('.list_component').appendChild(elem)
 }
 else {
     for (let a = 0; a<buh_list.length; a++){

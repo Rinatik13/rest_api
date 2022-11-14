@@ -50,7 +50,9 @@ reader.onload = async function(){
     documentPdf = {
         name : el.value,
         body : reader.result,
-        address : company.id + "/employees"
+        company_id : company.id,
+        block : "employees",
+        block_id : employee.id
     }
     console.log(documentPdf);
 

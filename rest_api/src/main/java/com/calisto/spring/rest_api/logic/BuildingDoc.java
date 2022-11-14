@@ -147,7 +147,7 @@ public class BuildingDoc {
         for (GeneratorDoc doc : generatorDocList){
             addZipEntry(zip, doc, company, tender,date,summ);
         }
-        // закрываем создание архива 
+        // закрываем создание архива
         zip.close();
 
         // загружаем созданный архив на сервер яндекс диска

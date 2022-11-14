@@ -6,6 +6,7 @@ import com.calisto.spring.rest_api.communication.ApiDiskYandex.ControllerCommuni
 import com.calisto.spring.rest_api.entity.Akkredit;
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.DocumentPdf;
+import com.calisto.spring.rest_api.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +69,14 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
     private Company companyAddNewDocument(Company company, DocumentPdf documentPdf, String nameBlock, int blockId) {
         switch (nameBlock){
             case "employees": {
-                company.getEmployeeList().get(blockId).getDocumentPdfList().add(documentPdf);
+                List<Employee> employees = company.getEmployeeList();
+                int idListPosition = 0;
+                for (int i = 0; i<employees.size();i++){
+                    if (employees.get(i).getId()==blockId){
+                        idListPosition=i;
+                    }
+                }
+                company.getEmployeeList().get(idListPosition).getDocumentPdfList().add(documentPdf);
                 break;
             }
             case "all_docs": {
