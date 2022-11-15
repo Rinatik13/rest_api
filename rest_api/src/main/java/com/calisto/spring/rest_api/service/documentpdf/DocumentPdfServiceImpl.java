@@ -89,7 +89,14 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
                 break;
             }
             case "contracts": {
-                company.getContractList().get(blockId).getDocumentPdfList().add(documentPdf);
+                List<Contract> contracts = company.getContractList();
+                int idListPosition = 0;
+                for (int i = 0; i<contracts.size();i++){
+                    if (contracts.get(i).getId()==blockId){
+                        idListPosition=i;
+                    }
+                }
+                company.getContractList().get(idListPosition).getDocumentPdfList().add(documentPdf);
                 break;
             }
             case "licenses": {

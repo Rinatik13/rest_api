@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Добавление договора</title>
+</head>
+<body>
+
+    <header>
+		<div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
+		<div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
+		<div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
+	</header>
+
+    <h1 class="title">Новый договор</h1>
+
+        <form class="registration_blok" id="add_contract" onsubmit>
+            <input class="input" type="text" placeholder="Название договора" name="" id="name">
+            <input class="input" type="text" placeholder="Дата заключения договора" name="" id="date">
+            <input class="input" type="text" placeholder="Дата окончания договора" name="" id="endDate">
+            <input class="input" type="text" placeholder="ИНН заказчика" name="" id="innZakaz">
+            <input class="input" type="text" placeholder="Сокращённое название заказчика" name="" id="smileNameZakaz">
+            <input class="input" type="text" placeholder="Адрес заказчика" name="" id="addressZakaz">
+            <input class="input" type="text" placeholder="Сумма договора" name="" id="summ">
+            <br>
+            <span id="error_add_contract" style="color:red">test</span>
+            <input class="button" type="submit" value="Добавить">
+        </form>
+<script src="/js/addcontract.js"></script>
+</body>
+</html>
