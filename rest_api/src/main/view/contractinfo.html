@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Информация о договоре</title>
+</head>
+<body>
+    <header>
+		<div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
+		<div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
+		<div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
+	</header>
+    <h1 class="title">Информация о договоре</h1>
+<div class="center_flex">
+    <div id="contract_info">
+        <div>Название договора : <span id="name" ></span></div>
+        <div>Дата заключения договора : <span id="date" ></span></div>
+        <div>Дата окончания договора : <span id="endDate" ></span></div>
+        <div>ИНН заказчика : <span id="innZakaz" ></span></div>
+        <div>Сокращённое название заказчика : <span id="smileNameZakaz" ></span></div>
+        <div>Адрес заказчика : <span id="addressZakaz" ></span></div>
+        <div>Сумма договора : <span id="summ" ></span></div>
+    </div>
+    <div>
+        <input type="text" id="file_name" placeholder="Имя файла">
+        <input type="file" id="file">
+        <button>Добавить файл</button>
+        <br>
+        <span>Список документов</span>   
+             <div class="doc_list" id="doc_list">
+             </div>
+     </div>
+</div>
+<script src="/js/contractinfo.js"></script>
+</body>
+</html>

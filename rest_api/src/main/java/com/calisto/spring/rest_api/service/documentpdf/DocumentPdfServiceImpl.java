@@ -3,10 +3,7 @@ package com.calisto.spring.rest_api.service.documentpdf;
 import com.calisto.spring.rest_api.DaO.company.CompanyDaO;
 import com.calisto.spring.rest_api.DaO.documentpdf.DocumentPdfDaO;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.ControllerCommunication;
-import com.calisto.spring.rest_api.entity.Akkredit;
-import com.calisto.spring.rest_api.entity.Company;
-import com.calisto.spring.rest_api.entity.DocumentPdf;
-import com.calisto.spring.rest_api.entity.Employee;
+import com.calisto.spring.rest_api.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -99,7 +96,14 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
                 company.getLicenseList().get(blockId).getDocumentPdfList().add(documentPdf);
                 break;
             }case "oborudovanies": {
-                company.getOborudovanieList().get(blockId).getDocumentPdfList().add(documentPdf);
+                List<Oborudovanie> oborudovanies = company.getOborudovanieList();
+                int idListPosition = 0;
+                for (int i = 0; i<oborudovanies.size();i++){
+                    if (oborudovanies.get(i).getId()==blockId){
+                        idListPosition=i;
+                    }
+                }
+                company.getOborudovanieList().get(idListPosition).getDocumentPdfList().add(documentPdf);
                 break;
             }
             case "prodacts": {

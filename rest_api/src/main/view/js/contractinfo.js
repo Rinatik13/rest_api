@@ -1,9 +1,9 @@
-let res = localStorage.getItem('oborudovanie');
-let oborudovanie = JSON.parse(res);
+let res = localStorage.getItem('contract');
+let contract = JSON.parse(res);
 
 document.addEventListener("DOMContentLoaded", loadList);
 async function loadList(){
-    await fetch('http://localhost:8080/api/calisto/oborudovanie/get/'+ oborudovanie.id,{
+    await fetch('http://localhost:8080/api/calisto/contract/get/'+ contract.id,{
                         method: 'GET',
                         headers:  {
                             'Content-Type': 'application/json',
@@ -14,19 +14,22 @@ async function loadList(){
         
                         .then(json => {
                             console.log(json);
-                                localStorage.setItem('oborudovanie',JSON.stringify(json)); 
+                                localStorage.setItem('contract',JSON.stringify(json)); 
                         }
                             );
     }
 
-res = localStorage.getItem('oborudovanie');
-oborudovanie = JSON.parse(res);
+res = localStorage.getItem('contract');
+contract = JSON.parse(res);
 
-document.getElementById('name').innerHTML = oborudovanie.name;
-document.getElementById('model').innerHTML = oborudovanie.model;
-document.getElementById('date').innerHTML = oborudovanie.date;
-document.getElementById('status').innerHTML = oborudovanie.status;
-document.getElementById('ps').innerHTML = oborudovanie.ps;
+document.getElementById('name').innerHTML = contract.name;
+document.getElementById('date').innerHTML = contract.date;
+document.getElementById('endDate').innerHTML = contract.endDate;
+document.getElementById('innZakaz').innerHTML = contract.innZakaz;
+document.getElementById('smileNameZakaz').innerHTML = contract.smileNameZakaz;
+document.getElementById('addressZakaz').innerHTML = contract.addressZakaz;
+document.getElementById('summ').innerHTML = contract.summ;
+
 
 
 document.querySelector('button').addEventListener('click', uploadFile);
@@ -43,9 +46,9 @@ reader.onload = async function(){
     documentPdf = {
         name : el.value,
         body : reader.result,
-        company_id : oborudovanie.company_id,
-        block : "oborudovanies",
-        block_id : oborudovanie.id
+        company_id : contract.company_id,
+        block : "contracts",
+        block_id : contract.id
     }
     console.log(documentPdf);
 
@@ -62,7 +65,7 @@ reader.onload = async function(){
             console.log(json);
         }
             );
-        window.location = "http://127.0.0.1:5500/oborudovanieinfo.html"
+        window.location = "http://127.0.0.1:5500/contractinfo.html"
 }
 reader.onerror = function(){
     console.log(reader.error);
