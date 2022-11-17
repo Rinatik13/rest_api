@@ -8,11 +8,9 @@ import com.calisto.spring.rest_api.forms.obshie_spravki.GeneratorSpravok;
 import com.calisto.spring.rest_api.forms.obshie_spravki.ListSpravok;
 import com.calisto.spring.rest_api.forms.obshie_spravki.SpravkaDoc;
 import com.calisto.spring.rest_api.forms.rosneft.*;
-import com.itextpdf.kernel.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +39,6 @@ public class BuildingDoc {
         // создаём общий поток для создания архива
         ByteArrayOutputStream zipStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(zipStream);
-
-
-
 
         List<GeneratorDoc> generatorDocList = new ArrayList<>();
         generatorDocList.add(new GeneratorDocForm1a());

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Добавление аккредитации</title>
+</head>
+<body>
+
+    <header>
+		<div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
+		<div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
+		<div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
+	</header>
+
+    <h1 class="title">Новая аккредитация</h1>
+
+        <form class="registration_blok" id="add_akkredit" onsubmit>
+            <input class="input" type="text" placeholder="Номер" name="" id="name">
+            <input class="input" type="text" placeholder="Дата начала" name="" id="name">
+            <input class="input" type="text" placeholder="Дата окончания" name="" id="name">
+            <input class="input" type="text" placeholder="Название выдавшей организации" name="" id="name">
+            <input class="input" type="text" placeholder="Инн выдавшей организации " name="" id="name">
+            <br>
+            <span id="error_add_akkredit" style="color:red">test</span>
+            <input class="button" type="submit" value="Добавить">
+        </form>
+<script src="/js/addakkredit.js"></script>
+</body>
+</html>
