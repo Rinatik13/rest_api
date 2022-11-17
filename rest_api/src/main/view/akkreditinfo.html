@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Информация о аккредитации</title>
+</head>
+<body>
+    <header>
+		<div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
+		<div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
+		<div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
+	</header>
+    <h1 class="title">Информация о аккредитации</h1>
+<div class="center_flex">
+    <div id="akkredit_info">
+        <div>Номер аккредитации : <span id="number" ></span></div>
+        <div>От : <span id="date" ></span></div>
+        <div>Действует до : <span id="endDate" ></span></div>
+        <div>Организация выдавшая : <span id="name" ></span></div>
+    </div>
+    <div>
+        <input type="text" id="file_name" placeholder="Имя файла">
+        <input type="file" id="file">
+        <button>Добавить файл</button>
+        <br>
+        <span>Список документов</span>   
+             <div class="doc_list" id="doc_list">
+             </div>
+     </div>
+</div>
+<script src="/js/akkreditinfo.js"></script>
+</body>
+</html>
