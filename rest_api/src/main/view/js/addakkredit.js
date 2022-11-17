@@ -11,10 +11,10 @@ async function addakkredit (event){
 
     akkredit = {
         name : el.name.value,
-        model : el.model.value,
+        number : el.number.value,
         date : el.date.value,
-        status : el.status.value,
-        ps : el.ps.value,
+        endDate : el.endDate.value,
+        innGov : el.innGov.value,
         company_id : company.id
     }
 

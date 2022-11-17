@@ -1,6 +1,11 @@
 package com.calisto.spring.rest_api.communication.ApiDiskYandex;
 
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
+import org.apache.hc.client5.http.classic.methods.HttpPut;
+import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,8 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 // реализуем управление работы с Yandex Api диском
 
 public class ControllerCommunication {
@@ -92,21 +96,23 @@ public class ControllerCommunication {
     }
 
     public  HttpURLConnection getHttpConnection(String url, String type){
+        System.out.println("запускаем метод getHttpConnection");
         URL uri = null;
-        HttpURLConnection con = null;
+        HttpURLConnection connect = null;
         try{
             uri = new URL(url);
-            con = (HttpURLConnection) uri.openConnection();
-            con.setRequestMethod(type); //type: POST, PUT, DELETE, GET
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setConnectTimeout(950000); //950 secs
-            con.setReadTimeout(950000); //950 secs
+            connect = (HttpURLConnection) uri.openConnection();
+            connect.setRequestMethod(type); //type: POST, PUT, DELETE, GET
+            connect.setDoOutput(true);
+            connect.setDoInput(true);
+            connect.setConnectTimeout(950000); //950 secs
+            connect.setReadTimeout(950000); //950 secs
 
         }catch(Exception e){
             throw new RuntimeException(e);
         }
-        return con;
+        System.out.println("завершаем выполнение getHttpConnection");
+        return connect;
     }
 
     // метод позволяет отправить файлы на сервер по открытому url адресу
@@ -115,7 +121,7 @@ public class ControllerCommunication {
     public void uploadFile(String url, String type, String reqbody){
         System.out.println("Загружаем файл длинной: " + reqbody.length() + " символов.");
         HttpURLConnection con = null;
-        String result = null;
+//        String result = null;
         try {
             con = getHttpConnection( url , type);
             if( reqbody != null){
@@ -129,12 +135,12 @@ public class ControllerCommunication {
             }
             con.connect();
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String temp = null;
-            StringBuilder sb = new StringBuilder();
-            while((temp = in.readLine()) != null){
-                sb.append(temp).append(" ");
-            }
-            result = sb.toString();
+//            String temp = null;
+//            StringBuilder sb = new StringBuilder();
+//            while((temp = in.readLine()) != null){
+//                sb.append(temp).append(" ");
+//            }
+//            result = sb.toString();
             in.close();
 
         } catch (IOException e) {
@@ -144,29 +150,39 @@ public class ControllerCommunication {
         }
     }
     public void uploadFileByte(String url, String type, byte[] reqbody){
-        System.out.println(reqbody);
-        HttpURLConnection con = null;
-        String result = null;
+        System.out.println("загружаем байты по адресу, работает метод uploadFileByte");
+        HttpURLConnection connect = null;
+
+//        String result = null;
         try {
-            con = getHttpConnection( url , type);
+            connect = getHttpConnection(url , type);
+            connect.setChunkedStreamingMode(999999999);
             if( reqbody != null){
-                con.setDoInput(true);
-                con.setDoOutput(true);
-                DataOutputStream out = new DataOutputStream(con.getOutputStream());
+                connect.setDoInput(true);
+                connect.setDoOutput(true);
+                System.out.println("начинаем выполнять передачу потока в connection");
+                DataOutputStream out = new DataOutputStream(connect.getOutputStream());
+//                connect.setInstanceFollowRedirects(true);
 
 //                byte[] buffer = Files.readAllBytes(Paths.get(reqbody));
                 out.write(reqbody);
                 out.close();
             }
-            con.connect();
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String temp = null;
-            StringBuilder sb = new StringBuilder();
-            while((temp = in.readLine()) != null){
-                sb.append(temp).append(" ");
-            }
-            result = sb.toString();
+            connect.connect();
+            System.out.println("начинаем выполнять передачу потока в in");
+            Calendar calendar = new GregorianCalendar();
+            System.out.println(calendar.getTime().toString());
+            BufferedReader in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
+//            String temp = null;
+//            StringBuilder sb = new StringBuilder();
+//            while((temp = in.readLine()) != null){
+//                sb.append(temp).append(" ");
+//            }
+//            result = sb.toString();
+            calendar = new GregorianCalendar();
+            System.out.println(calendar.getTime().toString());
             in.close();
+            System.out.println("Вышли из uploadFileByte");
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -174,4 +190,16 @@ public class ControllerCommunication {
             throw new RuntimeException(e);
         }
     }
+
+    // пытаемся написать метод для работы с запросами используя Httpclient
+    public void uploadFileByteApachHttpClient(String url, String type, byte[] reqbody){
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpUriRequest httpPut = new HttpPut(url);
+        try(CloseableHttpResponse httpClientPut = httpClient.execute(httpPut)){
+            org.apache.hc.core5.http.HttpEntity entity = httpClientPut.getEntity();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

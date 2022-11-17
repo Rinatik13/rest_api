@@ -81,7 +81,14 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
                 break;
             }
             case "akkredit": {
-                company.getAkkreditList().get(blockId).getDocumentPdfList().add(documentPdf);
+                List<Akkredit> akkredits = company.getAkkreditList();
+                int idListPosition = 0;
+                for (int i = 0; i<akkredits.size();i++){
+                    if (akkredits.get(i).getId()==blockId){
+                        idListPosition=i;
+                    }
+                }
+                company.getAkkreditList().get(idListPosition).getDocumentPdfList().add(documentPdf);
                 break;
             }
             case "buhdocuments": {
