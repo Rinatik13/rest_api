@@ -85,7 +85,14 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
                 break;
             }
             case "buhdocuments": {
-                company.getBuhdocumentList().get(blockId).getDocumentPdfList().add(documentPdf);
+                List<Buhdocument> buhdocuments = company.getBuhdocumentList();
+                int idListPosition = 0;
+                for (int i = 0; i<buhdocuments.size();i++){
+                    if (buhdocuments.get(i).getId()==blockId){
+                        idListPosition=i;
+                    }
+                }
+                company.getBuhdocumentList().get(idListPosition).getDocumentPdfList().add(documentPdf);
                 break;
             }
             case "contracts": {
@@ -100,9 +107,17 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
                 break;
             }
             case "licenses": {
-                company.getLicenseList().get(blockId).getDocumentPdfList().add(documentPdf);
+                List<License> licenses = company.getLicenseList();
+                int idListPosition = 0;
+                for (int i = 0; i<licenses.size();i++){
+                    if (licenses.get(i).getId()==blockId){
+                        idListPosition=i;
+                    }
+                }
+                company.getLicenseList().get(idListPosition).getDocumentPdfList().add(documentPdf);
                 break;
-            }case "oborudovanies": {
+            }
+            case "oborudovanies": {
                 List<Oborudovanie> oborudovanies = company.getOborudovanieList();
                 int idListPosition = 0;
                 for (int i = 0; i<oborudovanies.size();i++){
@@ -114,7 +129,14 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
                 break;
             }
             case "prodacts": {
-                company.getProdactList().get(blockId).getDocumentPdfList().add(documentPdf);
+                List<Prodact> prodacts = company.getProdactList();
+                int idListPosition = 0;
+                for (int i = 0; i<prodacts.size();i++){
+                    if (prodacts.get(i).getId()==blockId){
+                        idListPosition=i;
+                    }
+                }
+                company.getProdactList().get(idListPosition).getDocumentPdfList().add(documentPdf);
                 break;
             }
             case "tenders": {

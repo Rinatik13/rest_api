@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 // создаём документ подтверждения согласия физического лица на обработку персональных
 // данных
 public class GeneratorDocForm6 implements GeneratorDoc{
-        String fileName = "Сгласие физ лица на обработку персональных данных";
+        String fileName = "Согласие физ лица на обработку персональных данных";
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 

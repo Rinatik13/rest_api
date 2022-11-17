@@ -10,22 +10,22 @@ public class License {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotEmpty(message = "Не указано имя лицензии.")
-    @Size(min = 1, max = 255, message = "Введён не корректный размер имени.")
+//    @NotEmpty(message = "Не указано имя лицензии.")
+//    @Size(min = 1, max = 255, message = "Введён не корректный размер имени.")
     private String name;
-    @NotEmpty(message = "Не указана дата получения лицензии.")
-    @Size(min = 10, max = 10, message = "Введён не корректный размер даты получения лицензии.")
+//    @NotEmpty(message = "Не указана дата получения лицензии.")
+//    @Size(min = 10, max = 10, message = "Введён не корректный размер даты получения лицензии.")
     private String date;
-    @NotEmpty(message = "Не указан номер лицензии.")
-    @Size(min = 1, max = 255, message = "Введён не корректный размер номера лицензии.")
+//    @NotEmpty(message = "Не указан номер лицензии.")
+//    @Size(min = 1, max = 255, message = "Введён не корректный размер номера лицензии.")
     private String number;
-    @NotEmpty(message = "Не указана дата окончания лицензии.")
-    @Size(min = 10, max = 10, message = "Введён не корректный размер даты окончания лицензии.")
+//    @NotEmpty(message = "Не указана дата окончания лицензии.")
+//    @Size(min = 10, max = 10, message = "Введён не корректный размер даты окончания лицензии.")
     private String endDate;
-    @NotEmpty(message = "Не указано имя органа выдавшего лицензию.")
-    @Size(min = 1, max = 255, message = "Введён не корректный размер имени органа выдавшего лицензию.")
+//    @NotEmpty(message = "Не указано имя органа выдавшего лицензию.")
+//    @Size(min = 1, max = 255, message = "Введён не корректный размер имени органа выдавшего лицензию.")
     private String nameGovCom;
-    @NotEmpty(message = "Не указано id компании.")
+//    @NotEmpty(message = "Не указано id компании.")
     private int company_id;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "licenzii_docs",

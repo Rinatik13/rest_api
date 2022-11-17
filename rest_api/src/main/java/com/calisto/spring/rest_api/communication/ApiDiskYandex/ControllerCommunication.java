@@ -100,8 +100,8 @@ public class ControllerCommunication {
             con.setRequestMethod(type); //type: POST, PUT, DELETE, GET
             con.setDoOutput(true);
             con.setDoInput(true);
-            con.setConnectTimeout(150000); //150 secs
-            con.setReadTimeout(150000); //150 secs
+            con.setConnectTimeout(950000); //950 secs
+            con.setReadTimeout(950000); //950 secs
 
         }catch(Exception e){
             throw new RuntimeException(e);
