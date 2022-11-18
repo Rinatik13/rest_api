@@ -1,3 +1,11 @@
+let result = localStorage.getItem('buhdocument');
+let buhdoc = JSON.parse(result);
+let documentPdf;
+let res = localStorage.getItem('company');
+let company = JSON.parse(res);
+
+
+document.addEventListener("DOMContentLoaded", loadList)
 
 async function loadList(){
 await fetch('http://localhost:8080/api/calisto/buhdocument/get/' + buhdoc.id,{
@@ -12,28 +20,21 @@ await fetch('http://localhost:8080/api/calisto/buhdocument/get/' + buhdoc.id,{
                     .then(json => {
                         console.log(json);
                             localStorage.setItem('buhdocument',JSON.stringify(json));
-                            let result = localStorage.getItem('buhdocument');
-                            buhdoc = JSON.parse(result); 
+                            
                     }
                         );
 }
-let result = localStorage.getItem('buhdocument');
-let buhdoc = JSON.parse(result);
-let documentPdf;
-let res = localStorage.getItem('company');
-let company = JSON.parse(res);
+
+result = localStorage.getItem('buhdocument');
+buhdoc = JSON.parse(result);
 let docs_list = buhdoc.documentPdfList;
-
-document.addEventListener("DOMContentLoaded", loadList)
-
-// let el = document.getElementById('buhdoc_info');
 
 document.getElementById("buh_data").innerHTML = buhdoc.dateName;
 document.getElementById("oboroti_data").innerHTML = buhdoc.oborotiDate;
 document.getElementById("buh_data_count_empl").innerHTML = buhdoc.countEmployeeDate;
 
-    if(docs_list === ""){
-        document.getElementById("list_docs").innerHTML = "Документы отсутствуют";
+    if(docs_list == null){
+        document.getElementById("list_docs").innerHTML = "Список пуст";
     } 
     else
     {

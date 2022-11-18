@@ -32,17 +32,7 @@ async function addBuhDoc(event){
         .then(response => response.json())
         .then(json => {
             console.log(json);
-            // let empl_list = company.employeeList;
-            // let res_list = [];
-            // for (let a = 0; a < empl_list.length; a++){
-            //     let empl = empl_list[a];
-            //     if (empl.id !=json.id){
-            //         res_list.push(empl);
-            //     }
-            // }
-            // company.employeeList = res_list;
-            // company.employeeList.push(json);
-            // localStorage.setItem('company', JSON.stringify(company));
+            localStorage.setItem('buhdocument', JSON.stringify(json));
         }
             );
         window.location ='http://127.0.0.1:5500/buhDocList.html';
