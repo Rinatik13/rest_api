@@ -223,14 +223,14 @@ public class Company {
     @JoinTable(name = "company_signature",
             joinColumns = @JoinColumn(name = "company_id"),
             inverseJoinColumns = @JoinColumn(name = "docs_id"))
-    private List<DocumentPdf> signatureList;
+    private List<Image_jpg> signatureList;
 
     // список печатей
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "company_stamp",
             joinColumns = @JoinColumn(name = "company_id"),
             inverseJoinColumns = @JoinColumn(name = "docs_id"))
-    private List<DocumentPdf> stampList;
+    private List<Image_jpg> stampList;
 
     @ManyToMany (cascade = CascadeType.ALL)
     @JoinTable(name = "tender",
@@ -521,19 +521,19 @@ public class Company {
         this.documentPdfList = documentPdfList;
     }
 
-    public List<DocumentPdf> getSignatureList() {
+    public List<Image_jpg> getSignatureList() {
         return signatureList;
     }
 
-    public void setSignatureList(List<DocumentPdf> signatureList) {
+    public void setSignatureList(List<Image_jpg> signatureList) {
         this.signatureList = signatureList;
     }
 
-    public List<DocumentPdf> getStampList() {
+    public List<Image_jpg> getStampList() {
         return stampList;
     }
 
-    public void setStampList(List<DocumentPdf> stampList) {
+    public void setStampList(List<Image_jpg> stampList) {
         this.stampList = stampList;
     }
 

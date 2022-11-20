@@ -1,4 +1,5 @@
 document.getElementById('login_info').addEventListener('submit',getUser);
+
 let user = {
     login: '',
     password: ''

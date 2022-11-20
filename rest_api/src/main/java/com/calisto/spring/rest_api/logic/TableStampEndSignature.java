@@ -1,7 +1,7 @@
 package com.calisto.spring.rest_api.logic;
 
 import com.calisto.spring.rest_api.entity.Company;
-import com.calisto.spring.rest_api.entity.DocumentPdf;
+import com.calisto.spring.rest_api.entity.Image_jpg;
 import com.itextpdf.kernel.color.DeviceGray;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.layout.border.Border;
@@ -26,10 +26,10 @@ public class TableStampEndSignature {
         int b = (int)(Math.random() * company.getSignatureList().size());
 
         // печать
-        DocumentPdf stamp = company.getStampList().get(i);
+        Image_jpg stamp = company.getStampList().get(i);
 
         // подпись
-        DocumentPdf signature = company.getSignatureList().get(b);
+        Image_jpg signature = company.getSignatureList().get(b);
 
         // добавляем подписанта документа
         Border border = new GrooveBorder(new DeviceGray(10),0);
@@ -38,16 +38,12 @@ public class TableStampEndSignature {
         String visaDocCompany =
                 company.getEmployeeList().get(0).getPositionCom() +
                         " \n" +
-                        company.
-                                getSmallNameCompany() +" " +
-                        "\""+
                         company.getSmallNameCompany() + "\"" + "         ";
 
         String nameVisaDocCompany =
 
                 "                                  " +
                         company.getEmployeeList().get(0).giveFullName() + ".";
-
 
         Table table = new Table(4);
         Cell cell = new Cell()
@@ -89,7 +85,7 @@ public class TableStampEndSignature {
         int b = (int)(Math.random() * company.getSignatureList().size());
 
         // подпись
-        DocumentPdf signature = company.getSignatureList().get(b);
+        Image_jpg signature = company.getSignatureList().get(b);
 
         // добавляем подписанта документа
         Border border = new GrooveBorder(new DeviceGray(10),0);
@@ -98,9 +94,6 @@ public class TableStampEndSignature {
         String visaDocCompany =
                 company.getEmployeeList().get(0).getPositionCom() +
                         " \n" +
-                        company.
-                                getSmallNameCompany() +" " +
-                        "\""+
                         company.getSmallNameCompany() + "\"" + "         ";
 
         String nameVisaDocCompany =

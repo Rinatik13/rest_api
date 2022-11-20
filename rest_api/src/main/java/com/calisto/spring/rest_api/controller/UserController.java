@@ -36,6 +36,7 @@ public class UserController {
 
     @PostMapping("/get")
     public User getLoginEndPass(@RequestBody User user){
+        System.out.println("Приняли логин и пароль пользователя: " + user.getLogin() + " / " + user.getPassword());
         return userService.getLoginEndPass(user);
     }
 }

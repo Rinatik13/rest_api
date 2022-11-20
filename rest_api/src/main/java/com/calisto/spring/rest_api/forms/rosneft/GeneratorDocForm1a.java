@@ -541,7 +541,7 @@ public class GeneratorDocForm1a implements GeneratorDoc{
         String endDate = null;
         boolean res = false;
         // перебираем все аккредитации и сравниваем с организацией в которую необходимо подать заявку на тендер
-        // в дальнейшем необходимо сделать проверку на дочерние копании и связанные друг с другом
+        // в дальнейшем необходимо сделать проверку на дочерние компании и связанные друг с другом
 
         for (Akkredit number : company.getAkkreditList()){
             if (number.getInnGov().equals(tender.getInnZakaz())){

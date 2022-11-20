@@ -29,7 +29,7 @@ public class BuildingDoc {
 
     public Link build(Company company, Tender tender, String date, double summ) throws IOException {
         ControllerCommunication controllerCommunication = new ControllerCommunication();
-        // созраняем ардес архива
+        // сохраняем адрес архива
         String addressZip = "user_" + company.getUser_id() + "/company_" + company.getId() +"/"
                 + "tenderId_" + tender.getId() + ".zip";
         // получаем ссылку для загрузки архива

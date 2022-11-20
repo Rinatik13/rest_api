@@ -1,13 +1,8 @@
 package com.calisto.spring.rest_api.entity;
 
-import com.itextpdf.io.image.ImageData;
-import com.itextpdf.io.image.ImageDataFactory;
-import com.itextpdf.layout.element.Image;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.net.MalformedURLException;
 
 @Entity
 public class DocumentPdf {
@@ -20,7 +15,6 @@ public class DocumentPdf {
 
     @Transient
     private String body;
-
 
     @NotEmpty(message = "Не указан адрес файла.")
     @Size(min = 1, max = 255, message = "Введён не корректный размер названия адреса файла.")
@@ -44,18 +38,18 @@ public class DocumentPdf {
         this.body = body;
     }
 
-    public Image giveImage (float fitWidth, float fitHeight){
-        Image result = null;
-        ImageData imageData = null;
-        try {
-            imageData = ImageDataFactory.create(address);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-        result = new Image(imageData);
-        result.scaleAbsolute(fitWidth,fitHeight);
-        return result;
-    }
+//    public Image giveImage (float fitWidth, float fitHeight){
+//        Image result = null;
+//        ImageData imageData = null;
+//        try {
+//            imageData = ImageDataFactory.create(address);
+//        } catch (MalformedURLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        result = new Image(imageData);
+//        result.scaleAbsolute(fitWidth,fitHeight);
+//        return result;
+//    }
 
     public int getId() {
         return id;

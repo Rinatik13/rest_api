@@ -49,12 +49,8 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
 
         // сохраняем файл по адресу
         // если файл имеет адрес компании(уставные документы и прочее)
+        //добавили такое решение, вносим изменения в саму компанию.
 
-//        documentPdf.setBody(body);
-//        documentPdf.setAddress(address);
-////        documentPdfDaO.add(documentPdf);
-//        //добавили такое решение, вносим изменения в саму компанию.
-//        company.getDocumentPdfList().add(documentPdf);
         companyDaO.add(company);
         String url = controller.getUploadFile(address + "/" + documentPdf.getName() + ".pdf")
                 .getHref();
@@ -147,10 +143,6 @@ public class DocumentPdfServiceImpl implements DocumentPdfService{
                 break;
             }
             case "tenders": {
-
-                break;
-            }
-            case "signatureStamp": {
 
                 break;
             }

@@ -8,8 +8,6 @@ public class BuildPathTest extends BuildPath {
     @Test
     public void buildPathTest(){
         TestCompany testCompany = new TestCompany();
-        Company company = testCompany.getCompany();
-        BuildPath.buildCompanyPath(company);
     }
 
     @Test

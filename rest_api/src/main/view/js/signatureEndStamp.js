@@ -55,7 +55,7 @@ document.querySelector('button').addEventListener('click', uploadFile);
 async function uploadFile(event){
 event.preventDefault();
 
-let radioInputPath = document.getElementsByTagName('element').value;
+
 
 let el = document.getElementById('file_name');
 
@@ -63,14 +63,24 @@ let file = document.getElementById('file').files[0];
 let reader = new FileReader();
 reader.readAsBinaryString(file)
 reader.onload = async function(){
+    let block;
+    let radio = document.querySelectorAll('.radio_element');
+    for(let i = 0; i<radio.length; i++){
+    if(radio[i].checked){
+        block = radio[i].value;
+        break;
+    }
+}
     documentPdf = {
+        block : block,
         name : el.value,
         body : reader.result,
-        address : company.id + "/signatureStamp"
+        address : company.id + '/signatureStamp',
+        company_id : company.id
     }
     console.log(documentPdf);
 
-    await fetch('http://localhost:8080/api/calisto/documentpdf/add',{
+    await fetch('http://localhost:8080/api/calisto/signatureStamp/add',{
         method: 'POST',
         body: JSON.stringify(documentPdf),
         headers:  {
