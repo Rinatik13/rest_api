@@ -4,7 +4,6 @@ public class Link {
     private String href;
     private String method;
     private boolean templated;
-
     private String operation_id;
 
     public Link() {

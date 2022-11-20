@@ -6,6 +6,7 @@ import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.BuildingDoc;
+import com.calisto.spring.rest_api.logic.filecontroller.NoFileController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,9 @@ import java.util.List;
 public class TenderServiceImpl implements TenderService{
     @Autowired
     TenderDaO tenderDaO;
+
+    @Autowired
+    NoFileController noFileController;
 
     @Autowired
     CompanyDaO companyDaO;
@@ -56,6 +60,10 @@ public class TenderServiceImpl implements TenderService{
         // надо от-куда то взять дату и сумму
         System.out.println("отправляем ответ");
         Link link = buildingDoc.build(company,tender,"24.09.2022",200000);
+
+        // тестовый запуск потока для удаления файла
+        noFileController.setAddressFile("user_5/company_17/1.pdf");
+        noFileController.start();
         return link;
     }
 }
