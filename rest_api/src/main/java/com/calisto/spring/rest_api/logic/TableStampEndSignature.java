@@ -94,7 +94,7 @@ public class TableStampEndSignature {
         String visaDocCompany =
                 company.getEmployeeList().get(0).getPositionCom() +
                         " \n" +
-                        company.getSmallNameCompany() + "\"" + "         ";
+                        company.getSmallNameCompany() + "         ";
 
         String nameVisaDocCompany =
 

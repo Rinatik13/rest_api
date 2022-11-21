@@ -91,9 +91,9 @@ public class GeneratorDocForm1a implements GeneratorDoc{
         // до следующей таблицы по годовым оборотам организации
         String bodyTextDoc2 =
                 "3. Руководитель организации: " +
-                        company.getEmployeeList().get(0).getPositionCom() + ".\n" +
+                        company.getEmployeeList().get(0).giveFullName() + ".\n" +
                         "4. Главный бухгалтер: " +
-                        company.getEmployeeList().get(0).getPositionCom() + ".\n" +
+                        company.getEmployeeList().get(0).giveFullName() + ".\n" +
                         "5. Дата, место и орган регистрации, № свидетельства: " +
                         company.getDateRegistrationNumberGovDoc() + " №" +
                         company.getRegistrationNumberCompany() + ".\n" +
@@ -135,7 +135,7 @@ public class GeneratorDocForm1a implements GeneratorDoc{
         // дальше идёт таблица с оборотами за последние 3 года.
         Table table1 = new Table(5);
 
-        addCell(" ", table1);
+        addCell("X", table1);
         addCell("2021г.,\n тыс.руб", table1);
         addCell("2020г.,\n тыс.руб.", table1);
         addCell("2019г.,\n тыс.руб", table1);
@@ -304,12 +304,14 @@ public class GeneratorDocForm1a implements GeneratorDoc{
                         ", размещены документы, указанные " +
                         "в разделе 2 Блока 9 настоящего документа на последнюю отчетную дату " +
                         // далее надо взять данные с бухгалтерии
-                        // по заполнено по умолчанию
+                        // заполнено по умолчанию
+                        //*************************
 
-                        "(1 квартал 2022год, 2021год, " +
-                        "2020 год, 2019год )" +
+                        "(1 квартал 2022 год, 2021 год, " +
+                        "2020 год, 2019 год )" +
                         ", необходимые для оценки уровня финансового состояния" +
                         " (раздел 2 Блока 9 настоящего документа).\n" +
+                        //*************************
                         "19. Сообщаем, что для оперативного уведомления по вопросам организационного" +
                         " характера и взаимодействия с ПАО «НК «Роснефть» нами уполномочен: " +
                         company.getEmployeeList().get(0).giveFullName() + " " +

@@ -54,29 +54,30 @@ public class GeneratorSpravok implements SpravkaDoc {
                 "\n";
 
         // добавляем название документа
-        String nameDocCompany = nameDoc +"\n";
+//        String nameDocCompany = nameDoc +"\n";
 
         // надпись в закупочную комиссию
         String toCompany = "В закупочную комиссию.";
 
         // добавляем дату документа
-        String dateDocCompany = date + " № " + nameDoc + "\n";
+        String dateDocCompany = date + " № " + documentNumber + "\n";
 
         // добавляем тело документа
         String textBodyDocCompany = "   " + bodyDocCompany + "\n\n\n";
-
-        // добавляем подписанта
-        String visaDocCompany =
-                company.getEmployeeList().get(0).getPositionCom() +
-                        " \n" +
-                        company.
-                                getSmallNameCompany() +" " +
-                        "\""+
-                        company.getSmallNameCompany() + "\"" + "         ";
-
-        String nameVisaDocCompany =
-                "                                  " +
-                        company.getEmployeeList().get(0).giveFullName() + ".";
+//
+//        // добавляем подписанта
+//        String visaDocCompany =
+//                company.getEmployeeList().get(0).getPositionCom() +
+//                        " \n" +
+//                        company.
+//                                getSmallNameCompany() +" " +
+//                        "\""+
+//                        company.getSmallNameCompany() + "\"" + "         ";
+//
+//        String nameVisaDocCompany =
+//                "                                  " +
+//                        company.getEmployeeList().get(0).giveFullName() + ".";
+//
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
 
@@ -121,7 +122,7 @@ public class GeneratorSpravok implements SpravkaDoc {
 
             // добавляем название документа
             // центруем текст
-            Paragraph paragraphNameDoc = new Paragraph(nameDocCompany);
+            Paragraph paragraphNameDoc = new Paragraph(nameDoc+"/n");
             paragraphNameDoc.setTextAlignment(TextAlignment.CENTER);
             paragraphNameDoc.setFont(font).setBold();
 
