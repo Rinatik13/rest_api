@@ -1,8 +1,6 @@
 package com.calisto.spring.rest_api.forms.rosneft;
 
-import com.calisto.spring.rest_api.entity.Akkredit;
-import com.calisto.spring.rest_api.entity.Company;
-import com.calisto.spring.rest_api.entity.Tender;
+import com.calisto.spring.rest_api.entity.*;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
 import com.itextpdf.io.source.ByteArrayOutputStream;
@@ -16,6 +14,7 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class GeneratorDocForm1a implements GeneratorDoc{
     String nameFile ="Сведения о исполнителе";
@@ -134,35 +133,39 @@ public class GeneratorDocForm1a implements GeneratorDoc{
 
         // дальше идёт таблица с оборотами за последние 3 года.
         Table table1 = new Table(5);
+        Buhdocument currentYear = createYearBuhdocument(company, PeriodOfTime.CURRENTYEAR);
+        Buhdocument firstYearBuh = createYearBuhdocument(company, PeriodOfTime.FIRSTYEAR);
+        Buhdocument secondYearBuh = createYearBuhdocument(company,PeriodOfTime.SECONDYEAR);
+        Buhdocument thirdYearBuh = createYearBuhdocument(company,PeriodOfTime.THIRDYEAR);
 
         addCell("X", table1);
-        addCell("2021г.,\n тыс.руб", table1);
-        addCell("2020г.,\n тыс.руб.", table1);
-        addCell("2019г.,\n тыс.руб", table1);
+        addCell( firstYearBuh.getDateName() + "г.,\n тыс.руб", table1);
+        addCell( secondYearBuh.getDateName() + "г.,\n тыс.руб.", table1);
+        addCell( thirdYearBuh.getDateName()+ "г.,\n тыс.руб", table1);
         addCell("Среднеговодой объём, \n тыс.руб.", table1);
         addCell("Годовые обороты\n всего, с учетом\n НДС тыс.руб.", table1);
 
         // тут надо сделать в идеале цикл с добавлением информации из бухгалтерских данных
 
         addCell((String.format("%.2f",
-                (company.getBuhdocumentList().get(0).getOborotiDate() * 1.2))) + "\n", table1);
+                (firstYearBuh.getOborotiDate() * 1.2))) + "\n", table1);
         addCell((String.format("%.2f",
-                (company.getBuhdocumentList().get(1).getOborotiDate() * 1.2))) + "\n", table1);
+                (secondYearBuh.getOborotiDate() * 1.2))) + "\n", table1);
         addCell((String.format("%.2f",
-                (company.getBuhdocumentList().get(2).getOborotiDate() * 1.2))) + "\n", table1);
-        addCell((String.format("%.2f", ((company.getBuhdocumentList().get(0).getOborotiDate() * 1.2) +
-                (company.getBuhdocumentList().get(1).getOborotiDate() * 1.2) +
-                (company.getBuhdocumentList().get(2).getOborotiDate() * 1.2)) / 3)) + "\n", table1);
+                (thirdYearBuh.getOborotiDate() * 1.2))) + "\n", table1);
+        addCell((String.format("%.2f", ((firstYearBuh.getOborotiDate() * 1.2) +
+                (secondYearBuh.getOborotiDate() * 1.2) +
+                (thirdYearBuh.getOborotiDate() * 1.2)) / 3)) + "\n", table1);
         addCell("Годовые обороты\nвсего, без учета\nНДС тыс. руб.", table1);
 
         // тут тоже делаем цикл полученные из бухгалтерии данных
-        addCell((String.format("%.2f", (company.getBuhdocumentList().get(0).getOborotiDate()))) + "\n", table1);
-        addCell((String.format("%.2f", (company.getBuhdocumentList().get(1).getOborotiDate()))) + "\n", table1);
-        addCell((String.format("%.2f", (company.getBuhdocumentList().get(2).getOborotiDate()))) + "\n", table1);
+        addCell((String.format("%.2f", (firstYearBuh.getOborotiDate()))) + "\n", table1);
+        addCell((String.format("%.2f", (secondYearBuh.getOborotiDate()))) + "\n", table1);
+        addCell((String.format("%.2f", (thirdYearBuh.getOborotiDate()))) + "\n", table1);
         addCell((String.format("%.2f", (
-                (company.getBuhdocumentList().get(0).getOborotiDate() +
-                        company.getBuhdocumentList().get(1).getOborotiDate() +
-                        company.getBuhdocumentList().get(2).getOborotiDate())) / 3)) + "\n", table1);
+                (firstYearBuh.getOborotiDate() +
+                        secondYearBuh.getOborotiDate() +
+                        thirdYearBuh.getOborotiDate())) / 3)) + "\n", table1);
 
 
         // начинаем 3 блок текста тела документа до таблицы сведений
@@ -306,9 +309,10 @@ public class GeneratorDocForm1a implements GeneratorDoc{
                         // далее надо взять данные с бухгалтерии
                         // заполнено по умолчанию
                         //*************************
-
-                        "(1 квартал 2022 год, 2021 год, " +
-                        "2020 год, 2019 год )" +
+                        "(" + currentYear.getDateName() + " год, " +
+                        firstYearBuh.getDateName() + " год, " +
+                        secondYearBuh.getDateName() + " год, " +
+                        thirdYearBuh.getDateName() + " год)" +
                         ", необходимые для оценки уровня финансового состояния" +
                         " (раздел 2 Блока 9 настоящего документа).\n" +
                         //*************************
@@ -519,6 +523,17 @@ public class GeneratorDocForm1a implements GeneratorDoc{
     return byteArrayOutputStream;
     }
 
+    private Buhdocument createYearBuhdocument(Company company, PeriodOfTime periodOfTime) {
+        List<Buhdocument> buhdocuments = company.getBuhdocumentList();
+        Buhdocument resultDocument = new Buhdocument();
+        for (Buhdocument buhdocument : buhdocuments){
+            if (periodOfTime.equals(buhdocument.getPeriodOfTime())){
+                resultDocument = buhdocument;
+            }
+        }
+        return resultDocument;
+    }
+
     private String websiteStatus(Company company) {
         String result = null;
         if (company.getWebSiteCompany()==null) {
@@ -549,7 +564,7 @@ public class GeneratorDocForm1a implements GeneratorDoc{
             if (number.getInnGov().equals(tender.getInnZakaz())){
                 numberAkkr=number.getNumber();
                 date=number.getDate();
-                nameCompanyAkkr = number.getName();
+                nameCompanyAkkr = tender.getName_company();
                 endDate = number.getEndDate();
                 res = true;
                 break;

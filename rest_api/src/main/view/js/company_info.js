@@ -18,20 +18,6 @@ await fetch('http://localhost:8080/api/calisto/company/get/' + company.id,{
                             localStorage.setItem('company',JSON.stringify(json)); 
                     }
                         );
-
-let docs_list = company.documentPdfList;
-
-    if(docs_list == ""){
-        document.getElementById("list_docs").innerHTML = "Документы отсутствуют";
-    } 
-    else
-    {
-        for(let a = 0; a<docs_list.length; a++){
-        let block_list = document.createElement('div');
-        block_list.innerHTML = "№" + (a+1) + ": " + docs_list[a].name + " <button class=\"button, button_delete\" name='"+ a +"'>Удалить</button>";
-        document.querySelector('.docs_list').appendChild(block_list);
-        }  
-    }
 }
 
 let res = localStorage.getItem('company');

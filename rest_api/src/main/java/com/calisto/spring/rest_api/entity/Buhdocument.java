@@ -19,6 +19,8 @@ public class Buhdocument {
     @Size(min = 1, max = 255, message = "Введён не корректное количество сотрудников")
     private String countEmployeeDate;
 
+    private PeriodOfTime periodOfTime;
+
 //    @NotEmpty(message = "Отсутствует id компании.")
     private int company_id;
     @ManyToMany(cascade = CascadeType.ALL)
@@ -28,6 +30,14 @@ public class Buhdocument {
     List<DocumentPdf> documentPdfList;
 
     public Buhdocument() {
+    }
+
+    public PeriodOfTime getPeriodOfTime() {
+        return periodOfTime;
+    }
+
+    public void setPeriodOfTime(PeriodOfTime periodOfTime) {
+        this.periodOfTime = periodOfTime;
     }
 
     public int getCompany_id() {
