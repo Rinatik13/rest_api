@@ -2,6 +2,7 @@ package com.calisto.spring.rest_api.controller;
 
 import com.calisto.spring.rest_api.entity.DocumentPdf;
 import com.calisto.spring.rest_api.service.documentpdf.DocumentPdfService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/calisto/documentpdf")
 public class DocumentPdfController {
+
+    private static final Logger log = Logger.getLogger(DocumentPdfController.class);
     @Autowired
     DocumentPdfService documentPdfService;
 
@@ -20,7 +23,7 @@ public class DocumentPdfController {
 
     @PostMapping("/add")
     public DocumentPdf addDocumentPdf(@RequestBody DocumentPdf documentPdf){
-        System.out.println("Приняли документ: " + documentPdf.getName());
+        log.info("добавляем файл " + documentPdf.getName());
         return documentPdfService.add(documentPdf);
     }
 

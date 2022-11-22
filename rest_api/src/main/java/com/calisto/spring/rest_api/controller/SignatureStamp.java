@@ -20,7 +20,6 @@ public class SignatureStamp {
 
     @PostMapping("/add")
     public Image_jpg addSignatureStamp(@RequestBody Image_jpg imageJpg){
-        System.out.println("Приняли документ: " + imageJpg.getName() + " / " + imageJpg.getBlock());
         return signatureStampService.add(imageJpg);
     }
 

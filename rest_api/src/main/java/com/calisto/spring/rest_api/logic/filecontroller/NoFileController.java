@@ -10,7 +10,6 @@ public class NoFileController extends Thread{
         private void deleteFile(){
             ControllerCommunication communication = new ControllerCommunication();
             communication.delete(addressFile);
-            System.out.println("Удалили файл по адресу: " + addressFile);
         }
 
     @Override

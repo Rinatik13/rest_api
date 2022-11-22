@@ -2,6 +2,7 @@ package com.calisto.spring.rest_api.controller;
 
 import com.calisto.spring.rest_api.entity.User;
 import com.calisto.spring.rest_api.service.user.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/calisto/user")
 public class UserController {
+
+    private static final Logger log = Logger.getLogger(UserController.class);
     @Autowired
     UserService userService;
 
@@ -36,7 +39,8 @@ public class UserController {
 
     @PostMapping("/get")
     public User getLoginEndPass(@RequestBody User user){
-        System.out.println("Приняли логин и пароль пользователя: " + user.getLogin() + " / " + user.getPassword());
+        log.info("Пользователь " + user.getName() + " заходит на сайт");
+//        System.out.println("Приняли логин и пароль пользователя: " + user.getLogin() + " / " + user.getPassword());
         return userService.getLoginEndPass(user);
     }
 }

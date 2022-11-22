@@ -52,13 +52,10 @@ public class TenderServiceImpl implements TenderService{
     @Override
     @Transactional
     public Link getLink(int id) throws IOException {
-        System.out.println("запрос пришёл");
         Tender tender = tenderDaO.getTender(id);
         Company company = companyDaO.getCompany(tender.getCompany_id());
-        System.out.println("сборка архива");
         BuildingDoc buildingDoc = new BuildingDoc();
         // надо от-куда то взять дату и сумму
-        System.out.println("отправляем ответ");
         Link link = buildingDoc.build(company,tender,"24.09.2022",200000);
 
         // тестовый запуск потока для удаления файла

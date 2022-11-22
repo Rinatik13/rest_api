@@ -4,6 +4,7 @@ import com.calisto.spring.rest_api.communication.ApiDiskYandex.ControllerCommuni
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.service.tender.TenderService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/calisto/tender")
 public class TenderController {
+    private static final Logger log = Logger.getLogger(TenderController.class);
     @Autowired
     TenderService tenderService;
 
@@ -23,8 +25,6 @@ public class TenderController {
 
     @PostMapping("/add")
     public Tender addTender(@RequestBody Tender tender){
-        System.out.println("Получили новый тендер:" + tender.toString());
-
         return tenderService.add(tender);
     }
 
@@ -41,7 +41,7 @@ public class TenderController {
 
     @GetMapping("/build/{id}")
     public Link getDownloadDocument(@PathVariable int id) throws IOException {
-        System.out.println("Подготовка пакета документов");
+        log.info("Начинаем подготовку документов");
         return tenderService.getLink(id);
     }
 }

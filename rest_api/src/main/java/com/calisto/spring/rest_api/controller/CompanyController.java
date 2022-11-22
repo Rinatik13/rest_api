@@ -28,7 +28,6 @@ public class CompanyController {
 
     @PostMapping("/add")
     public Company addCompany(@RequestBody Company company){
-        System.out.println("Получили данные компании: " + company.toString());
         return companyService.add(company);
     }
 

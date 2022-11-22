@@ -12,7 +12,6 @@ public class LoadDocumentToZip {
 
         Link link = communication.getDownFile(address);
 
-        System.out.println("Наш адрес: " + link.getHref());
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         InputStream is = null;
         int data;

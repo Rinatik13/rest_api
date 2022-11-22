@@ -1,5 +1,6 @@
 package com.calisto.spring.rest_api.logic;
 
+import com.calisto.spring.rest_api.RestApiApplication;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.ControllerCommunication;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.LoadDocumentToZip;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
@@ -8,6 +9,7 @@ import com.calisto.spring.rest_api.forms.obshie_spravki.GeneratorSpravok;
 import com.calisto.spring.rest_api.forms.obshie_spravki.ListSpravok;
 import com.calisto.spring.rest_api.forms.obshie_spravki.SpravkaDoc;
 import com.calisto.spring.rest_api.forms.rosneft.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayOutputStream;
@@ -18,6 +20,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class BuildingDoc {
+
+    private static final Logger log = Logger.getLogger(BuildingDoc.class);
+
     @Autowired
     CopyDocument copyDoc;
 
@@ -33,7 +38,7 @@ public class BuildingDoc {
         String addressZip = "user_" + company.getUser_id() + "/company_" + company.getId() +"/"
                 + "tenderId_" + tender.getId() + ".zip";
         // получаем ссылку для загрузки архива
-        System.out.println("Создаём архив по адресу: "+ addressZip);
+        log.info("создаём архив по адресу: " + addressZip);
         String url = controllerCommunication.getUploadFile(addressZip).getHref();
 
         // создаём общий поток для создания архива
@@ -62,14 +67,14 @@ public class BuildingDoc {
         for (int a = 0; a < listSpravok.size(); a++){
             String[] text = new String[3];
             text = listSpravok.get(a);
-            System.out.println("Создаём поток документов: " + text[0]);
+            log.info("создаём файл: " + text[0]);
             SpravkaDoc doc = new GeneratorSpravok();
             doc.setNumDoc(a+1);
             doc.setNameDoc(text[0]);
             doc.setBodyDocCompany(text[2]);
             generatorDocList.add(doc);
         }
-        System.out.println("Скачиваем файлы с яндекс диска");
+        log.info("запускаем скачиваение файлов с яндекс диска");
         // добавляем цикл скачивания всех документов в архив
         List<DocumentPdf> documentPdfList = new ArrayList<>();
         documentPdfList.addAll(company.getDocumentPdfList());
@@ -141,29 +146,28 @@ public class BuildingDoc {
 
         for (GeneratorDoc doc : generatorDocList){
             addZipEntry(zip, doc, company, tender,date,summ);
+            log.info("добавляем файл: " + doc.getNameFile());
         }
         // закрываем создание архива
         zip.close();
 
         // загружаем созданный архив на сервер яндекс диска
         controllerCommunication.uploadFileByte(url,"PUT", zipStream.toByteArray());
-        System.out.println("Начинаем получать Link для скачивания файла: " + addressZip);
+        log.info("получаем link для скачивания файла: " + addressZip);
         // получаем ссылку на скачивание заархивированного пакета документов
         ControllerCommunication communication = new ControllerCommunication();
         Link link = null;
         try{
             link = communication.getDownFile(addressZip);
-            System.out.println(link);
         } catch (Exception e){
-            System.out.println("Чёто какая то хуйня.");
-            System.out.println(e);
+            log.error("ошибка с получением link адреса: " + addressZip + " \n сама ошибка: " + e.toString());
         }
         return link;
     }
 
     private void addZipEntry(ZipOutputStream zip, GeneratorDoc generatorDoc, Company company, Tender tender, String date, double summ) {
         GeneratorDoc doc = generatorDoc;
-        System.out.println("создаём поток документа: " + generatorDoc.getNameFile());
+        log.info("создаём поток документа: " + generatorDoc.getNameFile());
         ByteArrayOutputStream streamDoc = doc.launch(company,tender,date,summ);
         ZipEntry zipEntry = new ZipEntry(tender.getId() + "/" + generatorDoc.getPath() + "/" + generatorDoc.getNameFile() +".pdf");
         try {
@@ -177,8 +181,7 @@ public class BuildingDoc {
     private void addZipEntryDocumentCopy(ZipOutputStream zip, DocumentPdf documentPdf, Tender tender) {
         LoadDocumentToZip loadDocumentToZip = new LoadDocumentToZip();
         String address = documentPdf.getAddress() + "/" + documentPdf.getName() + ".pdf";
-        System.out.println("Address: " + address );
-        System.out.println("Создаём поток документа: " + documentPdf.getName());
+        log.info("добавляем файл с адресом: " + address);
         ByteArrayOutputStream streamDoc = loadDocumentToZip.getLoadDocument(address);
         ZipEntry zipEntry = new ZipEntry(tender.getId() + "/Квалификационная часть/" + documentPdf.getName() +".pdf");
         try {

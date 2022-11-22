@@ -30,12 +30,9 @@ public class SignatureStampServiceImpl implements SignatureStampService{
     @Transactional
     public Image_jpg add(Image_jpg imageJpg) {
         ControllerCommunication controller = new ControllerCommunication();
-        System.out.println("Загрузка файла: " + imageJpg.getName());
-
         Company company = companyDaO.getCompany(imageJpg.getCompany_id());
         imageJpg.setAddress("user_" + company.getUser_id() + "/company_" +
                 company.getId() + "/signatureStamp");
-
         addNewImageJPGSignatureStamp(company, imageJpg);
         companyDaO.add(company);
         String url = controller.getUploadFile(imageJpg.getAddress() + "/" + imageJpg.getName() + ".jpg")

@@ -20,9 +20,6 @@ public class CompanyInfo {
     public Company getCompanyInfo(String inn) throws ParseException, JsonProcessingException {
 
         String jsonText = restTemplate.getForObject(URL, String.class);
-
-        System.out.println(jsonText);
-
         Object obj = new JSONParser().parse(jsonText);
         JSONObject jo = (JSONObject) obj;
         String text = jo.toJSONString();
