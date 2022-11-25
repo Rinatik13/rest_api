@@ -75,3 +75,22 @@ reader.onerror = function(){
     console.log(reader.error);
 }
 }
+
+const button_delete = document.querySelectorAll(".button_delete");
+
+async function deleteElement (event){
+    let element_num = parseInt(event.target.name);
+    let element_id = documentPdflist[element_num].id;
+    // создаём рест запрос на удаление объекта по id
+    await fetch('http://localhost:8080/api/calisto/documentpdf/delete/' + element_id)
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+            window.location = "http://127.0.0.1:5500/all_docList.html"
+        }
+        );
+}
+
+button_delete.forEach(button_delete =>{
+    button_delete.addEventListener('click', deleteElement);    
+}) 

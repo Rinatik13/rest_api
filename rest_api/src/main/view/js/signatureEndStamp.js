@@ -33,7 +33,7 @@ if(signatures === null){
 else {
     for (let a = 0; a<signatures.length; a++){
         let elem = document.createElement('div');
-        elem.innerHTML = "№"+ (a+1) + ": " + signatures[a].name + " <button class=\"button button_delete\" name='"+ a +"'> Удалить</button><br><br>";
+        elem.innerHTML = "№"+ (a+1) + ": " + signatures[a].name + " <button class=\"button, button_delete\" name='"+ a +"'> Удалить</button><br><br>";
         document.querySelector('.list_component_signature').appendChild(elem);
     }
 }
@@ -44,7 +44,7 @@ if(stamps === null){
 else {
     for (let a = 0; a<stamps.length; a++){
         let elem = document.createElement('div');
-        elem.innerHTML = "№"+ (a+1) + ": " + stamps[a].name + " <button class=\"button button_delete\" name='"+ a +"'> Удалить</button><br><br>";
+        elem.innerHTML = "№"+ (a+1) + ": " + stamps[a].name + " <button class=\"button, button_delete\" name='"+ a +"'> Удалить</button><br><br>";
         document.querySelector('.list_component_stamp').appendChild(elem);
     }
 }
@@ -99,3 +99,25 @@ reader.onerror = function(){
     console.log(reader.error);
 }
 }
+
+
+// необходимо реализовать метод удаления файлов для разных списков.
+
+// const button_delete = document.querySelectorAll(".button_delete");
+
+// async function deleteElement (event){
+//     let element_num = parseInt(event.target.name);
+//     let element_id = [element_num].id;
+//     // создаём рест запрос на удаление объекта по id
+//     await fetch('http://localhost:8080/api/calisto/tender/delete/' + element_id)
+//         .then(response => response.json())
+//         .then(json => {
+//             console.log(json);
+//             window.location = "http://127.0.0.1:5500/tenderList.html"
+//         }
+//         );
+// }
+
+// button_delete.forEach(button_delete =>{
+//     button_delete.addEventListener('click', deleteElement);    
+// }) 

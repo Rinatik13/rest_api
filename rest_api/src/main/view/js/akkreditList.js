@@ -29,7 +29,7 @@ if(akkredits==null){
 else {
     for (let a = 0; a<akkredits.length; a++){
         let elem = document.createElement('div');
-        elem.innerHTML = "№ " + (a+1) + " Номер: " + akkredits[a].number + ", кем выдан :" + akkredits[a].name + ", до какого действителен: " + akkredits[a].endDate + " <button class=\"button, button_info\" name='" + a + "'>Информация</button>";
+        elem.innerHTML = "№ " + (a+1) + " Номер: " + akkredits[a].number + ", кем выдан :" + akkredits[a].name + ", до какого действителен: " + akkredits[a].endDate + " <button class=\"button, button_info\" name='" + a + "'>Информация</button> <button class=\"button, button_delete\" name='"+ a +"'> Удалить</button>";
         document.querySelector('.list_component').appendChild(elem);
     }
 }
@@ -45,4 +45,23 @@ const openHtml = (event) =>{
 
 button_info.forEach(button_info =>{
     button_info.addEventListener('click', openHtml);    
+    }) 
+
+    const button_delete = document.querySelectorAll(".button_delete");
+
+    async function deleteElement (event){
+        let element_num = parseInt(event.target.name);
+        let element_id = akkredits[element_num].id;
+        // создаём рест запрос на удаление объекта по id
+        await fetch('http://localhost:8080/api/calisto/akkredit/delete/' + element_id)
+            .then(response => response.json())
+            .then(json => {
+                console.log(json);
+                window.location = "http://127.0.0.1:5500/akkreditList.html"
+            }
+            );
+    }
+    
+    button_delete.forEach(button_delete =>{
+        button_delete.addEventListener('click', deleteElement);    
     }) 

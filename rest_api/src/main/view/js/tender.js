@@ -29,7 +29,7 @@ if(tenderList==""){
 else {
     for(let a = 0; a < tenderList.length;a++){
         let block_list = document.createElement('div');
-        block_list.innerHTML = "№ " + (a+1) + ": " + tenderList[a].name + " №" + tenderList[a].number + " <button class=\"button button_addDoc\" name='"+ a +"'>Подготовить документы</button>";
+        block_list.innerHTML = "№ " + (a+1) + ": " + tenderList[a].name + " №" + tenderList[a].number + " <button class=\"button, button_addDoc\" name='"+ a +"'>Подготовить документы</button> <button class=\"button, button_delete\" name='"+ a +"'> Удалить</button>";
         document.querySelector('.list_tender').appendChild(block_list);
     }
 }
@@ -56,6 +56,28 @@ const openBuild = async (event) => {
 }
 
 const button_build = document.querySelectorAll('.button_addDoc');
+
 button_build.forEach(button_build =>{
     button_build.addEventListener('click', openBuild);    
     }) 
+
+
+    const button_delete = document.querySelectorAll(".button_delete");
+
+    async function deleteElement (event){
+        let element_num = parseInt(event.target.name);
+        let element_id = tenderList[element_num].id;
+        // создаём рест запрос на удаление объекта по id
+        await fetch('http://localhost:8080/api/calisto/tender/delete/' + element_id)
+            .then(response => response.json())
+            .then(json => {
+                console.log(json);
+                window.location = "http://127.0.0.1:5500/tenderList.html"
+            }
+            );
+    }
+    
+    button_delete.forEach(button_delete =>{
+        button_delete.addEventListener('click', deleteElement);    
+    }) 
+    

@@ -41,7 +41,8 @@ public class TenderController {
 
     @GetMapping("/build/{id}")
     public Link getDownloadDocument(@PathVariable int id) throws IOException {
-        log.info("Начинаем подготовку документов");
+        log.info("*****************************************************\n");
+        log.info("НАЧИНАЕМ ПОДГОТОВКУ ДОКУМЕНТОВ ПО ТЕНДЕРУ ID № " + id);
         return tenderService.getLink(id);
     }
 }

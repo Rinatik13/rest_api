@@ -3,10 +3,12 @@ package com.calisto.spring.rest_api.service.tender;
 import com.calisto.spring.rest_api.DaO.company.CompanyDaO;
 import com.calisto.spring.rest_api.DaO.tender.TenderDaO;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
+import com.calisto.spring.rest_api.controller.TenderController;
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.BuildingDoc;
 import com.calisto.spring.rest_api.logic.filecontroller.NoFileController;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.util.List;
 @Service
 public class TenderServiceImpl implements TenderService{
+    private static final Logger log = Logger.getLogger(TenderServiceImpl.class);
     @Autowired
     TenderDaO tenderDaO;
 
@@ -61,6 +64,8 @@ public class TenderServiceImpl implements TenderService{
         // тестовый запуск потока для удаления файла
 //        noFileController.setAddressFile("user_5/company_17/1.pdf");
 //        noFileController.start();
+        log.info("************************************************************************************\n");
+        log.info("ЗАКОНЧИЛИ ПОДГОТОВКУ ПАКЕТА ДОКУМЕНТОВ ПО ТЕНДЕРУ ID №" + tender.getId());
         return link;
     }
 }

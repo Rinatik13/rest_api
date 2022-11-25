@@ -33,7 +33,7 @@ public class ControllerCommunication {
     HttpEntity<String> request = new HttpEntity<>(headers);
     // метод удаляет папку или файл, или всё сразу
     public String delete(String address) {
-
+        headers.add(auth, OAuth);
         ResponseEntity<String> responseEntity = restTemplate.exchange(URLApi + address, HttpMethod.DELETE, request, new ParameterizedTypeReference<String>() {
         });
         log.info("удаляем файл по адресу: " + address);
