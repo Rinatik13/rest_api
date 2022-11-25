@@ -119,10 +119,10 @@ public class ControllerCommunication {
         HttpURLConnection con = null;
 //        String result = null;
         try {
-            con = getHttpConnection( url , type);
+            con = getHttpConnection(url , type);
             if( reqbody != null){
-                con.setDoInput(true);
-                con.setDoOutput(true);
+//                con.setDoInput(true);
+//                con.setDoOutput(true);
                 DataOutputStream out = new DataOutputStream(con.getOutputStream());
                 out.writeBytes(reqbody);
                 out.close();
@@ -144,20 +144,28 @@ public class ControllerCommunication {
 //        String result = null;
         try {
             connect = getHttpConnection(url , type);
-            connect.setChunkedStreamingMode(999999999);
+//            connect.setChunkedStreamingMode(999999999);
             if( reqbody != null){
-                connect.setDoInput(true);
-                connect.setDoOutput(true);
+                connect.connect();
+                // Тут надо оптимизировать код
+                // очень долгое формирование документов.
+                // Для начала надо определить, где затор
+//                connect.setDoInput(true);
+//                connect.setDoOutput(true);
                 log.info("начинаем выполнять передачу потока в connection");
-                DataOutputStream out = new DataOutputStream(connect.getOutputStream());
-//                connect.setInstanceFollowRedirects(true);
-
-//                byte[] buffer = Files.readAllBytes(Paths.get(reqbody));
-                out.write(reqbody);
-                out.close();
+                OutputStream outputStream = connect.getOutputStream();
+                outputStream.write(reqbody);
+                outputStream.close();
+//                DataOutputStream out = new DataOutputStream(connect.getOutputStream());
+////                connect.setInstanceFollowRedirects(true);
+//
+////                byte[] buffer = Files.readAllBytes(Paths.get(reqbody));
+//                out.write(reqbody);
+//                out.close();
             }
             connect.connect();
             log.info("начинаем загрузку архива на яндекс диск");
+            InputStreamReader inputStreamReader = new InputStreamReader(connect.getInputStream());
             BufferedReader in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
 //            String temp = null;
 //            StringBuilder sb = new StringBuilder();

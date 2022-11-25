@@ -38,6 +38,7 @@ public class CompanyController {
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable int id){
+        System.out.println("пришёл запрос на удаление");
         companyService.delete(id);
         return "Удалено!";
     }

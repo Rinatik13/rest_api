@@ -12,10 +12,13 @@ import com.calisto.spring.rest_api.forms.rosneft.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Adler32;
+import java.util.zip.CheckedOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -43,7 +46,8 @@ public class BuildingDoc {
 
         // создаём общий поток для создания архива
         ByteArrayOutputStream zipStream = new ByteArrayOutputStream();
-        ZipOutputStream zip = new ZipOutputStream(zipStream);
+        CheckedOutputStream checkedOutputStream = new CheckedOutputStream(zipStream,new Adler32());
+        ZipOutputStream zip = new ZipOutputStream(checkedOutputStream);
 
         List<GeneratorDoc> generatorDocList = new ArrayList<>();
         generatorDocList.add(new GeneratorDocForm1a());
@@ -152,8 +156,9 @@ public class BuildingDoc {
         zip.close();
 
         // загружаем созданный архив на сервер яндекс диска
+        log.info("!!! НАЧАЛО ЗАКАЧКИ АРХИВА !!!");
         controllerCommunication.uploadFileByte(url,"PUT", zipStream.toByteArray());
-        log.info("получаем link для скачивания файла: " + addressZip);
+        log.info("!!! КОНЕЦ ЗАКАЧКИ АРХИВА !!!");
         // получаем ссылку на скачивание заархивированного пакета документов
         ControllerCommunication communication = new ControllerCommunication();
         Link link = null;
@@ -190,6 +195,17 @@ public class BuildingDoc {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
+
+    //метод работает для создания архива
+//    private void buildingZip(){
+//       ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//       CheckedOutputStream checkedOutputStream = new CheckedOutputStream(byteArrayOutputStream,new Adler32());
+//       ZipOutputStream zipOutputStream = new ZipOutputStream(checkedOutputStream);
+//       BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(zipOutputStream);
+//
+//       zipOutputStream.putNextEntry(new ZipEntry("aaa"));
+//       int fileByte;
+////       while ((fileByte = ))
+//    }
 }

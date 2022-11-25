@@ -15,11 +15,9 @@ await fetch('http://localhost:8080/api/calisto/company/get/' + company.id,{
                     .then(json => {
                         console.log(json);
                             localStorage.setItem('company',JSON.stringify(json)); 
-
                     }
                         );
                 }
-
 
 let res = localStorage.getItem('company');
 let company_info = JSON.parse(res);
@@ -39,6 +37,7 @@ else {
 const openBuild = async (event) => {
     let tender_num = parseInt(event.target.name);
     let tender = tenderList[tender_num];
+    document.querySelector('.list_tender').innerHTML = '<div class="loader"></div>'
     await fetch('http://localhost:8080/api/calisto/tender/build/' + tender.id,{
                     method: 'GET',
                     headers:  {

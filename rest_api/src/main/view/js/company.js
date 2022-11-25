@@ -13,7 +13,6 @@ await fetch('http://localhost:8080/api/calisto/user/get',{
                     }
                     )
                     .then(response => response.json())
-    
                     .then(json => {
                         console.log(json);
                             if(json.login === null || json.password === null){
@@ -58,39 +57,19 @@ button_info.addEventListener('click', openHtml);
 
 const button_delete = document.querySelectorAll(".button_delete");
 
-// async function deleteCompany (event){
-//     let com_num = parseInt(event.target.name);
-//     let company_id = companyList[com_num].id;
-//     // создаём рест запрос на удаление компании по id
-//     await fetch('http://localhost:8080/api/calisto/delete/' + company_id)
-//         .then(response => response.json())
-//         .then(json => {
-//             console.log(json);
+async function deleteCompany (event){
+    let com_num = parseInt(event.target.name);
+    let company_id = companyList[com_num].id;
+    // создаём рест запрос на удаление компании по id
+    await fetch('http://localhost:8080/api/calisto/company/delete/' + company_id)
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+        }
+        );
+}
 
-//             await fetch('http://localhost:8080/api/calisto/user/get',{
-//                 method: 'POST',
-//                 body: JSON.stringify(user),
-//                 headers:  {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 }
-//                 )
-//                 .then(response => response.json())
-
-//                 .then(json => {
-//                     console.log(json);
-//                         if(json.login === null || json.password === null){
-//                             document.getElementById('error_login').innerText = 'Логин или пароль не верные.'
-//                         }
-//                         else{
-//                         localStorage.setItem('user',JSON.stringify(json));
-//                         window.location = 'http://127.0.0.1:5500/companyList.html';    
-//                         }
-//                 }
-//                     ); 
-//                 }
-//         };
-// button_info.forEach(_button_delete =>{
-// button_info.addEventListener('click', deleteCompany());    
-// }) 
+button_delete.forEach(button_delete =>{
+    button_delete.addEventListener('click', deleteCompany);    
+}) 
 
