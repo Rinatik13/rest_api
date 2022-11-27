@@ -14,11 +14,11 @@ public class BuildingDocTest extends BuildingDoc {
     @Test
     public void testBuild() throws IOException {
         TestCompany testCompany = new TestCompany();
-        Company company = testCompany.getCompany();
+//        Company company = testCompany.getCompany();
         Tender tender = new Tender();
         tender.setName("Clear");
         tender.setNumber("1234");
         tender.setId(1);
-        build(company,tender,"24.09.2022",2000);
+//        build(company,tender,"24.09.2022",2000);
     }
 }

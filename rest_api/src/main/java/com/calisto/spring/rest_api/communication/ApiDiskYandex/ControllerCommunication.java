@@ -1,6 +1,5 @@
 package com.calisto.spring.rest_api.communication.ApiDiskYandex;
 
-import com.calisto.spring.rest_api.RestApiApplication;
 import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
 import org.apache.hc.client5.http.classic.methods.HttpPut;
 import org.apache.hc.client5.http.classic.methods.HttpUriRequest;

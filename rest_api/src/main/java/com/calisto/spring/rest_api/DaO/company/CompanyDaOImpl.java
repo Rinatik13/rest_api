@@ -1,5 +1,6 @@
 package com.calisto.spring.rest_api.DaO.company;
 
+import com.calisto.spring.rest_api.communication.ApiDiskYandex.ControllerCommunication;
 import com.calisto.spring.rest_api.entity.Company;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -38,8 +39,11 @@ public class CompanyDaOImpl implements CompanyDaO{
 
     @Override
     public void delete(int id) {
+        ControllerCommunication communication = new ControllerCommunication();
         Session session = entityManager.unwrap(Session.class);
+        
         Company company = session.get(Company.class,id);
+        communication.delete("user_" + company.getUser_id() + "/company_" + id );
         session.delete(company);
     }
 

@@ -14,7 +14,11 @@ public class ControllerCommunicationTest extends ControllerCommunication {
     @Test
     public void testDelete1() {
         System.out.println(delete("test1"));
+    }
 
+    @Test
+    public void testDeleteFolder(){
+        delete("user_1/company_1");
     }
 
     @Test

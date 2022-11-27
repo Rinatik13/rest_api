@@ -38,8 +38,8 @@ public class BuildingDoc {
     public Link build(Company company, Tender tender, String date, double summ) throws IOException {
         ControllerCommunication controllerCommunication = new ControllerCommunication();
         // сохраняем адрес архива
-        String addressZip = "user_" + company.getUser_id() + "/company_" + company.getId() +"/"
-                + "tenderId_" + tender.getId() + ".zip";
+        String addressZip = "user_" + company.getUser_id() + "/company_" + company.getId() +
+                "/tender" + tender.getNumber() + ".zip";
         // получаем ссылку для загрузки архива
         log.info("создаём архив по адресу: " + addressZip);
         String url = controllerCommunication.getUploadFile(addressZip).getHref();

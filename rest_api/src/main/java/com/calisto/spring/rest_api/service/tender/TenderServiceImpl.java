@@ -62,8 +62,9 @@ public class TenderServiceImpl implements TenderService{
         Link link = buildingDoc.build(company,tender,"24.09.2022",200000);
 
         // тестовый запуск потока для удаления файла
-//        noFileController.setAddressFile("user_5/company_17/1.pdf");
-//        noFileController.start();
+        noFileController.setAddressFile("user_" + company.getUser_id() + "/company_" + company.getId() +
+                "/tender" + tender.getNumber() + ".zip");
+        noFileController.start();
         log.info("************************************************************************************\n");
         log.info("ЗАКОНЧИЛИ ПОДГОТОВКУ ПАКЕТА ДОКУМЕНТОВ ПО ТЕНДЕРУ ID №" + tender.getId());
         return link;
