@@ -31,7 +31,6 @@ public class GeneratorSpravok implements SpravkaDoc {
 
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
-
         // добавляем полное название компании в шапку файла
         String topFullNameFileDocCompany = company.getFullNameCompany();
 
@@ -141,50 +140,6 @@ public class GeneratorSpravok implements SpravkaDoc {
 
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();
             Table table4 = tableStampEndSignature.createTableStampEndSignature(company, font);
-
-//            // печать
-//            company.getStampList().get(0).getAddress();
-//            ImageData imageData = ImageDataFactory
-//                    .create(company.getStampList().get(0).getAddress());
-//            Image image = new Image(imageData);
-//            image.scaleAbsolute(100,100);
-//
-//            // подпись
-//            ImageData imageData1 = ImageDataFactory
-//                    .create(company.getSignatureList().get(0).getAddress());
-//            Image image1 = new Image(imageData1);
-//            image1.scaleAbsolute(50,45);
-
-//            // добавляем подписанта документа
-//            Border border = new GrooveBorder(new DeviceGray(10),0);
-
-//            Table table = new Table(4);
-//            Cell cell = new Cell()
-//                    .setBorder(border)
-//                    .add(visaDocCompany)
-//                    .setFont(font)
-//                    .setTextAlignment(TextAlignment.CENTER);
-//
-//            table.addCell(cell);
-//            cell = new Cell()
-//                    .setBorder(border)
-//                    .add(image);
-//            table.addCell(cell);
-//
-//            cell = new Cell()
-//                    .setBorder(border)
-//                    .add(image1)
-//                    .setRelativePosition(110,0,0,0);
-//            table.addCell(cell);
-//
-//            cell = new Cell()
-//                    .setBorder(border)
-//                    .add(nameVisaDocCompany)
-//                    .setFont(font)
-//                    .setTextAlignment(TextAlignment.RIGHT)
-//                    .setVerticalAlignment(VerticalAlignment.TOP);
-//            table.addCell(cell);
-
             document.add(paragraphTop);
             document.add(paragraphTopRek);
             document.add(paragraphLine);
