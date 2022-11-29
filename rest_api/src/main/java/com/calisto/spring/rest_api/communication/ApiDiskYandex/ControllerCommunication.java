@@ -20,7 +20,7 @@ import java.net.*;
 import java.util.*;
 // реализуем управление работы с Yandex Api диском
 
-public class ControllerCommunication {
+public class ControllerCommunication{
     private static final Logger log = Logger.getLogger(ControllerCommunication.class);
     String URLApi = "https://cloud-api.yandex.net/v1/disk/resources?path=";
     String URLApiDown = "https://cloud-api.yandex.net/v1/disk/resources/download?path=";
@@ -35,7 +35,7 @@ public class ControllerCommunication {
         headers.add(auth, OAuth);
         ResponseEntity<String> responseEntity = restTemplate.exchange(URLApi + address, HttpMethod.DELETE, request, new ParameterizedTypeReference<String>() {
         });
-        log.info("удаляем файл по адресу: " + address);
+//        log.info("удаляем файл по адресу: " + address);
         return responseEntity.getBody();
     }
 
@@ -56,7 +56,7 @@ public class ControllerCommunication {
                 links.add(responseEntity.getBody());
             }
             myUrl = URLApi;
-            log.info("создаём папки: " + addressFolrder);
+//            log.info("создаём папки: " + addressFolrder);
             return links;
         }
         else{
@@ -66,7 +66,7 @@ public class ControllerCommunication {
                 });
                 links.add(responseEntity.getBody());
             myUrl = URLApi;
-            log.info("создаём папки: " + addressFolrder);
+//            log.info("создаём папки: " + addressFolrder);
             return links;
         }
     }
@@ -78,7 +78,7 @@ public class ControllerCommunication {
         ResponseEntity<Link> responseEntity =
                 restTemplate.exchange(URLApiDown + address, HttpMethod.GET, request, new ParameterizedTypeReference<Link>() {
                 });
-        log.info("получаем ссылку для скачивания файла: " + address);
+//        log.info("получаем ссылку для скачивания файла: " + address);
         return responseEntity.getBody();
     }
     // реализуем метод по получению Link, данный класс JSON объекта ответа яндекс диска
@@ -89,11 +89,11 @@ public class ControllerCommunication {
         ResponseEntity<Link> responseEntity =
                 restTemplate.exchange(URLApiUpload + address, HttpMethod.GET, request, new ParameterizedTypeReference<Link>() {
                 });
-        log.info("получаем ссылку для скачивания файла: " + address);
+//        log.info("получаем ссылку для скачивания файла: " + address);
         return responseEntity.getBody();
     }
     public  HttpURLConnection getHttpConnection(String url, String type){
-        log.info("запускаем метод getHttpConnection для работы с link: " + url);
+//        log.info("запускаем метод getHttpConnection для работы с link: " + url);
         URL uri = null;
         HttpURLConnection connect = null;
         try{
@@ -114,7 +114,7 @@ public class ControllerCommunication {
     // указываем тим PUT, POST, DELETE, GET
     // после указываем адрес где хранится заветный файл
     public void uploadFile(String url, String type, String reqbody){
-        log.info("загружаем файл по адресу: " + url);
+//        log.info("загружаем файл по адресу: " + url);
         HttpURLConnection con = null;
 //        String result = null;
         try {
@@ -136,8 +136,8 @@ public class ControllerCommunication {
             throw new RuntimeException(e);
         }
     }
-    public void uploadFileByte(String url, String type, byte[] reqbody){
-        log.info("загружаем файл по адресу: " + url);
+    public synchronized void uploadFileByte(String url, String type, byte[] reqbody){
+//        log.info("загружаем файл по адресу: " + url);
         HttpURLConnection connect = null;
 
 //        String result = null;
@@ -192,5 +192,4 @@ public class ControllerCommunication {
             throw new RuntimeException(e);
         }
     }
-
 }
