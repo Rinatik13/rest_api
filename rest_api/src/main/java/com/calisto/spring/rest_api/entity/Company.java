@@ -241,6 +241,43 @@ public class Company {
     public Company() {
     }
 
+    public String giveTopRequisites(){
+        StringBuilder resultRequisites = new StringBuilder();
+        resultRequisites.append(fullNameFormCompany);
+        resultRequisites.append("\n");
+        resultRequisites.append("\"");
+        resultRequisites.append(fullNameCompany);
+        resultRequisites.append("\" \n");
+        resultRequisites.append("Юридический адрес: ");
+        resultRequisites.append(addressCompany);
+        resultRequisites.append(";\n");
+        resultRequisites.append("Почтовый адрес: ");
+        resultRequisites.append(mailAddressCompany);
+        resultRequisites.append(";\n");
+        resultRequisites.append("ИНН/КПП: ");
+        resultRequisites.append(innCompany);
+        resultRequisites.append("/");
+        resultRequisites.append(kppCompany);
+        resultRequisites.append("; ");
+        resultRequisites.append("ОГРН: ");
+        resultRequisites.append(registrationNumberCompany);
+        resultRequisites.append(";\n");
+        resultRequisites.append("Банковские реквизиты: ");
+        resultRequisites.append(nameFormBank);
+        resultRequisites.append(" ");
+        resultRequisites.append(nameBank);
+        resultRequisites.append(";\n");
+        resultRequisites.append("Бик: ");
+        resultRequisites.append(bankNumber);
+        resultRequisites.append("; р/с: ");
+        resultRequisites.append(checkingAccountBank);
+        resultRequisites.append("; к/с: ");
+        resultRequisites.append(correspondentAccountBank);
+
+
+        return resultRequisites.toString();
+    }
+
     public int getSmpstatus() {
         return smpstatus;
     }
