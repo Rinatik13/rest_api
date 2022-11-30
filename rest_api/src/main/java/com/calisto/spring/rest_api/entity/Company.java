@@ -273,8 +273,11 @@ public class Company {
         resultRequisites.append(checkingAccountBank);
         resultRequisites.append("; к/с: ");
         resultRequisites.append(correspondentAccountBank);
-
-
+        resultRequisites.append(";\nE-mail: ");
+        resultRequisites.append(emailCompany);
+        resultRequisites.append("; Телефон: ");
+        resultRequisites.append(telephoneCompany);
+        resultRequisites.append("\n __________________________________________________________________________________");
         return resultRequisites.toString();
     }
 

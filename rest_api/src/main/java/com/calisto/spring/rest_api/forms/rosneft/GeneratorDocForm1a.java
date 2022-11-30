@@ -26,27 +26,27 @@ public class GeneratorDocForm1a implements GeneratorDoc{
 
         String fullSizeNameCompany = company.getSmallNameCompany();
 
-        // добавляем полное название компании в шапку файла
-        String topFullNameFileDocCompany = company.getFullNameFormCompany() + "\n" + "\"" +
-                company.getFullNameCompany() + "\"";
-
-        // добавляем реквизиты компании в шапку файла
-        String requisitesCompany = "Юридический адрес: " + company.getAddressCompany() + ";\n" +
-                "Почтовый адрес: " + company.getMailAddressCompany() + ";\n" +
-                "ИНН/КПП: " + company.getInnCompany() + "/" +
-                company.getKppCompany() + "; " +
-                "ОГРН: " + company.getRegistrationNumberCompany() + ";\n" +
-                "Банковские реквизиты: " + company.getNameFormBank() + " " +
-                company.getNameBank() + ";\n" +
-                "Бик: " + company.getBankNumber() + ";" + " " +
-                "р/с: " + company.getCheckingAccountBank() + ";" + " " +
-                "к/с: " + company.getCorrespondentAccountBank() + ";\n" +
-                "E-mail: " + company.getEmailCompany() + ";" + " " +
-                "Телефон: " + company.getTelephoneCompany() + ".";
-
-        // добавляем разделительную линию
-        String line = "________________________________________________________________________" +
-                "\n";
+//        // добавляем полное название компании в шапку файла
+//        String topFullNameFileDocCompany = company.getFullNameFormCompany() + "\n" + "\"" +
+//                company.getFullNameCompany() + "\"";
+//
+//        // добавляем реквизиты компании в шапку файла
+//        String requisitesCompany = "Юридический адрес: " + company.getAddressCompany() + ";\n" +
+//                "Почтовый адрес: " + company.getMailAddressCompany() + ";\n" +
+//                "ИНН/КПП: " + company.getInnCompany() + "/" +
+//                company.getKppCompany() + "; " +
+//                "ОГРН: " + company.getRegistrationNumberCompany() + ";\n" +
+//                "Банковские реквизиты: " + company.getNameFormBank() + " " +
+//                company.getNameBank() + ";\n" +
+//                "Бик: " + company.getBankNumber() + ";" + " " +
+//                "р/с: " + company.getCheckingAccountBank() + ";" + " " +
+//                "к/с: " + company.getCorrespondentAccountBank() + ";\n" +
+//                "E-mail: " + company.getEmailCompany() + ";" + " " +
+//                "Телефон: " + company.getTelephoneCompany() + ".";
+//
+//        // добавляем разделительную линию
+//        String line = "________________________________________________________________________" +
+//                "\n";
 
         // добавляем информацию об участнике, инн и номер торгов
         String topInfoCompanyEndTender =
@@ -448,25 +448,25 @@ public class GeneratorDocForm1a implements GeneratorDoc{
 
         // создаём параграф и добавляем туда начало шапки документа
         // название формы организации + название самой организации
-        Paragraph paragraphTopDoc = new Paragraph(topFullNameFileDocCompany);
-        paragraphTopDoc.setTextAlignment(TextAlignment.CENTER)
-                .setBold()
-                .setFont(font)
-                .setFontSize(12);
-        document.add(paragraphTopDoc);
+//        Paragraph paragraphTopDoc = new Paragraph(topFullNameFileDocCompany);
+//        paragraphTopDoc.setTextAlignment(TextAlignment.CENTER)
+//                .setBold()
+//                .setFont(font)
+//                .setFontSize(12);
+//        document.add(paragraphTopDoc);
 
         // добавляем в шапку основные реквизиты
-        Paragraph paragraphTopRek = new Paragraph(requisitesCompany);
+        Paragraph paragraphTopRek = new Paragraph(company.giveTopRequisites());
         paragraphTopRek.setTextAlignment(TextAlignment.CENTER);
         paragraphTopRek.setFont(font)
                 .setFontSize(10);
         document.add(paragraphTopRek);
-
-        // добавляем разграничивающую линию для отделения шапки от основной части документа
-        Paragraph paragraphLine = new Paragraph(line);
-        paragraphLine.setTextAlignment(TextAlignment.CENTER);
-        document.add(paragraphLine)
-                .setFont(font);
+//
+//        // добавляем разграничивающую линию для отделения шапки от основной части документа
+//        Paragraph paragraphLine = new Paragraph(line);
+//        paragraphLine.setTextAlignment(TextAlignment.CENTER);
+//        document.add(paragraphLine)
+//                .setFont(font);
 
         // добавляем информацию об участнике, инн и номер торгов
         Paragraph paragraphInfoTenderInn = new Paragraph(topInfoCompanyEndTender);
