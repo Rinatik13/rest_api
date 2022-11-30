@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 public class NoFileController extends Thread{
     private static final Logger log = Logger.getLogger(NoFileController.class);
         private String addressFile;
-        private void deleteFile(){
+        private synchronized void deleteFile(){
             ControllerCommunication communication = new ControllerCommunication();
             communication.delete(addressFile);
         }
@@ -17,7 +17,7 @@ public class NoFileController extends Thread{
     public void run() {
         try {
             log.info("получили команду на удаление файла: " + addressFile);
-            Thread.sleep(300000);
+            Thread.sleep(600000);
             deleteFile();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

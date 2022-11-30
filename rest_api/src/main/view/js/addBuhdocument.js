@@ -2,7 +2,9 @@ document.getElementById("add_buh_doc").addEventListener("submit", addBuhDoc);
 
 let user = localStorage.getItem('user');
 let company_res = localStorage.getItem('company');
-let company = JSON.parse(company_res)
+let company = JSON.parse(company_res);
+let res_id = localStorage.getItem('id_budoc');
+let id_period = JSON.parse(res_id);
 
 // добавляем механизим сохранения нового бухгалтерского периода(документа)
 
@@ -17,7 +19,8 @@ async function addBuhDoc(event){
         dateName : el.buhdoc_date.value,
         oborotiDate : el.buhdoc_oboroti.value,
         countEmployeeDate : el.buhdoc_countEmpl.value,
-        company_id : company.id
+        company_id : company.id,
+        periodOfTime : id_period
     }
     console.log(buh_doc);
 

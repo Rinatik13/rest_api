@@ -16,11 +16,12 @@ let list = document.getElementById('component_list');
 //         document.querySelector('.list_component').appendChild(elem);
 //     }
 // }
-
-document.getElementById('currentYear').innerHTML  = "Иформация за " + buh_list[0].dateName + " год.";
-document.getElementById('firstYear').innerHTML = "Иформация за " + buh_list[1].dateName + " год.";
-document.getElementById('secondYear').innerHTML = "Иформация за " + buh_list[2].dateName + " год.";
-document.getElementById('thirdYear').innerHTML = "Иформация за " + buh_list[3].dateName + " год.";
+if(buh_list.length!==0){
+document.getElementById('currentYear').innerHTML  = "Информация за " + buh_list[0].dateName + " год.";
+document.getElementById('firstYear').innerHTML = "Информация за " + buh_list[1].dateName + " год.";
+document.getElementById('secondYear').innerHTML = "Информация за " + buh_list[2].dateName + " год.";
+document.getElementById('thirdYear').innerHTML = "Информация за " + buh_list[3].dateName + " год.";
+}
 
 
 
