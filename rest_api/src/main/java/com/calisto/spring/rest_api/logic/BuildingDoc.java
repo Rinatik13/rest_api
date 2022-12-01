@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
@@ -148,9 +149,10 @@ public class BuildingDoc {
         // закрываем создание архива
         zip.close();
 
-
+//        controllerCommunication.uploadFile(url,"PUT", Arrays.toString(zipStream.toByteArray()));
 
         controllerCommunication.uploadFileByte(url,"PUT", zipStream.toByteArray());
+
         log.info("!!! КОНЕЦ ЗАКАЧКИ АРХИВА !!!");
         // получаем ссылку на скачивание заархивированного пакета документов
 
@@ -183,7 +185,6 @@ public class BuildingDoc {
 //        log.info("добавляем файл с адресом: " + address);
         ByteArrayOutputStream streamDoc = loadDocumentToZip.getLoadDocument(address);
         ZipEntry zipEntry = new ZipEntry(tender.getId() + "/Квалификационная часть/" + documentPdf.getName() +".pdf");
-        zipEntry.setCompressedSize(0);
         try {
             zip.putNextEntry(zipEntry);
             zip.write(streamDoc.toByteArray());
