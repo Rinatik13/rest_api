@@ -134,7 +134,6 @@ public class rosneftAccreditation implements GeneratorDoc {
                 "2) в отношении " + company.getSmallNameCompany() + " не проводится ликвидация, отсутствует " +
                 "решение арбитражного суда о признании " + company.getSmallNameCompany() + " " +
                 "несостоятельным (банкротом) и об открытии конкурсного производства;",TextAlignment.LEFT);
-
         return byteArrayOutputStream;
     }
 
