@@ -1,4 +1,4 @@
-package com.calisto.spring.rest_api.forms.accreditation;
+package com.calisto.spring.rest_api.forms.rosneft.accreditation;
 
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
