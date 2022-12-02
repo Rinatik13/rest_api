@@ -14,7 +14,7 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
-public class rosneftAccreditation implements GeneratorDoc {
+public class rosneftAccreditationAnketa implements GeneratorDoc {
 
     private Company company;
     private Tender tender;

@@ -1,6 +1,5 @@
 package com.calisto.spring.rest_api;
 
-import com.calisto.spring.rest_api.controller.UserController;
 import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
