@@ -23,8 +23,6 @@ public class GeneratorDocForm6 implements GeneratorDoc{
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 
-
-
             // добавляем шрифт для отображения Русского языка в пдф
             // стандартный шрифт для всего документа
             BaseFont baseFont = new BaseFont();
@@ -39,20 +37,18 @@ public class GeneratorDocForm6 implements GeneratorDoc{
             // добавляем данные на физ лицо (руководителя)
             String reqEmplCompany =
                     "Настоящим " +
-                            company.getEmployeeList().get(0).giveFullName() +",\n" +
+                            company.getSupervisor().giveFullName() +",\n" +
                             "основной документ, удостоверяющий личность: паспорт " +
-                            company.getEmployeeList().get(0).getPassportSerial() + " " +
-                            company.getEmployeeList().get(0).getPassportNumber() + " выдан " +
-                            company.getEmployeeList().get(0).getPassportGovName() + " дата выдачи " +
-//                            sf.format
-                                    (company.getEmployeeList().get(0).getPassportGovDate()) + " года,\n" +
+                            company.getSupervisor().getPassportSerial() + " " +
+                            company.getSupervisor().getPassportNumber() + " выдан " +
+                            company.getSupervisor().getPassportGovName() + " дата выдачи " +
+                                    (company.getSupervisor().getPassportGovDate()) + " года,\n" +
                             "адрес регистрации: " +
-                            company.getEmployeeList().get(0).getAddressReg() +",\n" +
+                            company.getSupervisor().getAddressReg() +",\n" +
                             "дата рождения: " +
-//                            sf.format
-                                    (company.getEmployeeList().get(0).getHeppyDate()) + " года,\n" +
+                                    (company.getSupervisor().getHeppyDate()) + " года,\n" +
                             "ИНН " +
-                            company.getEmployeeList().get(0).getInn() + ".\n";
+                            company.getSupervisor().getInn() + ".\n";
 
             String bodyTextDoc1 =
                     "в соответствии с Федеральным законом от 27.07.2006 г. № 152-ФЗ «О персональных данных» " +
@@ -61,19 +57,13 @@ public class GeneratorDocForm6 implements GeneratorDoc{
                             "квалификации /процедурах закупок/включения в отчет о проведении процедур закупок " +
                             "в соответствии с Положением Компании «О закупке товаров, работ, услуг».\n" +
                             "Оператор, получающий настоящее согласие: " +
-                            // название организатора закупки
-                            // необходимо реализовать получение названия организации
-//                            tender.getCompany().get(0).getSmallNameFormCompany() + " \"" +
-//                            tender.getCompany().get(0).getSmallNameCompany() + "\"" +
+                            tender.getName_company() +
                             ", зарегистрирован по адресу: " +
-                            // юр адрес
-//                            tender.getCompany().get(0).getAddressCompany() + "\n" +
+                            tender.getAddressCompany() + ".\n"+
                             "Настоящее согласие дано в отношении всех сведений, указанных в передаваемых " +
                             "мною в адрес " +
-                            // название организатора закупки
-//                            tender.getCompany().get(0).getSmallNameFormCompany() + " \"" +
-//                            tender.getCompany().get(0).getSmallNameCompany() + "\" " +
-                            "документах, в том числе (если применимо): фамилия, имя, отчество, дата и место " +
+                            tender.getName_company() +
+                            " документах, в том числе (если применимо): фамилия, имя, отчество, дата и место " +
                             "рождения; паспортные данные; сведения об образовании (с указанием учебных заведений); " +
                             "сведения о трудовой деятельности с указанием наименования организации и занимаемой " +
                             "должности (в том числе по совместительству); сведения об участии (членстве) в " +
@@ -87,15 +77,10 @@ public class GeneratorDocForm6 implements GeneratorDoc{
                             "обработки данных приведено в Законе 152-ФЗ, а также на передачу такой информации " +
                             "третьим лицам, в случаях, установленных действующим законодательством, и в случаях, " +
                             "когда " +
-                            // название организатора закупки
-//                            tender.getCompany().get(0).getSmallNameFormCompany() + " \"" +
-//                            tender.getCompany().get(0).getSmallNameCompany() + "\" " +
-                            " выступает " +
-                            "для третьих лиц, которым передаются персональные данные, Организатором закупки.\n" +
+                            tender.getName_company() +
+                            " выступает для третьих лиц, которым передаются персональные данные, Организатором закупки.\n" +
                             "Условием прекращения обработки персональных данных является получение " +
-                            // название организатора закупки
-//                            tender.getCompany().get(0).getSmallNameFormCompany() + " \"" +
-//                            tender.getCompany().get(0).getSmallNameCompany() + "\" " +
+                            tender.getName_company() +
                             " письменного " +
                             "уведомления об отзыве согласия на обработку персональных данных.\n" +
                             "Настоящее согласие действует в течение 10 лет со дня его подписания. \n" +

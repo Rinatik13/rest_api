@@ -128,7 +128,6 @@ public class GeneratorDocForm2 implements GeneratorDoc{
 //                        sf.format
                                 (company.getEmployeeList().get(0).getHeppyDate()) + ", гражданство " +
                         company.getEmployeeList().get(0).getGovermentStatus() + ".",table);
-
             }
 
             cell = new Cell(1, 3)

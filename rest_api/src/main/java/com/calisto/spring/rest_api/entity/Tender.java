@@ -1,9 +1,7 @@
 package com.calisto.spring.rest_api.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -11,6 +9,7 @@ import javax.validation.constraints.Size;
 public class Tender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private int id;
     @NotEmpty(message = "Не указано имя тендера.")
     @Size(min = 1, max = 255, message = "Введён не корректный размер имени тендера.")
@@ -29,8 +28,37 @@ public class Tender {
 //    @NotEmpty(message = "Не указан id компании.")
     private int company_id;
     private int countEmployee;
+    private TypeOfTender typeOfTender;
+    private String addressCompany;
+
+    public void setMethodTender(String methodTender) {
+        this.methodTender = methodTender;
+    }
+
+    public String getMethodTender() {
+        return methodTender;
+    }
+
+    private String methodTender;
     public Tender() {
     }
+
+    public TypeOfTender getTypeOfTender() {
+        return typeOfTender;
+    }
+
+    public void setTypeOfTender(TypeOfTender typeOfTender) {
+        this.typeOfTender = typeOfTender;
+    }
+
+    public String getAddressCompany() {
+        return addressCompany;
+    }
+
+    public void setAddressCompany(String addressCompany) {
+        this.addressCompany = addressCompany;
+    }
+
     public String getName_company() {
         return name_company;
     }
@@ -115,4 +143,5 @@ public class Tender {
                 ", countEmployee=" + countEmployee +
                 '}';
     }
+
 }

@@ -62,10 +62,9 @@ public class GeneratorDocForm17 implements GeneratorDoc{
                             company.getAddressCompany() + ",\n" +
                             "Свидетельство о регистрации/ИНН (для индивидуального" +
                             " предпринимателя): " +
-                            // надо сделать более подробнее (не просто оргн и инн
-                            // а конкретно кто где и когда выдал
-                            company.getRegistrationNumberCompany() + "/" +
-                            company.getInnCompany();
+                            company.getRegistrationNumberGovCompany() + ", " +
+                            company.getRegistrationNumberCompany() + ", дата выдачи " +
+                            company.getDateRegistrationNumberGovDoc();
 
             String bodyTextDocCom =
                     "подтверждает, что выполнение работ производится российскими лицами, предоставляя документы, " +

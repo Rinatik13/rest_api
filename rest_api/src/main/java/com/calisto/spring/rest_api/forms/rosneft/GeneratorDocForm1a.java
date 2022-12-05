@@ -90,9 +90,9 @@ public class GeneratorDocForm1a implements GeneratorDoc{
         // до следующей таблицы по годовым оборотам организации
         String bodyTextDoc2 =
                 "3. Руководитель организации: " +
-                        company.getEmployeeList().get(0).giveFullName() + ".\n" +
+                        company.getSupervisor().giveFullName() + ".\n" +
                         "4. Главный бухгалтер: " +
-                        company.getEmployeeList().get(0).giveFullName() + ".\n" +
+                        company.getChiefAccountant().giveFullName() + ".\n" +
                         "5. Дата, место и орган регистрации, № свидетельства: " +
                         company.getDateRegistrationNumberGovDoc() + " №" +
                         company.getRegistrationNumberCompany() + ".\n" +

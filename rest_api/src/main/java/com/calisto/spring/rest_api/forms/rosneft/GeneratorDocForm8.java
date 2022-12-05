@@ -35,7 +35,7 @@ public class GeneratorDocForm8 implements GeneratorDoc{
             // краткое название компании с ковычками
             String fullSizeNameCompany = company.getSmallNameCompany();
 
-            // добавляем информацию о участнике, инн и номер торгов
+            // добавляем информацию об участнике, инн и номер торгов
             String topInfoCompanyEndTender =
                     "Наименование Участника закупки: " + fullSizeNameCompany + "\n" +
                             "ИНН (или иной индификационный номер) Участника закупки: " +

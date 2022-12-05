@@ -238,6 +238,30 @@ public class Company {
     inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Tender> tenderList;
 
+    @OneToOne
+    @JoinColumn(name = "supervisor_id")
+    private Employee supervisor;
+
+    @OneToOne
+    @JoinColumn(name = "chief_accountant_id")
+    private Employee chiefAccountant;
+
+    public Employee getChiefAccountant() {
+        return chiefAccountant;
+    }
+
+    public void setChiefAccountant(Employee chiefAccountant) {
+        this.chiefAccountant = chiefAccountant;
+    }
+
+    public Employee getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(Employee supervisor) {
+        this.supervisor = supervisor;
+    }
+
     public Company() {
     }
 

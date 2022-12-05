@@ -36,14 +36,14 @@ public class TableStampEndSignature {
 
         // добавляем подписанта
         String visaDocCompany =
-                company.getEmployeeList().get(0).getPositionCom() +
+                company.getSupervisor().getPositionCom()+
                         " \n" +
                         company.getSmallNameCompany() + "\"" + "         ";
 
         String nameVisaDocCompany =
 
                 "                                  " +
-                        company.getEmployeeList().get(0).giveFullName() + ".";
+                        company.getSupervisor().giveFullName() + ".";
 
         Table table = new Table(4);
         Cell cell = new Cell()
@@ -92,15 +92,12 @@ public class TableStampEndSignature {
 
         // добавляем подписанта
         String visaDocCompany =
-                company.getEmployeeList().get(0).getPositionCom() +
+                company.getSupervisor().getPositionCom()+
                         " \n" +
                         company.getSmallNameCompany() + "         ";
-
         String nameVisaDocCompany =
-
                 "                                  " +
-                        company.getEmployeeList().get(0).giveFullName() + ".";
-
+                        company.getSupervisor().giveFullName() + ".";
 
         Table table = new Table(3);
         Cell cell = new Cell()

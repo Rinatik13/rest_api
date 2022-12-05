@@ -62,11 +62,10 @@ public class GeneratorDocForm16 implements GeneratorDoc{
                             "Фактический адрес: " +
                             company.getAddressCompany() + ",\n" +
                             "Свидетельство о регистрации/ИНН (для индивидуального" +
-                            " предпринимателя): " +
-                            // надо сделать более подробнее (не просто оргн и инн
-                            // а конкретно кто где и когда выдал
-                            company.getRegistrationNumberCompany() + "/" +
-                            company.getInnCompany();
+                            " предпринимателя): выдан" +
+                            company.getRegistrationNumberGovCompany() + ", " +
+                            company.getRegistrationNumberCompany() + ", дата выдачи " +
+                            company.getDateRegistrationNumberGovDoc();
 
             String bodyTextDocCom =
                     "подтверждает отсутствие принадлежности» к субъектам малого и среднего предпринимательства (МСП).\n" +
