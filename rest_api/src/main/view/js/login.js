@@ -4,14 +4,13 @@ let user = {
     login: '',
     password: ''
 }
-document.getElementById('error_login').innerHTML = 'test'
 let el = document.getElementById('login_info');
 
 
 async function getUser(event){
     event.preventDefault();
 
-    if(el.login === null || el.password === null){
+    if(el.login == null || el.password == null){
         document.getElementById('error_login').innerHTML = 'Введите логин и пароль.'
     }
     else{

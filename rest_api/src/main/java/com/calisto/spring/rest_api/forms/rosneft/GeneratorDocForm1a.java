@@ -50,7 +50,7 @@ public class GeneratorDocForm1a implements GeneratorDoc{
 
         // добавляем информацию об участнике, инн и номер торгов
         String topInfoCompanyEndTender =
-                "Наименование Участника закупки: " + fullSizeNameCompany + "\n" +
+                "Наименование Участника закупки: " + company.getSmallNameCompany() + "\n" +
                         "ИНН (или иной индификационный номер) Участника закупки: " +
                         company.getInnCompany() + "\n" +
                         "Наименование закупки: №" +
@@ -68,7 +68,7 @@ public class GeneratorDocForm1a implements GeneratorDoc{
                 "подаём заявку на участие в указанной процедуре закупки и сообщаем о " +
                 "себе следующие сведения: \n" +
                 "1. Наименование организации: " +
-                fullSizeNameCompany + ".\n" +
+                company.getSmallNameCompany() + ".\n" +
                 "2. Прежнее название организации, если менялось: нет";
 
         // добавляем таблицу прежних названий организации !!!(пока не реализуем)!!!
@@ -96,6 +96,7 @@ public class GeneratorDocForm1a implements GeneratorDoc{
                         "5. Дата, место и орган регистрации, № свидетельства: " +
                         company.getDateRegistrationNumberGovDoc() + " №" +
                         company.getRegistrationNumberCompany() + ".\n" +
+                        company.getRegistrationNumberGovCompany() + ".\n" +
                         "6. ИНН: " +
                         company.getInnCompany() + "\n" +
                         "   КПП: " +

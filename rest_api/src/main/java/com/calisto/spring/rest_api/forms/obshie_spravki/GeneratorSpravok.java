@@ -121,7 +121,7 @@ public class GeneratorSpravok implements SpravkaDoc {
 
             // добавляем название документа
             // центруем текст
-            Paragraph paragraphNameDoc = new Paragraph(nameDoc+"/n");
+            Paragraph paragraphNameDoc = new Paragraph(nameDoc+"\n");
             paragraphNameDoc.setTextAlignment(TextAlignment.CENTER);
             paragraphNameDoc.setFont(font).setBold();
 

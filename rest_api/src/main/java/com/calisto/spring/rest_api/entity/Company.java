@@ -238,11 +238,11 @@ public class Company {
     inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Tender> tenderList;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "supervisor_id")
     private Employee supervisor;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "chief_accountant_id")
     private Employee chiefAccountant;
 
@@ -267,11 +267,8 @@ public class Company {
 
     public String giveTopRequisites(){
         StringBuilder resultRequisites = new StringBuilder();
-        resultRequisites.append(fullNameFormCompany);
-        resultRequisites.append("\n");
-        resultRequisites.append("\"");
         resultRequisites.append(fullNameCompany);
-        resultRequisites.append("\" \n");
+        resultRequisites.append("\n");
         resultRequisites.append("Юридический адрес: ");
         resultRequisites.append(addressCompany);
         resultRequisites.append(";\n");
