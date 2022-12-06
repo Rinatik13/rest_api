@@ -1,7 +1,6 @@
-package com.calisto.spring.rest_api.forms.rosneft;
+package com.calisto.spring.rest_api.forms.rosneft.work;
 
 import com.calisto.spring.rest_api.entity.Company;
-import com.calisto.spring.rest_api.entity.Employee;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
@@ -15,9 +14,6 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.VerticalAlignment;
-
-
-import java.io.FileNotFoundException;
 
 // формируем сведения по кадровым ресурсам
 public class GeneratorDocForm5 implements GeneratorDoc{

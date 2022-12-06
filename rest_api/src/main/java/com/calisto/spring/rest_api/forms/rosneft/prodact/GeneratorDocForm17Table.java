@@ -1,7 +1,8 @@
-package com.calisto.spring.rest_api.forms.rosneft;
+package com.calisto.spring.rest_api.forms.rosneft.prodact;
 
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
+import com.calisto.spring.rest_api.forms.rosneft.work.GeneratorDoc;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
 import com.itextpdf.io.source.ByteArrayOutputStream;
@@ -20,7 +21,7 @@ import com.itextpdf.layout.property.TextAlignment;
 
 import java.io.IOException;
 
-public class GeneratorDocForm17Table implements GeneratorDoc{
+public class GeneratorDocForm17Table implements GeneratorDoc {
     String fileName = "Таблица подтверждения выполнения работ Российскими лицами";
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {

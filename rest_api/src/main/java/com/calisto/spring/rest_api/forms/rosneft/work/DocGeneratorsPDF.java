@@ -1,4 +1,4 @@
-package com.calisto.spring.rest_api.forms.rosneft;
+package com.calisto.spring.rest_api.forms.rosneft.work;
 
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;

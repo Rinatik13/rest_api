@@ -1,7 +1,8 @@
-package com.calisto.spring.rest_api.forms.rosneft;
+package com.calisto.spring.rest_api.forms.rosneft.prodact;
 
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
+import com.calisto.spring.rest_api.forms.rosneft.work.GeneratorDoc;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
 import com.itextpdf.io.source.ByteArrayOutputStream;
@@ -19,7 +20,7 @@ import java.io.IOException;
 
 // создаём документ план распределения объёмов выполнения работ коллективного
 // участника закупки
-public class GeneratorDocForm11 implements GeneratorDoc{
+public class GeneratorDocForm11 implements GeneratorDoc {
     String fileName = "План распределения объёмов";
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {

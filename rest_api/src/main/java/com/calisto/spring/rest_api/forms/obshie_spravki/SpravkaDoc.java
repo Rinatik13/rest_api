@@ -1,6 +1,6 @@
 package com.calisto.spring.rest_api.forms.obshie_spravki;
 
-import com.calisto.spring.rest_api.forms.rosneft.GeneratorDoc;
+import com.calisto.spring.rest_api.forms.rosneft.work.GeneratorDoc;
 
 public interface SpravkaDoc extends GeneratorDoc {
     public void setNumDoc(int id);

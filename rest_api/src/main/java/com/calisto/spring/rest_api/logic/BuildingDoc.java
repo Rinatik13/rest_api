@@ -7,17 +7,13 @@ import com.calisto.spring.rest_api.entity.*;
 import com.calisto.spring.rest_api.forms.obshie_spravki.GeneratorSpravok;
 import com.calisto.spring.rest_api.forms.obshie_spravki.ListSpravok;
 import com.calisto.spring.rest_api.forms.obshie_spravki.SpravkaDoc;
-import com.calisto.spring.rest_api.forms.rosneft.*;
+import com.calisto.spring.rest_api.forms.rosneft.work.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.zip.Adler32;
 import java.util.zip.CheckedOutputStream;
 import java.util.zip.ZipEntry;
@@ -53,23 +49,28 @@ public class BuildingDoc {
         ZipOutputStream zip = new ZipOutputStream(checkedOutputStream);
 
         // загружаем созданный архив на сервер яндекс диска
-
         List<GeneratorDoc> generatorDocList = new ArrayList<>();
-        generatorDocList.add(new GeneratorDocForm1a());
-        generatorDocList.add(new GeneratorDocForm2());
-        generatorDocList.add(new GeneratorDocForm3());
-        generatorDocList.add(new GeneratorDocForm4());
-        generatorDocList.add(new GeneratorDocForm5());
-        generatorDocList.add(new GeneratorDocForm6());
-        generatorDocList.add(new GeneratorDocForm7());
-        generatorDocList.add(new GeneratorDocForm8());
-        generatorDocList.add(new GeneratorDocForm9());
-        generatorDocList.add(new GeneratorDocForm10());
-        generatorDocList.add(new GeneratorDocForm11());
-        generatorDocList.add(new GeneratorDocForm15());
-        generatorDocList.add(new GeneratorDocForm16());
-        generatorDocList.add(new GeneratorDocForm17());
-        generatorDocList.add(new GeneratorDocForm17Table());
+
+        if (tender.getTypeOfTender()==TypeOfTender.WORK){
+            generatorDocList.add(new GeneratorDocForm1a());
+            generatorDocList.add(new GeneratorDocForm2());
+            generatorDocList.add(new GeneratorDocForm3());
+            generatorDocList.add(new GeneratorDocForm4());
+            generatorDocList.add(new GeneratorDocForm5());
+            generatorDocList.add(new GeneratorDocForm6());
+            generatorDocList.add(new GeneratorDocForm7());
+            generatorDocList.add(new GeneratorDocForm8());
+            generatorDocList.add(new GeneratorDocForm9());
+            generatorDocList.add(new GeneratorDocForm10());
+            generatorDocList.add(new GeneratorDocForm11());
+            generatorDocList.add(new GeneratorDocForm15());
+            generatorDocList.add(new GeneratorDocForm16());
+            generatorDocList.add(new GeneratorDocForm17());
+            generatorDocList.add(new GeneratorDocForm17Table());
+        }
+        else if (tender.getTypeOfTender()==TypeOfTender.products){
+
+        }
 
         List<String[]> listSpravok = ListSpravok.getListSpravok(company,tender);
         // добавляем в лист справки

@@ -1,4 +1,4 @@
-package com.calisto.spring.rest_api.forms.rosneft;
+package com.calisto.spring.rest_api.forms.rosneft.work;
 
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
@@ -13,7 +13,6 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 // создаём документ подтверждения согласия физического лица на обработку персональных

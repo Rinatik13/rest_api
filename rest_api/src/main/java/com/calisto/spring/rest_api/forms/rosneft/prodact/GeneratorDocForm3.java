@@ -1,8 +1,9 @@
-package com.calisto.spring.rest_api.forms.rosneft;
+package com.calisto.spring.rest_api.forms.rosneft.prodact;
 
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Contract;
 import com.calisto.spring.rest_api.entity.Tender;
+import com.calisto.spring.rest_api.forms.rosneft.work.GeneratorDoc;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
 import com.itextpdf.io.source.ByteArrayOutputStream;
@@ -21,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 // форма № 3 список договоров с информацией по ним
-public class GeneratorDocForm3 implements GeneratorDoc{
+public class GeneratorDocForm3 implements GeneratorDoc {
     String fileName = "Список договоров";
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {

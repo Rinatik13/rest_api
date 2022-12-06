@@ -31,6 +31,10 @@ public class Tender {
     private TypeOfTender typeOfTender;
     private String addressCompany;
 
+    private String methodTender;
+    public Tender() {
+    }
+
     public void setMethodTender(String methodTender) {
         this.methodTender = methodTender;
     }
@@ -38,11 +42,6 @@ public class Tender {
     public String getMethodTender() {
         return methodTender;
     }
-
-    private String methodTender;
-    public Tender() {
-    }
-
     public TypeOfTender getTypeOfTender() {
         return typeOfTender;
     }

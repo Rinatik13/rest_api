@@ -1,7 +1,8 @@
-package com.calisto.spring.rest_api.forms.rosneft;
+package com.calisto.spring.rest_api.forms.rosneft.prodact;
 
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
+import com.calisto.spring.rest_api.forms.rosneft.work.GeneratorDoc;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
 import com.itextpdf.io.source.ByteArrayOutputStream;
@@ -13,11 +14,9 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
-import java.io.FileNotFoundException;
-
-// создаём документ где подтверждаем выполнения работ Российскими лицами
-public class GeneratorDocForm17 implements GeneratorDoc{
-    String fileName = "Подтверждение выполнение работ Российскими лицами";
+// создаём форму подтверждения отсутствия принадлежности к СМП и МСП
+public class GeneratorDocForm16 implements GeneratorDoc {
+        String fileName = "Подтверждение отсутствия принадлежности к СМП и МСП";
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 
@@ -51,7 +50,8 @@ public class GeneratorDocForm17 implements GeneratorDoc{
                     "\n";
 
             // добавляем название документа
-            String nameDocCompany = "ФОРМА ПОДТВЕРЖДЕНИЯ ВЫПОЛНЕНИЯ РАБОТ РОССИЙСКИМИ ЛИЦАМИ\n";
+            String nameDocCompany = "ФОРМА ПОДТВЕРЖДЕНИЯ ОТСУТСТВИЯ ПРИНАДЛЕЖНОСТИ ОРГАНИЗАЦИИ" +
+                    " К СУБЪЕКТАМ МАЛОГО И СРЕДНЕГО ПРЕДПРИНИМАТЕЛЬСТВА (МСП)\n";
 
             String infoReqDocCompany =
                     "Настоящим " +
@@ -61,27 +61,16 @@ public class GeneratorDocForm17 implements GeneratorDoc{
                             "Фактический адрес: " +
                             company.getAddressCompany() + ",\n" +
                             "Свидетельство о регистрации/ИНН (для индивидуального" +
-                            " предпринимателя): " +
+                            " предпринимателя): выдан" +
                             company.getRegistrationNumberGovCompany() + ", " +
                             company.getRegistrationNumberCompany() + ", дата выдачи " +
                             company.getDateRegistrationNumberGovDoc();
 
             String bodyTextDocCom =
-                    "подтверждает, что выполнение работ производится российскими лицами, предоставляя документы, " +
-                            "содержащие информацию о месте регистрации (для юридических лиц и индивидуальных " +
-                            "предпринимателей) либо документы, удостоверяющие личность (для физических лиц).\n" +
-                            "Подтверждаю, что ознакомлен(а) с положениями Постановления Правительства РФ от " +
-                            "16.09.2016 №925 «О приоритете товаров российского происхождения, работ, услуг, " +
-                            "выполняемых, оказываемых российскими лицами, по отношению к товарам, происходящим " +
-                            "из иностранного государства, работам, услугам, выполняемым, оказываемым " +
-                            "иностранными лицами».\n" +
-                            "Приоритет устанавливается с учетом положений Генерального соглашения по " +
-                            "тарифам и торговле 1994 года и Договора о Евразийском экономическом " +
-                            "союзе от 29 мая 2014 г.\n" +
-                            "Подтверждаю, что ознакомлен(а) с ответственностью, которая следует " +
-                            "в отношении предоставления недостоверных сведений о лицах, " +
-                            "выполняющих работы. \n";
-
+                    "подтверждает отсутствие принадлежности» к субъектам малого и среднего предпринимательства (МСП).\n" +
+                            "\n" +
+                            "Подтверждаю, что ознакомлен(а) с положениями Федерального закона от 24.07.2007 \n" +
+                            "№209-ФЗ «О развитии малого и среднего предпринимательства в Российской Федерации».\n";
 
             // добавляем печать и подпись
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();
@@ -153,7 +142,6 @@ public class GeneratorDocForm17 implements GeneratorDoc{
 
         @Override
         public String getPath() {
-                return "Коммерческая часть";
+                return "Квалификационная часть";
         }
 }
-

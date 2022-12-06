@@ -2,7 +2,7 @@ package com.calisto.spring.rest_api.forms.rosneft.accreditation;
 
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
-import com.calisto.spring.rest_api.forms.rosneft.GeneratorDoc;
+import com.calisto.spring.rest_api.forms.rosneft.work.GeneratorDoc;
 import com.calisto.spring.rest_api.style.BaseFont;
 import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.font.PdfFont;

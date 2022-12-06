@@ -1,7 +1,8 @@
-package com.calisto.spring.rest_api.forms.rosneft;
+package com.calisto.spring.rest_api.forms.rosneft.prodact;
 
 import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Tender;
+import com.calisto.spring.rest_api.forms.rosneft.work.GeneratorDoc;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
 import com.itextpdf.io.source.ByteArrayOutputStream;
@@ -18,7 +19,7 @@ import com.itextpdf.layout.property.TextAlignment;
 import java.io.IOException;
 
 // создаём коммерческое предложение по форме № 10
-public class GeneratorDocForm10 implements GeneratorDoc{
+public class GeneratorDocForm10 implements GeneratorDoc {
     String fileName = "Коммерческое предложение форма 10";
     @Override
 
