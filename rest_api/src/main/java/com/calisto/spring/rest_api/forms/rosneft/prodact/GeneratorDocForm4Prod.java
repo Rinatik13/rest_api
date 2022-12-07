@@ -1,6 +1,7 @@
 package com.calisto.spring.rest_api.forms.rosneft.prodact;
 
 import com.calisto.spring.rest_api.entity.Company;
+import com.calisto.spring.rest_api.entity.Oborudovanie;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.forms.rosneft.work.GeneratorDoc;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
@@ -16,21 +17,23 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.VerticalAlignment;
 
-// формируем сведения по кадровым ресурсам
-public class GeneratorDocForm5 implements GeneratorDoc {
-    String fileName = "Сведения о кадровых ресурсах";
-    @Override
-    public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
+import java.text.SimpleDateFormat;
+import java.util.List;
 
+// создаём сведения о материально-технических ресурсах
+public class GeneratorDocForm4Prod implements GeneratorDoc {
+    String fileName = "Сведения о материально-технических ресурсах";
+    @Override
+    public ByteArrayOutputStream launch (Company company, Tender tender, String date, double summ) {
             // добавляем шрифт для отображения Русского языка в пдф
             // стандартный шрифт для всего документа
             BaseFont baseFont = new BaseFont();
             PdfFont font = baseFont.getFont();
 
             // краткое название компании с ковычками
-            String fullSizeNameCompany =  company.getSmallNameCompany();
+            String fullSizeNameCompany = company.getSmallNameCompany();
 
-            // добавляем информацию об участнике, инн и номер торгов
+            // добавляем информацию о участнике, инн и номер торгов
             String topInfoCompanyEndTender =
                     "Наименование Участника закупки: " + fullSizeNameCompany + "\n" +
                             "ИНН (или иной индификационный номер) Участника закупки: " +
@@ -40,59 +43,86 @@ public class GeneratorDocForm5 implements GeneratorDoc {
                             tender.getName() + "\n";
 
             // добавляем название документа
-            String nameDocCompany = "СВЕДЕНИЯ О КАДРОВЫХ РЕСУРСАХ\n";
+            String nameDocCompany = "СВЕДЕНИЯ О МАТЕРИАЛЬНО-ТЕХНИЧЕСКИХ РЕСУРСАХ\n";
 
-            // добавляем таблицу со списком сотрудников, общее количество
-            // надо потом реализовать цыкл с выдачей всех работников компании
+            // добавляем таблицу с мтр
+            // надо потом реализовать цыкл с выдачей всех ресурсов компании(оборудования
+            // и прочего)
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy");
 
-            // итоговое количество сотрудников
-            int countSummEmpl = 0;
-
-            // итоговое количество сотрудников для привлечения к работе
-            int countSummEmplWork = 0;
-
-            Table table = new Table(5);
+            Table table = new Table(8);
             addCell("№\n" +
-                    "п/п",table);
-            addCell("Наименование показателей",table);
-            addCell("Кол-во человек, подразделения",table);
-            addCell("Место нахождения",table);
-            addCell("Количество человек, " +
-                    "которые Участник закупки собирается " +
-                    "использовать при выполнении Договора",table);
+                    "п/п", table);
+            addCell("Наименование",table);
+            addCell("Производитель, страна\n" +
+                    "производства, марка,\n" +
+                    "модель, основные\n" +
+                    "технические\n" +
+                    "характеристики",table);
+            addCell("Год\n" +
+                    "выпуска",table);
+            addCell("%\n" +
+                    "аморт\n" +
+                    "изаци\n" +
+                    "и",table);
+            addCell("Принадлежность\n" +
+                    "(собственность,\n" +
+                    "арендованный)",table);
+            addCell("Кол-во\n" +
+                    "единиц",table);
+            addCell("Примеча\n" +
+                    "ния",table);
 
-
-            for (int i = 1; i < 6; i++) {
-                addCell(i + "\n",table);
+            for (int b = 1; b < 9; b++){
+                addCell(b + "\n",table);
             }
 
-            // **********************************************************************
-            // Необходимо реализовать цыкл и сборку данных по должностям. конкретно. можно попробывать всех работников
-            // здесь надо реализовать выдачу всех данных по кадрам
-            // ********************************************
-            // количество людей должно быть не меньше минимального количества в закупочной документации
-            // !!! желательно, указывать строго необходимое количество сотрудников.!!!
-            // добавляем кол-во людей
-                int countEmpl = company.getEmployeeList().size();
-//
 
-                countSummEmpl = countSummEmpl+countEmpl;
-                addCell(countEmpl + "",table);
+            // реализуем механизм добавления техники в таблицу
+
+            List<Oborudovanie> arrayListTransport = company.getOborudovanieList();
+//            List<OborudovanieDoc> arrayListOborudovanie = company.getOborudovanieInfoDoc().get(0).getArrayListOborudovatieDoc();
+
+            int i = 1;
+            for (int a = 0; a < arrayListTransport.size(); a++) {
+                Oborudovanie transportDoc = arrayListTransport.get(a);
+
+                // порядковый номер
+                addCell("" + i + "\n",table);
+
+                // Наименование
+                addCell(transportDoc.getName(),table);
+
+                // Производитель, страна производства, марка, модель, основные тех
+                // характеристики
+                addCell(transportDoc.getModel(),table);
+
+                // Год выпуска
+                addCell(
+//                        sf.format
+                        (transportDoc.getDate()),table);
+
+                // % амортизации
+                // нужна ли амортизация неизвестно
                 addCell(" ", table);
-                addCell(" ", table);
-                // добавляем место нахождение отдела
-                addCell(company.getAddressCompany(),table);
 
-                // добавляем количество человек которое участник собирается использовать
-                countSummEmplWork = countSummEmplWork + countEmpl;
-                addCell(countEmpl + "",table);
+                // Принадлежность (собственность, арендованный)
+                String statusArend = "собственность";
+                if (transportDoc.getStatus().equals("арендованный")){
+                    statusArend = "арендованный";
+                }
 
-                addCell("X", table);
-                addCell("ВСЕГО", table);
-                addCell(countSummEmpl + "",table);
-                addCell("\n",table);
-                addCell(countSummEmplWork + "",table);
-//*******************************************************************************************
+                addCell(statusArend,table);
+
+
+                // Кол-во единиц
+                addCell("1",table);
+
+                // Примечание
+                // обычно взрывозащищённое или нет
+                addCell(transportDoc.getPs(),table);
+                i++;
+            }
 
             // добавляем печать и подпись
             TableStampEndSignature tableStampEndSignature = new TableStampEndSignature();
@@ -127,11 +157,8 @@ public class GeneratorDocForm5 implements GeneratorDoc {
 
             // добавляем подписанта
             document.add(table2);
-
-
             document.close();
-
-        return byteArrayOutputStream;
+            return byteArrayOutputStream;
     }
 
     @Override

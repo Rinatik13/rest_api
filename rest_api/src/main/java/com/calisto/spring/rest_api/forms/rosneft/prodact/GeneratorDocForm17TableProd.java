@@ -21,7 +21,7 @@ import com.itextpdf.layout.property.TextAlignment;
 
 import java.io.IOException;
 
-public class GeneratorDocForm17Table implements GeneratorDoc {
+public class GeneratorDocForm17TableProd implements GeneratorDoc {
     String fileName = "Таблица подтверждения выполнения работ Российскими лицами";
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
@@ -35,7 +35,7 @@ public class GeneratorDocForm17Table implements GeneratorDoc {
 
             // добавляем блок 2 й страницы
             String bodyTextDoc2 =
-                    "Критерии подтверждения выполнения работ российскими лицами";
+                    "Критерии подтверждения российского происхождения товаров";
 
             String nameFullCom =
                     company.getFullNameFormCompany() + " " + "\"" +
@@ -43,28 +43,27 @@ public class GeneratorDocForm17Table implements GeneratorDoc {
 
             // добавляем название таблицы
             String nameDocTable =
-                    "Перечень работ, выполняемых российскими и иностранными лицами, \n" +
-                            "к Форме подтверждения выполнения работ российскими лицами\n";
+                    "Перечень товаров российского и иностранного происхождения, \n" +
+                            "к Форме подтверждения российского происхождения товаров\n";
 
             Table table = new Table(7);
             createTableCell(table,"Наименование лота");
             createTableCell(table,"Наименование позиции");
             createTableCell(table,"Общая стоимость позиции, " +
                     "руб. с НДС  ");
-            createTableCell(table,"Объем работ, выполняемый " +
-                    "российскими лицами");
+            createTableCell(table,"Российское происхождение");
 
             Table littleTable = new Table(3);
             Cell cellLittleT = new Cell(1,3)
-                    .add("Объем работ, выполняемый иностранными лицами")
+                    .add("Иностранное происхождение")
                     .setFont(font)
                     .setTextAlignment(TextAlignment.CENTER)
                     .setBorder(border)
                     .setFontSize(8);
             littleTable.addCell(cellLittleT);
-            createTableCell(littleTable,"Страна регистрации");
+            createTableCell(littleTable,"Страна происхождения");
             createTableCell(littleTable, "Удельный вес, %");
-            createTableCell(littleTable,"Стоимость, руб с НДС");
+            createTableCell(littleTable,"Стоимость импортной составляющей, руб с НДС");
 
             Cell cell = new Cell(1,3)
                     .add(littleTable);
@@ -76,7 +75,7 @@ public class GeneratorDocForm17Table implements GeneratorDoc {
             table.addCell(cell);
 
             cell = new Cell(1,7)
-                    .add("Выполнение работ")
+                    .add("Поставка товаров")
                     .setFont(font)
                     .setTextAlignment(TextAlignment.CENTER)
                     .setFontSize(8);

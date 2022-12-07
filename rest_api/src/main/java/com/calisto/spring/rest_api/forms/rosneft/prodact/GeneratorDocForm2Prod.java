@@ -18,7 +18,7 @@ import com.itextpdf.layout.property.TextAlignment;
 import java.text.SimpleDateFormat;
 
 // информация о собственниках (акционерах компании)
-public class GeneratorDocForm2 implements GeneratorDoc {
+public class GeneratorDocForm2Prod implements GeneratorDoc {
     String nameFile = "Информация о собственниках";
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
@@ -62,7 +62,7 @@ public class GeneratorDocForm2 implements GeneratorDoc {
             // добавляем название документа
             String nameDocCompany = "ИНФОРМАЦИЯ О СОБСТВЕННИКАХ (АКЦИОНЕРАХ) " +
                     fullSizeNameCompany +
-                    " УЧАСТНИКА ЗАКУПКИ НА ВЫПОЛНЕНИЕ РАБОТ ДЛЯ ПАО \"НК \" РОСНЕФТЬ\" И " +
+                    " УЧАСТНИКА ЗАКУПКИ НА ПОСТАВКУ ТОВАРОВ ДЛЯ ПАО \"НК \" РОСНЕФТЬ\" И " +
                     "ОБЩЕСТВ ГРУППЫ С УКАЗАНИЕМ ВСЕЙ ЦЕПОЧКИ СОБСТВЕННИКОВ, ВКЛЮЧАЯ " +
                     "БЕНЕФЕЦИАРОВ (В ТОМ ЧИСЛЕ КОНЕЧНЫХ)).\n";
 

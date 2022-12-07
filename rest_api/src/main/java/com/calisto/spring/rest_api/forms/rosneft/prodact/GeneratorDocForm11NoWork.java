@@ -20,7 +20,7 @@ import java.io.IOException;
 
 // создаём документ план распределения объёмов выполнения работ коллективного
 // участника закупки
-public class GeneratorDocForm11 implements GeneratorDoc {
+public class GeneratorDocForm11NoWork implements GeneratorDoc {
     String fileName = "План распределения объёмов";
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {

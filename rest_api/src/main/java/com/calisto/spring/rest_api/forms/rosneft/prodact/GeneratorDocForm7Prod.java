@@ -16,7 +16,7 @@ import com.itextpdf.layout.property.TextAlignment;
 
 // создаём документ подтверждения участника закупки наличия согласия на
 // обработку персональных данных
-public class GeneratorDocForm7 implements GeneratorDoc {
+public class GeneratorDocForm7Prod implements GeneratorDoc {
         String fileName = "Согласие юр лица на обработку персональных данных";
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
@@ -72,7 +72,8 @@ public class GeneratorDocForm7 implements GeneratorDoc {
 
             String bodyTextDoc1 =
                     "в соответствии с Федеральным законом от 27.07.2006 №152-ФЗ «О персональных данных» " +
-                            "(далее – Закон 152-ФЗ), подтверждает получение им в целях участия в квалификации " +
+                            "(далее – Закон 152-ФЗ), подтверждает получение им в целях участия в аккредитации/" +
+                            "квалификации по видам продукции" +
                             "/закупочных процедурах/включения в отчет о проведении процедур закупок в соответствии " +
                             "с Положением Компании «О закупке товаров, работ, услуг» всех требуемых в соответствии " +
                             "с действующим законодательством Российской Федерации (в том числе о персональных данных) " +

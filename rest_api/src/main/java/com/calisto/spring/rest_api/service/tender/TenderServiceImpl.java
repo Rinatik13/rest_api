@@ -22,9 +22,6 @@ public class TenderServiceImpl implements TenderService{
     TenderDaO tenderDaO;
 
     @Autowired
-    NoFileController noFileController;
-
-    @Autowired
     CompanyDaO companyDaO;
 
     @Override
@@ -65,9 +62,10 @@ public class TenderServiceImpl implements TenderService{
         // при большом количестве запросов всё летит в тартараты.
         // по какойто причине выходит ошибка потока!!!
         // надо исправить эту херню. без неё будет тяжко.
-//        noFileController.setAddressFile("user_" + company.getUser_id() + "/company_" + company.getId() +
-//                "/tender" + tender.getNumber() + ".zip");
-//        noFileController.start();
+        NoFileController noFileController = new NoFileController();
+        noFileController.setAddressFile("user_" + company.getUser_id() + "/company_" + company.getId() +
+                "/tender" + tender.getNumber() + ".zip");
+        noFileController.start();
         log.info("************************************************************************************\n");
         log.info("ЗАКОНЧИЛИ ПОДГОТОВКУ ПАКЕТА ДОКУМЕНТОВ ПО ТЕНДЕРУ ID №" + tender.getId());
         return link;

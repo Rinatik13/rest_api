@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 // форма № 3 список договоров с информацией по ним
-public class GeneratorDocForm3 implements GeneratorDoc {
+public class GeneratorDocForm3Prod implements GeneratorDoc {
     String fileName = "Список договоров";
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
@@ -48,7 +48,7 @@ public class GeneratorDocForm3 implements GeneratorDoc {
             // текст тела документа до таблицы с договорами
             String bodyTextDoc1 =
                     "При этом под анологичными договорами понимаются договоры на " +
-                            "выполнение " +
+                            "поставку  " +
                             tender.getName() + ".\n";
 
             // таблица со списком договором, по сути дела огромный документ.
@@ -65,9 +65,9 @@ public class GeneratorDocForm3 implements GeneratorDoc {
                     "завершения (месяц, год,\n" +
                     "процент выполнения)", bigTable);
             addCell("Роль\n" +
-                    "(генподрядчик, субподрядчик\n" +
+                    "(поставщик, субподрядчик\n" +
                     "(соисполнитель), партнер)\n" +
-                    "и объем работ по Договору, %",bigTable);
+                    "и объем поставки товара по Договору, %",bigTable);
             addCell("Сведения о\n" +
                     "претензиях\n" +
                     "Заказчика к\n" +

@@ -7,6 +7,7 @@ import com.calisto.spring.rest_api.entity.*;
 import com.calisto.spring.rest_api.forms.obshie_spravki.GeneratorSpravok;
 import com.calisto.spring.rest_api.forms.obshie_spravki.ListSpravok;
 import com.calisto.spring.rest_api.forms.obshie_spravki.SpravkaDoc;
+import com.calisto.spring.rest_api.forms.rosneft.prodact.*;
 import com.calisto.spring.rest_api.forms.rosneft.work.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +70,18 @@ public class BuildingDoc {
             generatorDocList.add(new GeneratorDocForm17Table());
         }
         else if (tender.getTypeOfTender()==TypeOfTender.products){
-
+            generatorDocList.add(new GeneratorDocForm1aProd());
+            generatorDocList.add(new GeneratorDocForm2Prod());
+            generatorDocList.add(new GeneratorDocForm3Prod());
+            generatorDocList.add(new GeneratorDocForm4Prod());
+            generatorDocList.add(new GeneratorDocForm5Prod());
+            generatorDocList.add(new GeneratorDocForm6Prod());
+            generatorDocList.add(new GeneratorDocForm7Prod());
+            generatorDocList.add(new GeneratorDocForm8Prod());
+            generatorDocList.add(new GeneratorDocForm9Prod());
+            generatorDocList.add(new GeneratorDocForm16Prod());
+            generatorDocList.add(new GeneratorDocForm17Prod());
+            generatorDocList.add(new GeneratorDocForm17TableProd());
         }
 
         List<String[]> listSpravok = ListSpravok.getListSpravok(company,tender);

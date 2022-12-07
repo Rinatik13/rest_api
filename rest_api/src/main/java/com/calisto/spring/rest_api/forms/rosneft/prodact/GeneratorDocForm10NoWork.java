@@ -19,10 +19,9 @@ import com.itextpdf.layout.property.TextAlignment;
 import java.io.IOException;
 
 // создаём коммерческое предложение по форме № 10
-public class GeneratorDocForm10 implements GeneratorDoc {
+public class GeneratorDocForm10NoWork implements GeneratorDoc {
     String fileName = "Коммерческое предложение форма 10";
     @Override
-
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
 
             // добавляем шрифт для отображения Русского языка в пдф

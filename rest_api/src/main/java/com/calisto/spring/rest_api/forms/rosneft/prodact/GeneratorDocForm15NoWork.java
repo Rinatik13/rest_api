@@ -19,7 +19,7 @@ import com.itextpdf.layout.property.TextAlignment;
 import java.io.IOException;
 
 // создаём опись документов
-public class GeneratorDocForm15 implements GeneratorDoc {
+public class GeneratorDocForm15NoWork implements GeneratorDoc {
     String fileName = "Опись документов";
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {

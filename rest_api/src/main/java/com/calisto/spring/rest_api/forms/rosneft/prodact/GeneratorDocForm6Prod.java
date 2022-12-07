@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 
 // создаём документ подтверждения согласия физического лица на обработку персональных
 // данных
-public class GeneratorDocForm6 implements GeneratorDoc {
+public class GeneratorDocForm6Prod implements GeneratorDoc {
         String fileName = "Согласие физ лица на обработку персональных данных";
     @Override
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ) {
@@ -54,7 +54,7 @@ public class GeneratorDocForm6 implements GeneratorDoc {
                     "в соответствии с Федеральным законом от 27.07.2006 г. № 152-ФЗ «О персональных данных» " +
                             "(далее – Закон 152-ФЗ), подтверждает свое согласие на передачу и обработку " +
                             "персональных данных в целях прохождения процедур, необходимых для участия в " +
-                            "квалификации /процедурах закупок/включения в отчет о проведении процедур закупок " +
+                            "аккредитации/квалификации по видам продукции/процедурах закупок/включения в отчет о проведении процедур закупок " +
                             "в соответствии с Положением Компании «О закупке товаров, работ, услуг».\n" +
                             "Оператор, получающий настоящее согласие: " +
                             tender.getName_company() +

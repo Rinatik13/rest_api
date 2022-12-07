@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 public class NoFileController extends Thread{
     private static final Logger log = Logger.getLogger(NoFileController.class);
         private String addressFile;
-        private synchronized void deleteFile(){
+        private void deleteFile(){
             ControllerCommunication communication = new ControllerCommunication();
             communication.delete(addressFile);
         }

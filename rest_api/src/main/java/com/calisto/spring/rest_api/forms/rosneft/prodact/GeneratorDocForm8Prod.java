@@ -19,7 +19,7 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
 // техническое предложение
-public class GeneratorDocForm8 implements GeneratorDoc {
+public class GeneratorDocForm8Prod implements GeneratorDoc {
         String fileName = "Техническое предложение";
     public ByteArrayOutputStream launch(Company company, Tender tender, String date, double summ){
 
@@ -89,8 +89,8 @@ public class GeneratorDocForm8 implements GeneratorDoc {
                             // добавляем юр адрес компании
                             company.getAddressCompany() +
                             ",\n" +
-                            "согласно выполнить работы в соответствии с предлагаемыми проектом Договора " +
-                            "(Блок 6 «Проект Договора»), Техническим заданием (Блок 7 «Техническое задание») " +
+                            "согласно поставить товар в соответствии с предлагаемыми проектом Договора " +
+                            ", Техническим заданием (Блок 7 «Техническое задание») " +
                             ".\n" +
                             "Настоящее Техническое предложение имеет правовой статус оферты и действует " +
                             "в течение срока действия заявки, который составляет: " +
