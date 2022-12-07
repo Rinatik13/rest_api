@@ -246,6 +246,12 @@ public class Company {
     @JoinColumn(name = "chief_accountant_id")
     private Employee chiefAccountant;
 
+    @ManyToMany (cascade = CascadeType.ALL)
+    @JoinTable(name = "owner",
+    joinColumns = @JoinColumn(name = "company_id"),
+    inverseJoinColumns = @JoinColumn(name = "id"))
+    private List<Owner> owners;
+
     public Employee getChiefAccountant() {
         return chiefAccountant;
     }
@@ -300,6 +306,14 @@ public class Company {
         resultRequisites.append(telephoneCompany);
         resultRequisites.append("\n __________________________________________________________________________________");
         return resultRequisites.toString();
+    }
+
+    public List<Owner> getOwners() {
+        return owners;
+    }
+
+    public void setOwners(List<Owner> owners) {
+        this.owners = owners;
     }
 
     public int getSmpstatus() {
