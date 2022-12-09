@@ -1,7 +1,6 @@
 package com.calisto.spring.rest_api.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,11 @@ public class Owner {
     private String country;
     private String identifier;
     private int share;
-    private List<Owner> owners = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "owner_owners",
+    joinColumns = @JoinColumn(name = "owner_id"),
+    inverseJoinColumns = @JoinColumn(name = "owners_id"))
+    private List<Owner> owners;
 
     public Owner() {
     }

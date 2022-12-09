@@ -247,9 +247,9 @@ public class Company {
     private Employee chiefAccountant;
 
     @ManyToMany (cascade = CascadeType.ALL)
-    @JoinTable(name = "owner",
+    @JoinTable(name = "company_owners",
     joinColumns = @JoinColumn(name = "company_id"),
-    inverseJoinColumns = @JoinColumn(name = "id"))
+    inverseJoinColumns = @JoinColumn(name = "owner_id"))
     private List<Owner> owners;
 
     public Employee getChiefAccountant() {
