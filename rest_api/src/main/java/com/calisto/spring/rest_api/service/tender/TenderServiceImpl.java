@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 @Service
 public class TenderServiceImpl implements TenderService{
@@ -51,12 +52,12 @@ public class TenderServiceImpl implements TenderService{
 
     @Override
     @Transactional
-    public Link getLink(int id) throws IOException {
+    public Link getLink(int id, String date, BigDecimal summ) throws IOException {
         Tender tender = tenderDaO.getTender(id);
         Company company = companyDaO.getCompany(tender.getCompany_id());
         BuildingDoc buildingDoc = new BuildingDoc();
         // надо от-куда то взять дату и сумму
-        Link link = buildingDoc.build(company,tender,"24.09.2022",200000);
+        Link link = buildingDoc.build(company,tender,date,summ.doubleValue());
 
         // тестовый запуск потока для удаления файла
         // при большом количестве запросов всё летит в тартараты.

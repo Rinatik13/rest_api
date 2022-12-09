@@ -4,6 +4,7 @@ import com.calisto.spring.rest_api.communication.ApiDiskYandex.entity.Link;
 import com.calisto.spring.rest_api.entity.Tender;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface TenderService {
@@ -12,5 +13,5 @@ public interface TenderService {
     public Tender getTender(int id);
     public void delete(int id);
 
-    public Link getLink(int id) throws IOException;
+    public Link getLink(int id, String date, BigDecimal summ) throws IOException;
 }

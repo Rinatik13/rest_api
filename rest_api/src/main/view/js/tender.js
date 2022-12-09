@@ -35,10 +35,21 @@ else {
 }
 
 const openBuild = async (event) => {
+    let summ,tenderDate;
+    addDateEndSumm();
+    function addDateEndSumm(){  
+        summ=prompt('Введите сумму без НДС в рублях') 
+        tenderDate=prompt('Введите дату формата "дд.мм.гггг"') 
+    }
+    if(summ==""||tenderDate==''||summ==null||tenderDate==null){
+        alert("Вы не ввели необходимые данные!")
+        window.location = ('http://127.0.0.1:5500/tenderList.html')
+    }
+    else {
     let tender_num = parseInt(event.target.name);
     let tender = tenderList[tender_num];
     document.querySelector('.list_tender').innerHTML = '<div class="loader"></div>'
-    await fetch('http://localhost:8080/api/calisto/tender/build/' + tender.id,{
+    await fetch('http://localhost:8080/api/calisto/tender/build/' + tender.id + '/' + tenderDate + '/' + summ,{
                     method: 'GET',
                     headers:  {
                         'Content-Type': 'application/json',
@@ -51,7 +62,9 @@ const openBuild = async (event) => {
                             localStorage.setItem('link',JSON.stringify(json));
                             window.location = "http://127.0.0.1:5500/linkZip.html";
                     }
-                        );
+                        );    
+    }
+    
                 
 }
 

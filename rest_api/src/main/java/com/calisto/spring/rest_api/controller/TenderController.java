@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -39,10 +40,12 @@ public class TenderController {
         return "Удалено!";
     }
 
-    @GetMapping("/build/{id}")
-    public Link getDownloadDocument(@PathVariable int id) throws IOException {
+    @GetMapping("/build/{id}/{date}/{summ}")
+    public Link getDownloadDocument(@PathVariable int id, @PathVariable String date,@PathVariable BigDecimal summ) throws IOException {
+        System.out.println("Получили дату: " + date);
+        System.out.println("Получили сумму: " + summ);
         log.info("*****************************************************\n");
         log.info("НАЧИНАЕМ ПОДГОТОВКУ ДОКУМЕНТОВ ПО ТЕНДЕРУ ID № " + id);
-        return tenderService.getLink(id);
+        return tenderService.getLink(id,date,summ);
     }
 }
