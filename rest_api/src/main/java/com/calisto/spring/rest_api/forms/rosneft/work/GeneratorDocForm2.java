@@ -1,6 +1,7 @@
 package com.calisto.spring.rest_api.forms.rosneft.work;
 
 import com.calisto.spring.rest_api.entity.Company;
+import com.calisto.spring.rest_api.entity.Owner;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
@@ -15,6 +16,7 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 // информация о собственниках (акционерах компании)
 public class GeneratorDocForm2 implements GeneratorDoc{
@@ -102,7 +104,7 @@ public class GeneratorDocForm2 implements GeneratorDoc{
             // далее добавляем информацию о собственниках главной
             // в идеале надо сделать цикл для списка собственников
             // по умолчанию стоит 1 собственник, он же директор
-            // пока не реализуем. надо подумать на логикой реализации
+            // пока не реализуем. надо подумать над логикой реализации
             int numberMenCompanySobstveniki = 1;
             for (int i = numberMenCompanySobstveniki; i < 2; i++) {
                 addCell(fullSizeNameCompany +
@@ -115,16 +117,13 @@ public class GeneratorDocForm2 implements GeneratorDoc{
 
 
                 // реализуем новую форму даты (сделать отдельно класс)
-                SimpleDateFormat sf = new SimpleDateFormat("dd MMMM yyyy");
                 addCell("паспорт " + company.getEmployeeList().get(0)
                         .getPassportSerial() + " " +
                         company.getEmployeeList().get(0)
                                 .getPassportNumber() + ", выдан " +
                         company.getEmployeeList().get(0).getPassportGovName() + ", дата выдачи " +
-//                        sf.format
                                 (company.getEmployeeList().get(0).getPassportGovDate())
                         + ", дата рождения " +
-//                        sf.format
                                 (company.getEmployeeList().get(0).getHeppyDate()) + ", гражданство " +
                         company.getEmployeeList().get(0).getGovermentStatus() + ".",table);
             }
@@ -298,6 +297,8 @@ public class GeneratorDocForm2 implements GeneratorDoc{
                     .setFontSize(10);
 
             // добавляем таблицу с информацией о собственниках
+            createOwners(document,company.getOwners());
+
             document.add(table);
             document.add(inP);
 
@@ -322,6 +323,40 @@ public class GeneratorDocForm2 implements GeneratorDoc{
             document.close();
             return byteArrayOutputStream;
         }
+
+    private void createOwners(Document document, List<Owner> owners) {
+
+        BaseFont baseFont = new BaseFont();
+        PdfFont font = baseFont.getFont();
+
+        //создаём таблицу
+        Table table = new Table(3);
+
+        // добавляем шапки
+        addCell("Наименование организации\n" +
+                "(наименование, место\n" +
+                "нахождения, ИНН",table);
+
+        addCell("Собственники (акционеры)\n" +
+                "организации, с указанием доли в %\n" +
+                "(наименование, место нахождения\n" +
+                "(страна), ИНН", table);
+
+        addCell("Подтверждающие\n" +
+                "документы, наименование,\n" +
+                "реквизиты, паспортные данные\n" +
+                "(в т.ч. гражданство)", table);
+
+        //добавляем главную шапку для первого раздела
+        Cell cell;
+        cell = new Cell(1, 3)
+                .add("I. Организация-Участник закупки")
+                .setFont(font)
+                .setTextAlignment(TextAlignment.LEFT)
+                .setFontSize(8)
+                .setBold();
+        table.addCell(cell);
+    }
 
     @Override
     public String getNameFile() {
