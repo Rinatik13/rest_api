@@ -1,7 +1,7 @@
 package com.calisto.spring.rest_api.forms.rosneft.work;
 
 import com.calisto.spring.rest_api.entity.Company;
-import com.calisto.spring.rest_api.entity.Owner;
+import com.calisto.spring.rest_api.entity.owners.Owner;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
 import com.calisto.spring.rest_api.style.BaseFont;
@@ -15,7 +15,7 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 // информация о собственниках (акционерах компании)
@@ -51,7 +51,7 @@ public class GeneratorDocForm2 implements GeneratorDoc{
             String line = "________________________________________________________________________" +
                     "\n";
 
-            // добавляем информацию о участнике, инн и номер торгов
+            // добавляем информацию об участнике, инн и номер торгов
             String topInfoCompanyEndTender =
                     "Наименование Участника закупки: " + fullSizeNameCompany + "\n" +
                             "ИНН (или иной индификационный номер) Участника закупки: " +
@@ -74,114 +74,6 @@ public class GeneratorDocForm2 implements GeneratorDoc{
                             // пока поставим по умолчанию
                             date +
                             ".\n";
-
-            // таблица с информацией о собственниках
-            // нужны данные физ лица или компаний собственников
-            // нужны данные с бухгалтерии с информацией по долям
-            Table table = new Table(3);
-
-            addCell("Наименование организации\n" +
-                    "(наименование, место\n" +
-                    "нахождения, ИНН",table);
-            addCell("Собственники (акционеры)\n" +
-                    "организации, с указанием доли в %\n" +
-                    "(наименование, место нахождения\n" +
-                    "(страна), ИНН", table);
-            addCell("Подтверждающие\n" +
-                    "документы, наименование,\n" +
-                    "реквизиты, паспортные данные\n" +
-                    "(в т.ч. гражданство)", table);
-
-            Cell cell;
-            cell = new Cell(1, 3)
-                    .add("I. Организация-Участник закупки")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.LEFT)
-                    .setFontSize(8)
-                    .setBold();
-            table.addCell(cell);
-
-            // далее добавляем информацию о собственниках главной
-            // в идеале надо сделать цикл для списка собственников
-            // по умолчанию стоит 1 собственник, он же директор
-            // пока не реализуем. надо подумать над логикой реализации
-            int numberMenCompanySobstveniki = 1;
-            for (int i = numberMenCompanySobstveniki; i < 2; i++) {
-                addCell(fullSizeNameCompany +
-                        company.getAddressCompany() + ", " +
-                        company.getInnCompany(),table);
-                addCell(company.getEmployeeList().get(0).giveFullName() + ", " +
-                        company.getEmployeeList().get(0)
-                                .getAddressReg() + ", " +
-                        company.getEmployeeList().get(0).getInn(),table);
-
-
-                // реализуем новую форму даты (сделать отдельно класс)
-                addCell("паспорт " + company.getEmployeeList().get(0)
-                        .getPassportSerial() + " " +
-                        company.getEmployeeList().get(0)
-                                .getPassportNumber() + ", выдан " +
-                        company.getEmployeeList().get(0).getPassportGovName() + ", дата выдачи " +
-                                (company.getEmployeeList().get(0).getPassportGovDate())
-                        + ", дата рождения " +
-                                (company.getEmployeeList().get(0).getHeppyDate()) + ", гражданство " +
-                        company.getEmployeeList().get(0).getGovermentStatus() + ".",table);
-            }
-
-            cell = new Cell(1, 3)
-                    .add("II. Юридические лица, являющиеся собственниками организации" +
-                            " - Участника закупки.")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.LEFT)
-                    .setFontSize(8)
-                    .setBold();
-            table.addCell(cell);
-
-            for (int i = 0; i < 3; i++) {
-                cell = new Cell()
-                        .add("\n")
-                        .setFont(font)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setFontSize(8)
-                        .setBold();
-                table.addCell(cell);
-            }
-
-            cell = new Cell(1, 3)
-                    .add("III. Юридические лица, являющиеся собственниками собственников" +
-                            " организации - Участника закупки.")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.LEFT)
-                    .setFontSize(8)
-                    .setBold();
-            table.addCell(cell);
-
-            for (int i = 0; i < 3; i++) {
-                cell = new Cell()
-                        .add("\n")
-                        .setFont(font)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setFontSize(8);
-                table.addCell(cell);
-            }
-
-            cell = new Cell(1, 3)
-                    .add("IV. Юридические лица, являющиеся собственниками " +
-                            "следующих уровней (до конечных) ...")
-                    .setFont(font)
-                    .setTextAlignment(TextAlignment.LEFT)
-                    .setFontSize(8)
-                    .setBold();
-            table.addCell(cell);
-
-            for (int i = 0; i < 3; i++) {
-                cell = new Cell()
-                        .add("\n")
-                        .setFont(font)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setFontSize(8);
-                table.addCell(cell);
-            }
 
             // далее идёт название следующей таблицы
 
@@ -234,6 +126,7 @@ public class GeneratorDocForm2 implements GeneratorDoc{
 
             // если есть аффилированность то заполняем эту часть таблицы
             // по умолчанию "Аффилированные и/или входящие в группу лица отсутствуют"
+        Cell cell;
             for (int i = 0; i < 8; i++) {
                 cell = new Cell()
                         .add("Аффилированные и/или входящие в группу лица отсутствуют")
@@ -297,9 +190,8 @@ public class GeneratorDocForm2 implements GeneratorDoc{
                     .setFontSize(10);
 
             // добавляем таблицу с информацией о собственниках
-            createOwners(document,company.getOwners());
+            createOwners(document,company);
 
-            document.add(table);
             document.add(inP);
 
             // добавляем текстовое тело документа после таблицы 1 до таблицы 2
@@ -324,11 +216,8 @@ public class GeneratorDocForm2 implements GeneratorDoc{
             return byteArrayOutputStream;
         }
 
-    private void createOwners(Document document, List<Owner> owners) {
-
-        BaseFont baseFont = new BaseFont();
-        PdfFont font = baseFont.getFont();
-
+    private void createOwners(Document document,Company company) {
+        List<Owner> owners = company.getOwners();
         //создаём таблицу
         Table table = new Table(3);
 
@@ -348,14 +237,70 @@ public class GeneratorDocForm2 implements GeneratorDoc{
                 "(в т.ч. гражданство)", table);
 
         //добавляем главную шапку для первого раздела
+
+        addTableHideText("I. Организация-Участник закупки", table);
+
+        List<Owner> ownerList2 = new ArrayList<>();
+        List<Owner> ownerList3 = new ArrayList<>();
+
+        addOwnersToList(owners, ownerList2, table, company);
+
+        addTableHideText("II. Юридические лица, являющиеся собственниками организации" +
+                " - Участника закупки.",table);
+
+        addOwnersToList(ownerList2,ownerList3,table,company);
+
+        addTableHideText("III. Юридические лица, являющиеся собственниками собственников" +
+                " организации - Участника закупки.",table);
+
+        ownerList2 = new ArrayList<>();
+
+        addOwnersToList(ownerList3,ownerList2,table,company);
+
+        addTableHideText("IV. Юридические лица, являющиеся собственниками " +
+                "следующих уровней (до конечных) ...", table);
+
+        ownerList3= new ArrayList<>();
+
+        addOwnersToList(ownerList2,ownerList3,table,company);
+
+        document.add(table);
+    }
+
+    private void addTableHideText(String text, Table table) {
+
+        BaseFont baseFont = new BaseFont();
+        PdfFont font = baseFont.getFont();
+
         Cell cell;
         cell = new Cell(1, 3)
-                .add("I. Организация-Участник закупки")
+                .add(text)
                 .setFont(font)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setFontSize(8)
                 .setBold();
         table.addCell(cell);
+
+    }
+
+    private void addOwnersToList(List<Owner> owners, List<Owner> ownerList2, Table table, Company company) {
+
+        for (Owner owner : owners) {
+            addCell(company.getSmallNameCompany() + ", " +
+                    company.getAddressCompany() + ", " +
+                    company.getInnCompany(), table);
+
+            addCell(owner.getShare() + "%, " +
+                    owner.getName() + ", " +
+                    owner.getCountry() + ", " +
+                    owner.getIdentifier(), table);
+
+            addCell(owner.getRecvisites(), table);
+
+            if (owner.getOwners() != null) {
+                ownerList2.addAll(owner.getOwners());
+            }
+        }
     }
 
     @Override
