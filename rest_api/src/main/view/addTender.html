@@ -21,12 +21,20 @@
     <form action="" class="registration_blok" id="add_tender" onsubmit="">
         <input type="text" placeholder="Номер закупки" id="number">
         <input type="text" placeholder="Название тендера" id="name">
+        <input type="text" placeholder="Форма закупки" id="formTender">
+        <select id="vid" name="vidTender" required>
+            <option selected disabled>Выберете вид тендера</option>
+            <option value="0">Работа</option>
+            <option value="1">Товары</option>
+            <option value="2">Услуги</option>
+            </select>
         <input type="text" placeholder="Ссылка на закупку" id="tender_url">
         <input type="text" placeholder="Краткое название заказчика" id="name_company">
         <input type="text" placeholder="Инн заказчика" id="inn_company">
         <input type="number" placeholder="Требуемое количество сотрудников" id="count_empl">
+        
         <br>
-        <span id="error_add_company" style="color:red">test</span>
+        <span id="error_add_company" style="color:red"></span>
         <input class="button" type="submit" value="Добавить">
     </form>
 

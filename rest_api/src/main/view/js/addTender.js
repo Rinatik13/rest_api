@@ -17,7 +17,9 @@ async function addTender (event){
         innZakaz : el.inn_company.value,
         company_id : com_id,
         countEmployee : el.count_empl.value,
-        name_company : el.name_company.value
+        name_company : el.name_company.value,
+        type_of_tender : el.vid.value,
+        method_tender : el.formTender.value
     }
 
     console.log(tender);
