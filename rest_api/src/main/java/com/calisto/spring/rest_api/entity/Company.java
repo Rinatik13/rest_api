@@ -1,5 +1,7 @@
 package com.calisto.spring.rest_api.entity;
 
+import com.calisto.spring.rest_api.entity.owners.Owner;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
