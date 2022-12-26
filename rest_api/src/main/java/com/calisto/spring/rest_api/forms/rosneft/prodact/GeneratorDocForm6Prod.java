@@ -1,6 +1,7 @@
 package com.calisto.spring.rest_api.forms.rosneft.prodact;
 
 import com.calisto.spring.rest_api.entity.Company;
+import com.calisto.spring.rest_api.entity.Employee;
 import com.calisto.spring.rest_api.entity.Tender;
 import com.calisto.spring.rest_api.forms.rosneft.work.GeneratorDoc;
 import com.calisto.spring.rest_api.logic.TableStampEndSignature;
@@ -15,6 +16,7 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 // создаём документ подтверждения согласия физического лица на обработку персональных
 // данных
@@ -33,22 +35,33 @@ public class GeneratorDocForm6Prod implements GeneratorDoc {
             // добавляем название файла
             String nameDoc =
                     "ПОДТВЕРЖДЕНИЕ СОГЛАСИЯ ФИЗИЧЕСКОГО ЛИЦА НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ";
+        List<Employee> employees = company.getEmployeeList();
+        Employee supervisor = new Employee();
+        Employee chiefAccountant = new Employee();
+        for (Employee employee : employees){
+            if (employee.getId()==company.getSupervisor()){
+                supervisor = employee;
+            }
+            if (employee.getId()==company.getChiefAccountant()){
+                chiefAccountant = employee;
+            }
+        }
 
             // добавляем данные на физ лицо (руководителя)
             String reqEmplCompany =
                     "Настоящим " +
-                            company.getSupervisor().giveFullName() +",\n" +
+                            supervisor.giveFullName() +",\n" +
                             "основной документ, удостоверяющий личность: паспорт " +
-                            company.getSupervisor().getPassportSerial() + " " +
-                            company.getSupervisor().getPassportNumber() + " выдан " +
-                            company.getSupervisor().getPassportGovName() + " дата выдачи " +
-                                    (company.getSupervisor().getPassportGovDate()) + " года,\n" +
+                            supervisor.getPassportSerial() + " " +
+                            supervisor.getPassportNumber() + " выдан " +
+                            supervisor.getPassportGovName() + " дата выдачи " +
+                                    (supervisor.getPassportGovDate()) + " года,\n" +
                             "адрес регистрации: " +
-                            company.getSupervisor().getAddressReg() +",\n" +
+                            supervisor.getAddressReg() +",\n" +
                             "дата рождения: " +
-                                    (company.getSupervisor().getHeppyDate()) + " года,\n" +
+                                    (supervisor.getHeppyDate()) + " года,\n" +
                             "ИНН " +
-                            company.getSupervisor().getInn() + ".\n";
+                            supervisor.getInn() + ".\n";
 
             String bodyTextDoc1 =
                     "в соответствии с Федеральным законом от 27.07.2006 г. № 152-ФЗ «О персональных данных» " +

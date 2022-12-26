@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Список учредителей</title>
+</head>
+<body>
+
+    <header>
+        <input type="button" class="button_style" onclick="history.back();" value="Назад"/>
+		<div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
+		<div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
+		<div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
+	</header>
+
+    <h1 class="title">Список учредителей</h1>
+
+    <div class="center_flex">
+        <button class="button"><a href="/addOwner.html" class="text_decorator">Добавить учредителя</a></button>
+        <button class="button">Удалить компанию</button></div>
+    <br>
+
+<div class="list_owner center_flex" id="owner_list">
+</div>
+<script src="/js/owners.js"></script>
+</body>
+</html>

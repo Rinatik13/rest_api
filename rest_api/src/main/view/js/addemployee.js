@@ -29,6 +29,9 @@ if(employee !== null){
 async function addEmployee(event){
     event.preventDefault();
     console.log(company);
+
+    let vidEmployee = el.vid.value;
+
     employee = {
     name : el.empl_name.value,
     surname : el.empl_surname.value,
@@ -46,8 +49,10 @@ async function addEmployee(event){
     snils : el.empl_snils.value,
     govermentStatus : el.empl_govermentStatus.value,
     company_id : company.id,
-    id :el.empl_id.value
+    vid_position : vid.value, 
+    id : el.empl_id.value
     }
+    console.log(vidEmployee);
 console.log(employee);
     await fetch('http://localhost:8080/api/calisto/employee/add',{
         method: 'POST',
@@ -71,6 +76,15 @@ console.log(employee);
                     res_list.push(empl);
                 }
             }
+            // if(vidEmployee==1){
+            //     let id_impl = json.id;
+            //     company.supervisor=id_impl;
+            // }
+            // if(vidEmployee==2){
+            //     let id_impl = json.id;
+            //     company.chiefAccountant=id_impl;
+            // }
+           
             company.employeeList = res_list;
             company.employeeList.push(json);
             localStorage.setItem('company', JSON.stringify(company));

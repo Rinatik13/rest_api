@@ -17,6 +17,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.net.*;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.util.*;
 // реализуем управление работы с Yandex Api диском
 
@@ -160,6 +164,21 @@ public class ControllerCommunication{
         try(CloseableHttpResponse httpClientPut = httpClient.execute(httpPut)){
             org.apache.hc.core5.http.HttpEntity entity = httpClientPut.getEntity();
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // реализуем HttpClient
+    public void uploadFileHttpClient(String url, ByteArrayOutputStream reqBody){
+        HttpClient client = HttpClient.newBuilder()
+                .build();
+        HttpRequest req = HttpRequest.newBuilder(URI.create(url))
+                .header(auth,OAuth)
+                .POST(HttpRequest.BodyPublishers.ofByteArray(reqBody.toByteArray()))
+                .build();
+        try {
+            client.send(req, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

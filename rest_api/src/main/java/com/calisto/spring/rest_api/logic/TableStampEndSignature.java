@@ -1,6 +1,7 @@
 package com.calisto.spring.rest_api.logic;
 
 import com.calisto.spring.rest_api.entity.Company;
+import com.calisto.spring.rest_api.entity.Employee;
 import com.calisto.spring.rest_api.entity.Image_jpg;
 import com.itextpdf.kernel.color.DeviceGray;
 import com.itextpdf.kernel.font.PdfFont;
@@ -10,6 +11,8 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.VerticalAlignment;
+
+import java.util.List;
 
 // формируем участок кода для добавления в itext таблицы
 // получаем компанию и вид шрифта
@@ -34,16 +37,24 @@ public class TableStampEndSignature {
         // добавляем подписанта документа
         Border border = new GrooveBorder(new DeviceGray(10),0);
 
+        List<Employee> employees = company.getEmployeeList();
+        Employee supervisor = new Employee();
+        for (Employee employee : employees){
+            if (employee.getId()==company.getSupervisor()){
+                supervisor = employee;
+            }
+        }
+
         // добавляем подписанта
         String visaDocCompany =
-                company.getSupervisor().getPositionCom()+
+                supervisor.getPositionCom()+
                         " \n" +
                         company.getSmallNameCompany() + "\"" + "         ";
 
         String nameVisaDocCompany =
 
                 "                                  " +
-                        company.getSupervisor().giveFullName() + ".";
+                        supervisor.giveFullName() + ".";
 
         Table table = new Table(4);
         Cell cell = new Cell()
@@ -78,6 +89,14 @@ public class TableStampEndSignature {
     }
 
     public Table createTableSignature(Company company, PdfFont font, String date){
+
+        List<Employee> employees = company.getEmployeeList();
+        Employee supervisor = new Employee();
+        for (Employee employee : employees){
+            if (employee.getId()==company.getSupervisor()){
+                supervisor = employee;
+            }
+        }
         //результат
         Table result = null;
 
@@ -92,12 +111,12 @@ public class TableStampEndSignature {
 
         // добавляем подписанта
         String visaDocCompany =
-                company.getSupervisor().getPositionCom()+
+                supervisor.getPositionCom()+
                         " \n" +
                         company.getSmallNameCompany() + "         ";
         String nameVisaDocCompany =
                 "                                  " +
-                        company.getSupervisor().giveFullName() + ".";
+                        supervisor.giveFullName() + ".";
 
         Table table = new Table(3);
         Cell cell = new Cell()

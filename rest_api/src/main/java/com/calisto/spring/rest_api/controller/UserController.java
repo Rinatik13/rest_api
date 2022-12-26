@@ -23,6 +23,7 @@ public class UserController {
 
     @PostMapping("/add")
     public User addUser(@RequestBody User user){
+        System.out.println("Получили команду на добавление: " + user.getName());
         return userService.add(user);
     }
 

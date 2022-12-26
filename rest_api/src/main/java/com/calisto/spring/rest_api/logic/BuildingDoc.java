@@ -69,7 +69,7 @@ public class BuildingDoc {
             generatorDocList.add(new GeneratorDocForm17());
             generatorDocList.add(new GeneratorDocForm17Table());
         }
-        else if (tender.getTypeOfTender()==TypeOfTender.products){
+        else if (tender.getTypeOfTender()==TypeOfTender.PRODUCTS){
             generatorDocList.add(new GeneratorDocForm1aProd());
             generatorDocList.add(new GeneratorDocForm2Prod());
             generatorDocList.add(new GeneratorDocForm3Prod());
@@ -162,7 +162,7 @@ public class BuildingDoc {
         // закрываем создание архива
         zip.close();
 
-//        controllerCommunication.uploadFile(url,"PUT", Arrays.toString(zipStream.toByteArray()));
+//        controllerCommunication.uploadFileHttpClient(url, zipStream);
 
         controllerCommunication.uploadFileByte(url,"PUT", zipStream.toByteArray());
 

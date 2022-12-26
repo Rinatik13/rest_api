@@ -1,6 +1,9 @@
 package com.calisto.spring.rest_api.controller;
 
+import com.calisto.spring.rest_api.DaO.company.CompanyDaO;
+import com.calisto.spring.rest_api.entity.Company;
 import com.calisto.spring.rest_api.entity.Employee;
+import com.calisto.spring.rest_api.service.company.CompanyService;
 import com.calisto.spring.rest_api.service.employee.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

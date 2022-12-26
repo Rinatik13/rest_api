@@ -240,13 +240,13 @@ public class Company {
     inverseJoinColumns = @JoinColumn(name = "id"))
     private List<Tender> tenderList;
 
-    @ManyToOne
-    @JoinColumn(name = "supervisor_id")
-    private Employee supervisor;
+//    @ManyToOne
+//    @JoinColumn(name = "supervisor_id")
+    private int supervisor_id;
 
-    @ManyToOne
-    @JoinColumn(name = "chief_accountant_id")
-    private Employee chiefAccountant;
+//    @ManyToOne
+//    @JoinColumn(name = "chief_accountant_id")
+    private int chief_accountant_id;
 
     @ManyToMany (cascade = CascadeType.ALL)
     @JoinTable(name = "company_owners",
@@ -254,20 +254,20 @@ public class Company {
     inverseJoinColumns = @JoinColumn(name = "owner_id"))
     private List<Owner> owners;
 
-    public Employee getChiefAccountant() {
-        return chiefAccountant;
+    public int getSupervisor() {
+        return supervisor_id;
     }
 
-    public void setChiefAccountant(Employee chiefAccountant) {
-        this.chiefAccountant = chiefAccountant;
+    public void setSupervisor(int supervisor) {
+        this.supervisor_id = supervisor;
     }
 
-    public Employee getSupervisor() {
-        return supervisor;
+    public int getChiefAccountant() {
+        return chief_accountant_id;
     }
 
-    public void setSupervisor(Employee supervisor) {
-        this.supervisor = supervisor;
+    public void setChiefAccountant(int chiefAccountant) {
+        this.chief_accountant_id = chiefAccountant;
     }
 
     public Company() {

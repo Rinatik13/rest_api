@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Добавление учредителя</title>
+</head>
+<body>
+
+    <header>
+        <input type="button" class="button_style" onclick="history.back();" value="Назад"/>
+		<div class = "button_style"><a href="/companyList.html" class="text_decorator">Компании</a></div>
+		<div class = "button_style"><a href="/tenderList.html" class="text_decorator">Тендеры</a></div>
+		<div class = "button_style"><a href="/user.html" class="text_decorator">Личные данные</a></div>
+	</header>
+
+    <h1 class="title">Информация об учредителе</h1>
+
+        <form class="registration_blok" id="add_owner" onsubmit>
+            <input type="text" id="empl_id" style="visibility:hidden">
+            <input type="text" placeholder="Название учредителя" id="owner_name">
+            <input type="text" placeholder="Страна регистрации" id="owner_country">
+            <input type="text" placeholder="ИНН/паспортные данные" id="owner_identifier">
+            <input type="number" placeholder="Доля в %" id="owner_share">
+            <input type="text" placeholder="Реквизиты/паспортные данные" id="owner_recvisites">
+            <br>
+            <span id="error_add_company" style="color:red"></span>
+            <input class="button" type="submit" value="Сохранить">
+        </form>
+<script src="/js/addOwner.js"></script>
+</body>
+</html>

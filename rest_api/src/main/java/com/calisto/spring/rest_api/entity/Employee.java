@@ -115,7 +115,17 @@ public class Employee {
             inverseJoinColumns = @JoinColumn(name = "docs_id"))
     List<DocumentPdf> documentPdfList;
 
+    private int vid_position;
+
     public Employee() {
+    }
+
+    public int getVid_position() {
+        return vid_position;
+    }
+
+    public void setVid_position(int vid_position) {
+        this.vid_position = vid_position;
     }
 
     public String giveFullName(){

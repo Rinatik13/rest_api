@@ -87,13 +87,25 @@ public class GeneratorDocForm1aProd implements GeneratorDoc {
             addCell(" ", table);
         }
 
+        List<Employee> employees = company.getEmployeeList();
+        Employee supervisor = new Employee();
+        Employee chiefAccountant = new Employee();
+        for (Employee employee : employees){
+            if (employee.getId()==company.getSupervisor()){
+                supervisor = employee;
+            }
+            if (employee.getId()==company.getChiefAccountant()){
+                chiefAccountant = employee;
+            }
+        }
+
         // продолжаем писать 2 блок тела документа после таблицы
         // до следующей таблицы по годовым оборотам организации
         String bodyTextDoc2 =
                 "3. Руководитель организации: " +
-                        company.getSupervisor().giveFullName() + ".\n" +
+                        supervisor.giveFullName() + ".\n" +
                         "4. Главный бухгалтер: " +
-                        company.getChiefAccountant().giveFullName() + ".\n" +
+                        chiefAccountant.giveFullName() + ".\n" +
                         "5. Дата, место и орган регистрации, № свидетельства: " +
                         company.getDateRegistrationNumberGovDoc() + " №" +
                         company.getRegistrationNumberCompany() + ".\n" +
