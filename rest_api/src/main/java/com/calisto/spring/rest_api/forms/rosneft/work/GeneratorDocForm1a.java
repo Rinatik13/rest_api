@@ -26,28 +26,6 @@ public class GeneratorDocForm1a implements GeneratorDoc{
 
         String fullSizeNameCompany = company.getSmallNameCompany();
 
-//        // добавляем полное название компании в шапку файла
-//        String topFullNameFileDocCompany = company.getFullNameFormCompany() + "\n" + "\"" +
-//                company.getFullNameCompany() + "\"";
-//
-//        // добавляем реквизиты компании в шапку файла
-//        String requisitesCompany = "Юридический адрес: " + company.getAddressCompany() + ";\n" +
-//                "Почтовый адрес: " + company.getMailAddressCompany() + ";\n" +
-//                "ИНН/КПП: " + company.getInnCompany() + "/" +
-//                company.getKppCompany() + "; " +
-//                "ОГРН: " + company.getRegistrationNumberCompany() + ";\n" +
-//                "Банковские реквизиты: " + company.getNameFormBank() + " " +
-//                company.getNameBank() + ";\n" +
-//                "Бик: " + company.getBankNumber() + ";" + " " +
-//                "р/с: " + company.getCheckingAccountBank() + ";" + " " +
-//                "к/с: " + company.getCorrespondentAccountBank() + ";\n" +
-//                "E-mail: " + company.getEmailCompany() + ";" + " " +
-//                "Телефон: " + company.getTelephoneCompany() + ".";
-//
-//        // добавляем разделительную линию
-//        String line = "________________________________________________________________________" +
-//                "\n";
-
         // добавляем информацию об участнике, инн и номер торгов
         String topInfoCompanyEndTender =
                 "Наименование Участника закупки: " + company.getSmallNameCompany() + "\n" +
@@ -474,18 +452,13 @@ public class GeneratorDocForm1a implements GeneratorDoc{
         paragraphTopRek.setFont(font)
                 .setFontSize(10);
         document.add(paragraphTopRek);
-//
-//        // добавляем разграничивающую линию для отделения шапки от основной части документа
-//        Paragraph paragraphLine = new Paragraph(line);
-//        paragraphLine.setTextAlignment(TextAlignment.CENTER);
-//        document.add(paragraphLine)
-//                .setFont(font);
 
         // добавляем информацию об участнике, инн и номер торгов
-        Paragraph paragraphInfoTenderInn = new Paragraph(topInfoCompanyEndTender);
-        paragraphInfoTenderInn.setTextAlignment(TextAlignment.LEFT);
-        document.add(paragraphInfoTenderInn)
-                .setFont(font);
+        Paragraph paragraphInfoTenderInn = new Paragraph(topInfoCompanyEndTender)
+                .setFont(font)
+                .setFontSize(10)
+                .setTextAlignment(TextAlignment.LEFT);
+        document.add(paragraphInfoTenderInn);
 
         // название бланка
         Paragraph paragraphNameDoc = new Paragraph(nameDocCompany);

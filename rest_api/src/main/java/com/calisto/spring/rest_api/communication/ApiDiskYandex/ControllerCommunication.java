@@ -157,7 +157,7 @@ public class ControllerCommunication{
         }
     }
 
-    // пытаемся написать метод для работы с запросами используя Httpclient
+    // пытаемся написать метод для работы с запросами используя HttpClient
     public void uploadFileByteApachHttpClient(String url, String type, byte[] reqbody){
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpUriRequest httpPut = new HttpPut(url);
@@ -181,5 +181,20 @@ public class ControllerCommunication{
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void uploadFileHttpClientDefault(String url, ByteArrayOutputStream reqBody){
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .setHeader(auth,OAuth)
+                .PUT(HttpRequest.BodyPublishers.ofByteArray(reqBody.toByteArray()))
+                .build();
+        try {
+            client.send(httpRequest,HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

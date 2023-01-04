@@ -36,9 +36,7 @@ public class GeneratorDocForm17Table implements GeneratorDoc{
             String bodyTextDoc2 =
                     "Критерии подтверждения выполнения работ российскими лицами";
 
-            String nameFullCom =
-                    company.getFullNameFormCompany() + " " + "\"" +
-                            company.getFullNameCompany() + "\"";
+            String nameFullCom = company.getFullNameCompany();
 
             // добавляем название таблицы
             String nameDocTable =

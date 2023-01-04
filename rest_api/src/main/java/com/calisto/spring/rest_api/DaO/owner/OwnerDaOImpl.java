@@ -42,4 +42,39 @@ public class OwnerDaOImpl implements OwnerDaO{
         Owner owner = session.get(Owner.class,id);
         session.delete(owner);
     }
+//
+//    @Override
+//    public MainOwner addMainOwner(MainOwner owner) {
+//        Session session = entityManager.unwrap(Session.class);
+//        session.saveOrUpdate(owner);
+//        return owner;
+//    }
+//
+//    @Override
+//    public List<MainOwner> getAllMainOwner() {
+//        Session session = entityManager.unwrap(Session.class);
+//        Query<MainOwner> ownerQuery = session.createQuery("from MainOwner",
+//                MainOwner.class);
+//        return ownerQuery.getResultList();
+//    }
+//
+//    @Override
+//    public MainOwner getMainOwner(int id) {
+//        Session session = entityManager.unwrap(Session.class);
+//        return session.get(MainOwner.class,id);
+//    }
+//
+//    @Override
+//    public void deleteMainOwner(int id) {
+//        Session session = entityManager.unwrap(Session.class);
+//        MainOwner owner = session.get(MainOwner.class,id);
+//        session.delete(owner);
+//    }
+//
+//    @Override
+//    public MainOwner editMineOwner(MainOwner owner) {
+//        Session session = entityManager.unwrap(Session.class);
+//        session.saveOrUpdate(owner);
+//        return owner;
+//    }
 }

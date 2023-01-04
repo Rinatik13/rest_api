@@ -49,7 +49,7 @@ public class TableStampEndSignature {
         String visaDocCompany =
                 supervisor.getPositionCom()+
                         " \n" +
-                        company.getSmallNameCompany() + "\"" + "         ";
+                        company.getSmallNameCompany() + "          ";
 
         String nameVisaDocCompany =
 
@@ -72,7 +72,7 @@ public class TableStampEndSignature {
         cell = new Cell()
                 .setBorder(border)
                 .add(signature.giveImage(50,45))
-                .setRelativePosition(110,0,0,0);
+                .setRelativePosition(90,0,0,0);
         table.addCell(cell);
 
         cell = new Cell()

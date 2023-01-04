@@ -80,9 +80,7 @@ public class GeneratorDocForm8 implements GeneratorDoc{
                             tender.getName() +
                             ", " +
                             "и принимая установленные в них требования и условия закупки,\n" +
-                            company.getFullNameFormCompany() + " " +
-                            "\"" +
-                            company.getFullNameCompany() + "\"" +
+                            company.getFullNameCompany()+
                             ", \n" +
                             "расположенное по адресу " +
                             // добавляем юр адрес компании

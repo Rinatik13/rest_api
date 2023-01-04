@@ -1,25 +1,44 @@
 package com.calisto.spring.rest_api.entity.owners;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Owner{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private int company_id;
+    private int main_owner_id;
     private String name;
     private String country;
     private String identifier;
     private int share;
     private String recvisites;
     @ManyToMany
-    @JoinTable(name = "owner_owners",
-    joinColumns = @JoinColumn(name = "owner_id"),
-    inverseJoinColumns = @JoinColumn(name = "owners_id"))
-    private List<Owner> owners;
-
+    @JoinTable(name = "owner",
+    joinColumns = @JoinColumn(name = "main_owner_id"),
+    inverseJoinColumns = @JoinColumn(name = "id"))
+    private List<Owner> owners = new ArrayList<>();
 
     public Owner() {
+    }
+
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
+    }
+
+    public int getMain_owner_id() {
+        return main_owner_id;
+    }
+
+    public void setMain_owner_id(int main_owner_id) {
+        this.main_owner_id = main_owner_id;
     }
 
     public void setRecvisites(String recvisites) {
@@ -82,11 +101,9 @@ public class Owner{
     public String toString() {
         return "Owner{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", country='" + country + '\'' +
-                ", identifier='" + identifier + '\'' +
-                ", share=" + share +
+                ", company_id=" + company_id +
+                ", main_owner_id=" + main_owner_id +
                 ", owners=" + owners +
-                '}';
+                "}\n";
     }
 }

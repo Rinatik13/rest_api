@@ -6,6 +6,6 @@ let company_doc = company.documentPdfList;
 for(let a = 0; a < company_doc.length; a++)
 {
     let elem = document.createElement('div');
-    elem.innerHTML = "хуй";
+    elem.innerHTML = "-";
     document.querySelector(".doc_list").appendChild(elem);  
 }

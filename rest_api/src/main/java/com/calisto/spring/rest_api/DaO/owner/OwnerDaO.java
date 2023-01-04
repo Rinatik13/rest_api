@@ -12,4 +12,10 @@ public interface OwnerDaO {
     public Owner getOwner(int id);
 
     public void delete(int id);
+//
+//    public MainOwner addMainOwner(MainOwner owner);
+//    public List<MainOwner> getAllMainOwner();
+//    public MainOwner getMainOwner(int id);
+//    public void deleteMainOwner(int id);
+//    public MainOwner editMineOwner(MainOwner owner);
 }

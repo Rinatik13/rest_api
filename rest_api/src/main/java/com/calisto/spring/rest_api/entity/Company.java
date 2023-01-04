@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 // компания
@@ -252,7 +253,7 @@ public class Company {
     @JoinTable(name = "company_owners",
     joinColumns = @JoinColumn(name = "company_id"),
     inverseJoinColumns = @JoinColumn(name = "owner_id"))
-    private List<Owner> owners;
+    private List<Owner> owners = new ArrayList<>();
 
     public int getSupervisor() {
         return supervisor_id;
@@ -310,12 +311,20 @@ public class Company {
         return resultRequisites.toString();
     }
 
-    public List<Owner> getOwners() {
-        return owners;
+    public int getSupervisor_id() {
+        return supervisor_id;
     }
 
-    public void setOwners(List<Owner> owners) {
-        this.owners = owners;
+    public void setSupervisor_id(int supervisor_id) {
+        this.supervisor_id = supervisor_id;
+    }
+
+    public int getChief_accountant_id() {
+        return chief_accountant_id;
+    }
+
+    public void setChief_accountant_id(int chief_accountant_id) {
+        this.chief_accountant_id = chief_accountant_id;
     }
 
     public int getSmpstatus() {
@@ -630,6 +639,13 @@ public class Company {
         this.tenderList = tenderList;
     }
 
+    public List<Owner> getOwners() {
+        return owners;
+    }
+
+    public void setOwners(List<Owner> owners) {
+        this.owners = owners;
+    }
 
     @Override
     public String toString() {

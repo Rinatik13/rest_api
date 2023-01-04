@@ -16,7 +16,9 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // информация о собственниках (акционерах компании)
 public class GeneratorDocForm2 implements GeneratorDoc{
@@ -30,8 +32,7 @@ public class GeneratorDocForm2 implements GeneratorDoc{
             String fullSizeNameCompany = company.getSmallNameCompany();
 
             // добавляем полное название компании в шапку файла
-            String topFullNameFileDocCompany = company.getFullNameFormCompany() + "\n" + "\"" +
-                    company.getFullNameCompany() + "\"";
+            String topFullNameFileDocCompany = company.getFullNameCompany();
 
             // добавляем реквизиты компании в шапку файла
             String requisitesCompany = "Юридический адрес: " + company.getAddressCompany() + ";\n" +
@@ -242,27 +243,35 @@ public class GeneratorDocForm2 implements GeneratorDoc{
 
         List<Owner> ownerList2 = new ArrayList<>();
         List<Owner> ownerList3 = new ArrayList<>();
+        Map<Integer,List<Owner>> mapOwner = new HashMap<>();
 
-        addOwnersToList(owners, ownerList2, table, company);
+        addMainOwnersToList(owners, ownerList2, table, company);
 
         addTableHideText("II. Юридические лица, являющиеся собственниками организации" +
                 " - Участника закупки.",table);
-
-        addOwnersToList(ownerList2,ownerList3,table,company);
+        // необходимо сделать заполнение таблицы не основными учредителями
+        for (int i = 0; i<ownerList2.size(); i++){
+            System.out.println("запускаем цыкл добавления учредителя");
+            Owner owner = ownerList2.get(i);
+            System.out.println("добавляем не основного учредителя: " + owner);
+            addOwnersToList(owner,ownerList3,table);
+        }
 
         addTableHideText("III. Юридические лица, являющиеся собственниками собственников" +
                 " организации - Участника закупки.",table);
 
         ownerList2 = new ArrayList<>();
-
-        addOwnersToList(ownerList3,ownerList2,table,company);
-
+        for (int i = 0; i<ownerList3.size(); i++){
+            Owner owner = ownerList2.get(i);
+            addOwnersToList(owner,ownerList2,table);
+        }
         addTableHideText("IV. Юридические лица, являющиеся собственниками " +
                 "следующих уровней (до конечных) ...", table);
 
-        ownerList3= new ArrayList<>();
-
-        addOwnersToList(ownerList2,ownerList3,table,company);
+        for (int i = 0; i<ownerList3.size(); i++){
+            Owner owner = ownerList2.get(i);
+            addOwnersToList(owner,ownerList2,table);
+        }
 
         document.add(table);
     }
@@ -283,9 +292,13 @@ public class GeneratorDocForm2 implements GeneratorDoc{
 
     }
 
-    private void addOwnersToList(List<Owner> owners, List<Owner> ownerList2, Table table, Company company) {
-
-        for (Owner owner : owners) {
+    private void addMainOwnersToList(List<Owner> owners,
+                                 List<Owner> ownerList,
+                                 Table table,
+                                 Company company) {
+        for (int i = 0; i<owners.size();i++) {
+            Owner owner = owners.get(i);
+            System.out.println(owner);
             addCell(company.getSmallNameCompany() + ", " +
                     company.getAddressCompany() + ", " +
                     company.getInnCompany(), table);
@@ -297,9 +310,60 @@ public class GeneratorDocForm2 implements GeneratorDoc{
 
             addCell(owner.getRecvisites(), table);
 
-            if (owner.getOwners() != null) {
-                ownerList2.addAll(owner.getOwners());
+            System.out.println("Готовимся добавлять список учредителей");
+            if (owner.getOwners().size() > 0) {
+                ownerList.addAll(owner.getOwners());
+                System.out.println("Новый список учредителей" + ownerList);
             }
+        }
+    }
+
+//    private void addOwnersToList(List<Owner> owners,
+//                                     List<Owner> ownerList,
+//                                     Table table) {
+//        for (int i = 0; i<owners.size();i++) {
+//            Owner owner = owners.get(i);
+//            System.out.println(owner);
+//            addCell(owner.getName() + ", " +
+//                    owner.getCountry() + ", " +
+//                    owner.getIdentifier(), table);
+//
+//            addCell(owner.getShare() + "%, " +
+//                    owner.getName() + ", " +
+//                    owner.getCountry() + ", " +
+//                    owner.getIdentifier(), table);
+//
+//            addCell(owner.getRecvisites(), table);
+//
+//            System.out.println("Готовимся добавлять список учредителей");
+//            if (owner.getOwners().size() > 0) {
+//                ownerList.addAll(owner.getOwners());
+//                System.out.println("Новый список учредителей" + ownerList);
+//            }
+//        }
+//    }
+
+    private void addOwnersToList(Owner mainOwner,
+                                     List<Owner> ownerList,
+                                     Table table) {
+        List<Owner> owners = mainOwner.getOwners();
+        for (int i = 0; i < owners.size();i++) {
+            Owner owner = owners.get(i);
+            System.out.println(owner);
+            if (owner.getOwners().size() < 1) {
+               owner = mainOwner;
+            }
+            else {
+                ownerList.addAll(owner.getOwners());
+            }
+            addCell(mainOwner.getName() + ", " +
+                    mainOwner.getCountry() + ", " +
+                    mainOwner.getIdentifier(), table);
+            addCell(owner.getShare() + "%, " +
+                    owner.getName() + ", " +
+                    owner.getCountry() + ", " +
+                    owner.getIdentifier(), table);
+            addCell(owner.getRecvisites(), table);
         }
     }
 

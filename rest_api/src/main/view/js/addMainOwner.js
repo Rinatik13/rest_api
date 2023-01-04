@@ -3,13 +3,13 @@ document.getElementById("add_owner").addEventListener("submit", addOwner)
 let user = localStorage.getItem('user');
 let company_res = localStorage.getItem('company');
 let company = JSON.parse(company_res)
+let com_id = company.id;
 let owner;
 
 async function addOwner(event){
     event.preventDefault();
-
     owner = {
-    company_id : company.id,
+    company_id : com_id,
     main_owner_id : 0,    
     name : owner_name.value,
     country : owner_country.value,
@@ -29,10 +29,9 @@ async function addOwner(event){
         .then(response => response.json())
         .then(json => {
             console.log(json);
-            company.employeeList.push(json);
             localStorage.setItem('owner', JSON.stringify(company));
         }
             );
-        window.location ='http://127.0.0.1:5500/ownerInfo.html';
+        window.location ='http://127.0.0.1:5500/owners.html';
 
 }

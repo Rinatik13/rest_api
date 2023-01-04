@@ -15,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Adler32;
-import java.util.zip.CheckedOutputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import java.util.zip.*;
 
 public class BuildingDoc {
 
@@ -48,6 +45,8 @@ public class BuildingDoc {
         ByteArrayOutputStream zipStream = new ByteArrayOutputStream();
         CheckedOutputStream checkedOutputStream = new CheckedOutputStream(zipStream,new Adler32());
         ZipOutputStream zip = new ZipOutputStream(checkedOutputStream);
+        zip.setMethod(ZipOutputStream.DEFLATED);
+        zip.setLevel(Deflater.DEFLATED);
 
         // загружаем созданный архив на сервер яндекс диска
         List<GeneratorDoc> generatorDocList = new ArrayList<>();
@@ -163,8 +162,9 @@ public class BuildingDoc {
         zip.close();
 
 //        controllerCommunication.uploadFileHttpClient(url, zipStream);
+        controllerCommunication.uploadFileHttpClientDefault(url,zipStream);
 
-        controllerCommunication.uploadFileByte(url,"PUT", zipStream.toByteArray());
+//        controllerCommunication.uploadFileByte(url,"PUT", zipStream.toByteArray());
 
         log.info("!!! КОНЕЦ ЗАКАЧКИ АРХИВА !!!");
         // получаем ссылку на скачивание заархивированного пакета документов
@@ -183,8 +183,10 @@ public class BuildingDoc {
         GeneratorDoc doc = generatorDoc;
 //        log.info("создаём поток документа: " + generatorDoc.getNameFile());
         ByteArrayOutputStream streamDoc = doc.launch(company,tender,date,summ);
-        ZipEntry zipEntry = new ZipEntry(tender.getId() + "/" + generatorDoc.getPath() + "/" + generatorDoc.getNameFile() +".pdf");
+        ZipEntry zipEntry = new ZipEntry(tender.getNumber() + "/" + generatorDoc.getPath() + "/" + generatorDoc.getNameFile() +".pdf");
         try {
+            zip.setMethod(ZipOutputStream.DEFLATED);
+            zip.setLevel(Deflater.DEFLATED);
             zip.putNextEntry(zipEntry);
             zip.write(streamDoc.toByteArray());
         } catch (IOException e) {
@@ -197,24 +199,14 @@ public class BuildingDoc {
         String address = documentPdf.getAddress() + "/" + documentPdf.getName() + ".pdf";
 //        log.info("добавляем файл с адресом: " + address);
         ByteArrayOutputStream streamDoc = loadDocumentToZip.getLoadDocument(address);
-        ZipEntry zipEntry = new ZipEntry(tender.getId() + "/Квалификационная часть/" + documentPdf.getName() +".pdf");
+        ZipEntry zipEntry = new ZipEntry(tender.getNumber() + "/Квалификационная часть/" + documentPdf.getName() +".pdf");
         try {
+            zip.setMethod(ZipOutputStream.DEFLATED);
+            zip.setLevel(Deflater.DEFLATED);
             zip.putNextEntry(zipEntry);
             zip.write(streamDoc.toByteArray());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-    //метод работает для создания архива
-//    private void buildingZip(){
-//       ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//       CheckedOutputStream checkedOutputStream = new CheckedOutputStream(byteArrayOutputStream,new Adler32());
-//       ZipOutputStream zipOutputStream = new ZipOutputStream(checkedOutputStream);
-//       BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(zipOutputStream);
-//
-//       zipOutputStream.putNextEntry(new ZipEntry("aaa"));
-//       int fileByte;
-////       while ((fileByte = ))
-//    }
 }

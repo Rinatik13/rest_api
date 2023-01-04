@@ -1,10 +1,10 @@
-let result = localStorage.getItem('company');
-let company = JSON.parse(result);
+let result = localStorage.getItem('owner');
+let owner = JSON.parse(result);
 
 document.addEventListener("DOMContentLoaded", loadList)
 
 async function loadList(){
-await fetch('http://localhost:8080/api/calisto/company/get/' + company.id ,{
+await fetch('http://localhost:8080/api/calisto/owner/get/' + owner.id,{
                     method: 'GET',
                     headers:  {
                         'Content-Type': 'application/json',
@@ -14,14 +14,14 @@ await fetch('http://localhost:8080/api/calisto/company/get/' + company.id ,{
                     .then(response => response.json())
                     .then(json => {
                         console.log(json);
-                        localStorage.setItem('company',JSON.stringify(json)); 
+                        localStorage.setItem('owner',JSON.stringify(json)); 
                     }
                         );
 }
 
-let res = localStorage.getItem('company');
-let company_info = JSON.parse(res);
-let owners = company_info.owners;
+result = localStorage.getItem('owner');
+owner = JSON.parse(result);
+let owners = owner.owners;
 let list = document.getElementById('owner_list');
 if(owners == 0){
     document.getElementById('owner_list').innerText = 'Учредители отсутствуют.';

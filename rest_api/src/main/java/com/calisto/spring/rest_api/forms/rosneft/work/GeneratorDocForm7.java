@@ -28,8 +28,7 @@ public class GeneratorDocForm7 implements GeneratorDoc{
             String fullSizeNameCompany = company.getSmallNameCompany();
 
             // добавляем полное название компании в шапку файла
-            String topFullNameFileDocCompany = company.getFullNameFormCompany() + "\n" + "\"" +
-                    company.getFullNameCompany() + "\"";
+            String topFullNameFileDocCompany = company.getFullNameCompany();
 
             // добавляем реквизиты компании в шапку файла
             String requisitesCompany = "Юридический адрес: " + company.getAddressCompany() + ";\n" +
@@ -149,21 +148,21 @@ public class GeneratorDocForm7 implements GeneratorDoc{
             Paragraph paragraphNameDocCom = new Paragraph(nameDocCompany)
                     .setFont(font)
                     .setTextAlignment(TextAlignment.CENTER)
-                    .setFontSize(12)
+                    .setFontSize(14)
                     .setBold();
             document.add(paragraphNameDocCom);
 
             // Добавляем реквизиты компании слева
             Paragraph paragraphInfoReqCom = new Paragraph(infoReqDocCompany)
                     .setFont(font)
-                    .setFontSize(10)
+                    .setFontSize(12)
                     .setTextAlignment(TextAlignment.LEFT);
             document.add(paragraphInfoReqCom);
 
             // добавляем текст тела документа
             Paragraph paragraphBodyTextDoc = new Paragraph(bodyTextDoc1)
                     .setFont(font)
-                    .setFontSize(10);
+                    .setFontSize(12);
             document.add(paragraphBodyTextDoc);
 
             // добавляем подписанта
